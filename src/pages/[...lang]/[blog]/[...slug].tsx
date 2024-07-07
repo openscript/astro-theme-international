@@ -1,4 +1,3 @@
----
 import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { splitLocaleFromPath } from '@timelet/i18n';
@@ -22,7 +21,7 @@ export const getStaticPaths = (async () => {
       }
       return acc;
     }, new Array<string>);
-      // astro breaks indention...
+    // it works well in TSX
     return { params: { lang: locale, slug: path, blog: "blog" }, props: {...page, translations} };
   });
 
@@ -36,8 +35,3 @@ console.log(Astro.params);
 const page = Astro.props as Props;
 
 const { Content } = await page.render();
----
-<DefaultLayout>
-  <h1>{lang}{slug}</h1>
-  <Content/>
-</DefaultLayout>
