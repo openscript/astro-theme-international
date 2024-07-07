@@ -1,0 +1,21 @@
+{
+  "name": "spiffy-shell",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "astro": "^4.11.5",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@timelet/i18n": "^0.0.2",
+    "limax": "^4.1.0"
+  }
+}
