@@ -1,0 +1,12 @@
+---
+type Props = {
+  translations?: Record<string, string>;
+  currentLocale?: string;
+}
+
+const { translations } = Astro.props;
+---
+
+<div>
+  {Object.entries(translations || {}).map(([lang, path]) => ( <div>{lang}{path}</div>))}
+</div>
