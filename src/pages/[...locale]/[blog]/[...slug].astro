@@ -3,7 +3,7 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { splitLocaleFromPath } from '@timelet/i18n';
 import slugify from 'limax';
-import config from '../../../../astro.config.mjs';
+import config from '../../../../astro.config';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 
 export const getStaticPaths = (async () => {
