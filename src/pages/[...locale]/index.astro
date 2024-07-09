@@ -10,7 +10,7 @@ export const getStaticPaths = (async () => {
 
 	return locales.map((l) => {
 		const locale = l === config.i18n?.defaultLocale ? undefined : l;
-		return { params: { locale }, props: { l } };
+		return { params: { locale }, props: { locale: l } };
 	});
 
 }) satisfies GetStaticPaths;
