@@ -1,15 +1,17 @@
 ---
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-
+import { getLocaleFromUrl, useTranslations } from '../i18n';
 
 type Props = {
   translations?: Record<string, string>;
   currentLocale?: string;
 }
 
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 const { translations, currentLocale } = Astro.props;
 ---
-<html>
+<html lang={locale}>
   <head>
     <style is:global>
       html {
@@ -35,7 +37,7 @@ const { translations, currentLocale } = Astro.props;
   </head>
   <body>
     <header>
-      Header
+      <div id="site-title">{t('site.title')}</div>
       <LanguageSwitcher translations={translations} currentLocale={currentLocale} />
     </header>
     <main>
