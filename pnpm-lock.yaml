@@ -11,6 +11,15 @@ importers:
       '@astrojs/check':
         specifier: ^0.8.0
         version: 0.8.0(typescript@5.5.3)
+      '@fontsource-variable/dosis':
+        specifier: ^5.0.20
+        version: 5.0.20
+      '@fontsource-variable/fira-code':
+        specifier: ^5.0.18
+        version: 5.0.18
+      '@fontsource-variable/playfair-display':
+        specifier: ^5.0.25
+        version: 5.0.25
       '@timelet/i18n':
         specifier: ^0.0.2
         version: 0.0.2
@@ -336,6 +345,15 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/dosis@5.0.20':
+    resolution: {integrity: sha512-lx0Tuv+euHoD1IaaNIt7Pc3pL6YSrlRrNrIa3khBpUVCOMWykj1UuFvwO7hYOBvfBHl+5IARCw0e4qGHjY9+4w==}
+
+  '@fontsource-variable/fira-code@5.0.18':
+    resolution: {integrity: sha512-Pmbnf4HukX4y928RY9g47hWyVECQglwV7HLv5taaDQwI3UBXyoLUnyRsjJxeviCPhdwJY5qyLT4GaCMlgC9oCQ==}
+
+  '@fontsource-variable/playfair-display@5.0.25':
+    resolution: {integrity: sha512-q8tzLiURtXycJQ27YoppTNCEe0W2ZRXIeZ25nH9KoM6fsbWYZAm9ItY0aRoL/jn/GllsEcTSm8H2UKa7l4AxDw==}
 
   '@img/sharp-darwin-arm64@0.33.4':
     resolution: {integrity: sha512-p0suNqXufJs9t3RqLBO6vvrgr5OhgbWp76s5gTRvdmxmuv9E1rcaqGUsl3l4mKVmXPkTkTErXediAui4x+8PSA==}
@@ -2215,6 +2233,12 @@ snapshots:
 
   '@esbuild/win32-x64@0.21.5':
     optional: true
+
+  '@fontsource-variable/dosis@5.0.20': {}
+
+  '@fontsource-variable/fira-code@5.0.18': {}
+
+  '@fontsource-variable/playfair-display@5.0.25': {}
 
   '@img/sharp-darwin-arm64@0.33.4':
     optionalDependencies:

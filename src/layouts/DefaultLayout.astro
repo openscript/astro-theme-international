@@ -1,4 +1,6 @@
 ---
+import './layouts';
+import './DefaultLayout.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { getLocaleFromUrl, useTranslations } from '../i18n';
 
@@ -13,27 +15,6 @@ const { translations, currentLocale } = Astro.props;
 ---
 <html lang={locale}>
   <head>
-    <style is:global>
-      html {
-        height: 100%;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      main {
-        flex-grow: 1;
-      }
-
-      header, footer {
-        background-color: #DDD;
-        height: 4rem;
-      }
-    </style>
   </head>
   <body>
     <header>
