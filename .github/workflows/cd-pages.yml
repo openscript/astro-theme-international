@@ -1,4 +1,4 @@
-name: Deploy Astro site to Pages
+name: Deploy to Pages
 
 on:
   push:

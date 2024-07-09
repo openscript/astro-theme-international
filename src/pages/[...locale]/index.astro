@@ -1,22 +1,31 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import config from '../../../astro.config.mjs';
-import type { GetStaticPaths } from 'astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 export const getStaticPaths = (async () => {
   if(!config.i18n) throw new Error('i18n config is required');
 
 	const locales = config.i18n.locales as string[];
 
+	const translations = locales.reduce((acc, l) => {
+		acc[l] = l === config.i18n?.defaultLocale ? `/` : `/${l}`;
+		return acc;
+	}, {} as Record<string, string>);
+
 	return locales.map((l) => {
 		const locale = l === config.i18n?.defaultLocale ? undefined : l;
-		return { params: { locale }, props: { locale: l } };
+		return { params: { locale }, props: { locale: l, translations } };
 	});
 
 }) satisfies GetStaticPaths;
 
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { translations } = Astro.props as Props;
+
 ---
 
-<DefaultLayout>
+<DefaultLayout translations={translations}>
 	<h1>Astro</h1>
 </DefaultLayout>
