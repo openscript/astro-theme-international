@@ -15,8 +15,12 @@ const { translations } = Astro.props;
   }
 </style>
 
-<nav>
+<nav role="navigation">
+  <ul>
   {Object.entries(translations || {}).map(([locale, path]) => (
-    <a href={path} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
+    <li>
+      <a href={path} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
+    </li>
   ))}
+  </ul>
 </div>

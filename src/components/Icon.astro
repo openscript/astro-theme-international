@@ -1,0 +1,12 @@
+---
+import { I } from '../icons';
+
+type Props = {
+  name: keyof typeof I;
+}
+
+const { name } = Astro.props;
+
+---
+
+<div set:html={I[name]}></div>
