@@ -1,13 +1,18 @@
 import { C } from './configuration';
 
-export function getLocaleFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
-  if (lang && lang in C.MESSAGES) return lang as keyof typeof C.MESSAGES;
+export function getNameFromLocale(locale: string) {
+  if (locale in C.LOCALES) return C.LOCALES[locale as keyof typeof C.LOCALES];
   return C.DEFAULT_LOCALE;
 }
 
-export function useTranslations(lang: keyof typeof C.MESSAGES) {
+export function getLocaleFromUrl(url: URL) {
+  const [, locale] = url.pathname.split('/');
+  if (locale && locale in C.MESSAGES) return locale as keyof typeof C.MESSAGES;
+  return C.DEFAULT_LOCALE;
+}
+
+export function useTranslations(locale: keyof typeof C.MESSAGES) {
   return function t(key: keyof typeof C.MESSAGES[typeof C.DEFAULT_LOCALE]) {
-    return C.MESSAGES[lang][key] || C.MESSAGES[C.DEFAULT_LOCALE][key];
+    return C.MESSAGES[locale][key] || C.MESSAGES[C.DEFAULT_LOCALE][key];
   }
 }

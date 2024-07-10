@@ -7,6 +7,10 @@ An Astro theme, focused on internationalization and simplicity.
 - [x] Internationalization
 - [x] Pre-configured devcontainer
 
+### Sections
+
+
+
 
 ## Ressources
 

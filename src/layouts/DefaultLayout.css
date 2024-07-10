@@ -24,6 +24,6 @@ header .title {
   font-size: 1.5rem;
 }
 
-.padded, header {
+.padded, header, main, footer {
   padding: 0 10%;
 }

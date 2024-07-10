@@ -1,4 +1,6 @@
 ---
+import {getNameFromLocale} from '../i18n';
+
 type Props = {
   translations?: Record<string, string>;
   currentLocale?: string;
@@ -7,6 +9,14 @@ type Props = {
 const { translations } = Astro.props;
 ---
 
-<div>
-  {Object.entries(translations || {}).map(([lang, path]) => ( <div>{lang}{path}</div>))}
+<style>
+  div {
+    padding: 1rem;
+  }
+</style>
+
+<nav>
+  {Object.entries(translations || {}).map(([locale, path]) => (
+    <a href={path} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
+  ))}
 </div>

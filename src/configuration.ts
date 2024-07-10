@@ -8,5 +8,9 @@ export const C = {
     'de': {
       'site.title': 'Astro Theme: International',
     }
+  },
+  MENUS: {
+    header: [],
+    footer: [],
   }
 } as const;
