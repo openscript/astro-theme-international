@@ -18,7 +18,7 @@ const { translations, currentLocale } = Astro.props;
   </head>
   <body>
     <header>
-      <div id="site-title">{t('site.title')}</div>
+      <div class="title">{t('site.title')}</div>
       <LanguageSwitcher translations={translations} currentLocale={currentLocale} />
     </header>
     <main>

@@ -3,10 +3,10 @@ export const C = {
   DEFAULT_LOCALE: 'en' as const,
   MESSAGES: {
     'en': {
-      'site.title': 'Example Astro App',
+      'site.title': 'Astro Theme: International',
     },
     'de': {
-      'site.title': 'Beispiel Astro App',
+      'site.title': 'Astro Theme: International',
     }
   }
 } as const;

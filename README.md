@@ -7,3 +7,8 @@ An Astro theme, focused on internationalization and simplicity.
 - [x] Internationalization
 - [x] Pre-configured devcontainer
 
+
+## Ressources
+
+- Fonts: https://fontsource.org/
+- Colors: https://colorhunt.co/palette/eeeeee686d76373a40dc5f00

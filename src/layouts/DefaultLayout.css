@@ -1,12 +1,4 @@
-
-html {
-  height: 100%;
-}
-
 body {
-  font-family: var(--font-text);
-  margin: 0;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   background-color: var(--white-color);
@@ -22,10 +14,16 @@ header, footer {
   height: 4rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-code {
-  font-family: var(--font-monospace);
+header .title {
+  font-size: 1.5rem;
+}
+
+.padded, header {
+  padding: 0 10%;
 }

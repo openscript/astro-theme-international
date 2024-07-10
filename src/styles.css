@@ -6,4 +6,24 @@
   --font-heading: 'Playfair Display Variable', serif;
   --font-text: 'Dosis Variable', sans-serif;
   --font-monospace: 'Fira Code Variable', monospace;
+  --font-size: 14px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-text);
+  font-size: var(--font-size);
+  margin: 0;
+  min-height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, .title {
+  font-family: var(--font-heading);
+}
+
+code {
+  font-family: var(--font-monospace);
 }
