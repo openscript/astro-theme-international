@@ -4,9 +4,11 @@ export const C = {
   MESSAGES: {
     'en': {
       'site.title': '<span>Astro Theme:</span> International',
+      'site.license': 'MIT License',
     },
     'de': {
       'site.title': '<span>Astro Theme:</span> International',
+      'site.license': 'MIT Lizenz',
     }
   },
   MENUS: {

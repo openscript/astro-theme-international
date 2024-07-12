@@ -4,6 +4,7 @@ import './DefaultLayout.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { getLocaleFromUrl, useTranslations } from '../i18n';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { C } from '../configuration';
 
 type Props = {
   translations?: Record<string, string>;
@@ -20,7 +21,7 @@ const { translations, currentLocale } = Astro.props;
   <body>
     <header>
       <a href={getRelativeLocaleUrl(locale)} class="title" set:html={t('site.title')}></a>
-      <LanguageSwitcher translations={translations} currentLocale={currentLocale} />
+      <LanguageSwitcher translations={translations} currentLocale={currentLocale || C.DEFAULT_LOCALE} />
     </header>
     <main>
       <slot />

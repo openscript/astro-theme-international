@@ -5,7 +5,13 @@ const blogCollection = defineCollection({
     title: z.string()
   })
 });
+const pagesCollection = defineCollection({
+  schema: z.object({
+    path: z.string()
+  })
+});
 
 export const collections = {
-  'blog': blogCollection
+  'blog': blogCollection,
+  'pages': pagesCollection
 };

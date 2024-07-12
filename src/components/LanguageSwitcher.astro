@@ -2,9 +2,10 @@
 import {getNameFromLocale} from '../i18n';
 import Icon from './Icon.astro';
 
+
 type Props = {
+  currentLocale: string;
   translations?: Record<string, string>;
-  currentLocale?: string;
 }
 
 const { translations, currentLocale } = Astro.props;

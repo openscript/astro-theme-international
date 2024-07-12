@@ -2,27 +2,26 @@
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { splitLocaleFromPath } from '@timelet/i18n';
-import slugify from 'limax';
-import config from '../../../../astro.config';
-import DefaultLayout from '../../../layouts/DefaultLayout.astro';
+import config from '../../../astro.config';
+import DefaultLayout from '../../layouts/DefaultLayout.astro';
 
 export const getStaticPaths = (async () => {
   if(!config.i18n) throw new Error('i18n config is required');
 
-  const pages = await getCollection('blog');
+  const pages = await getCollection('pages');
 
   const paths = pages.map(page => {
     const split = splitLocaleFromPath(page.slug);
     const locale = split && split.locale !== config.i18n?.defaultLocale ? split.locale : undefined;
-    const slug = slugify(page.data.title);
     const translations = pages.reduce((acc, p) => {
       const s = splitLocaleFromPath(p.slug);
       if(s && s.path === split?.path) {
-        acc[s.locale] = [s.locale !== config.i18n?.defaultLocale ? `/${s.locale}` : undefined, "blog", slugify(p.data.title)].join("/");
+        acc[s.locale] = [s.locale !== config.i18n?.defaultLocale ? `/${s.locale}` : undefined, p.data.path].join("/");
       }
       return acc;
     }, {} as Record<string, string>);
-    return { params: { locale, slug, blog: "blog" }, props: {...page, translations, locale} };
+    console.log(translations);
+    return { params: { locale, pages: page.data.path }, props: {...page, translations, locale} };
   });
 
   return paths;
