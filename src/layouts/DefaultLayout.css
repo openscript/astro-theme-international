@@ -11,7 +11,10 @@ main {
 header, footer {
   background-color: var(--gray-color);
   color: var(--white-color);
-  height: 4rem;
+}
+
+header {
+  height: 5rem;
 }
 
 header {
@@ -22,6 +25,29 @@ header {
 
 header .title {
   font-size: 1.5rem;
+  text-decoration: none;
+}
+
+header .title span {
+  font-size: 1rem;
+  line-height: 1rem;
+  display: block;
+}
+
+header .title:visited {
+  color: var(--white-color);
+}
+
+header a:link {
+  color: var(--white-color);
+}
+
+header a:visited {
+  color: var(--secondary-color);
+}
+
+footer {
+  height: 3rem;
 }
 
 .padded, header, main, footer {

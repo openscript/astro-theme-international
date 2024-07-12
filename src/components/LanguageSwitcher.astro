@@ -1,26 +1,74 @@
 ---
 import {getNameFromLocale} from '../i18n';
+import Icon from './Icon.astro';
 
 type Props = {
   translations?: Record<string, string>;
   currentLocale?: string;
 }
 
-const { translations } = Astro.props;
+const { translations, currentLocale } = Astro.props;
 ---
 
 <style>
-  div {
-    padding: 1rem;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a:focus {
+    color: red;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .dropdown ul {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid var(--white-color);
+    background-color: var(--gray-color);
+  }
+
+  .dropdown:hover ul,
+  .dropdown:focus-within ul {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown li a {
+    display: block;
+    padding: 0.8rem 2rem;
+    text-align: center;
+  }
+
+  .dropdown li.active {
+    background-color: var(--dark-color);
   }
 </style>
 
 <nav role="navigation">
   <ul>
-  {Object.entries(translations || {}).map(([locale, path]) => (
-    <li>
-      <a href={path} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
+    <li class="dropdown">
+      <button><Icon name="language" />{getNameFromLocale(currentLocale)}</button>
+      <ul>
+        {Object.entries(translations || {}).map(([locale, path]) => (
+          <li class:list={[{active: locale === currentLocale}]}>
+            <a href={path} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
+          </li>
+        ))}
+      </ul>
     </li>
-  ))}
   </ul>
 </div>

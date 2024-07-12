@@ -1,8 +1,8 @@
 import { C } from './configuration';
 
-export function getNameFromLocale(locale: string) {
-  if (locale in C.LOCALES) return C.LOCALES[locale as keyof typeof C.LOCALES];
-  return C.DEFAULT_LOCALE;
+export function getNameFromLocale(locale?: string) {
+  if (locale && locale in C.LOCALES) return C.LOCALES[locale as keyof typeof C.LOCALES];
+  return C.LOCALES[C.DEFAULT_LOCALE];
 }
 
 export function getLocaleFromUrl(url: URL) {

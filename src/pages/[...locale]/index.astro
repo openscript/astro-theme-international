@@ -2,7 +2,6 @@
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import config from '../../../astro.config';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
-import Icon from '../../components/Icon.astro';
 
 export const getStaticPaths = (async () => {
   if(!config.i18n) throw new Error('i18n config is required');
@@ -23,11 +22,10 @@ export const getStaticPaths = (async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { translations } = Astro.props as Props;
+const { translations, locale } = Astro.props as Props;
 
 ---
 
-<DefaultLayout translations={translations}>
-	<h1>Astro</h1>
-	<Icon name="SOME" />
+<DefaultLayout translations={translations} currentLocale={locale}>
+	<h1>Start</h1>
 </DefaultLayout>
