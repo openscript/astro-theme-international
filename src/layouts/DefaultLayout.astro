@@ -5,7 +5,6 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { getLocaleFromUrl, useTranslations } from '../i18n';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { C } from '../configuration';
-import { getRelativePath } from '../path';
 
 type Props = {
   translations?: Record<string, string>;
@@ -18,7 +17,7 @@ const { translations, currentLocale } = Astro.props;
 ---
 <html lang={locale}>
   <head>
-    <base href={getRelativePath(import.meta.env.BASE_URL)} />
+    <base href={import.meta.env.SITE} />
   </head>
   <body>
     <header>
