@@ -5,6 +5,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { getLocaleFromUrl, useTranslations } from '../i18n';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { C } from '../configuration';
+import { getRelativePath } from '../path';
 
 type Props = {
   translations?: Record<string, string>;
@@ -17,12 +18,13 @@ const { translations, currentLocale } = Astro.props;
 ---
 <html lang={locale}>
   <head>
-    <base href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/`} />
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#DC5F00">
+    <meta charset="utf-8">
+    {!import.meta.env.DEV && <base href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/`} />}
+    <link rel="apple-touch-icon" sizes="180x180" href={getRelativePath('/apple-touch-icon.png')}>
+    <link rel="icon" type="image/png" sizes="32x32" href={getRelativePath('/favicon-32x32.png')}>
+    <link rel="icon" type="image/png" sizes="16x16" href={getRelativePath('/favicon-16x16.png')}>
+    <link rel="manifest" href={getRelativePath('/site.webmanifest')}>
+    <link rel="mask-icon" href={getRelativePath('/safari-pinned-tab.svg')} color="#DC5F00">
     <meta name="msapplication-TileColor" content="#DC5F00">
     <meta name="theme-color" content="#DC5F00">
   </head>

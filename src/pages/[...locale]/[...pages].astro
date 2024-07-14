@@ -18,7 +18,6 @@ export const getStaticPaths = (async () => {
       }
       return acc;
     }, {} as Record<string, string>);
-    console.log(translations);
     return { params: { locale, pages: page.data.path }, props: {...page, translations, locale} };
   });
 
