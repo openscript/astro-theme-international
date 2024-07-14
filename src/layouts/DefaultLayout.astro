@@ -19,7 +19,7 @@ const { translations, currentLocale } = Astro.props;
 <html lang={locale}>
   <head>
     <meta charset="utf-8">
-    {!import.meta.env.DEV && <base href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/`} />}
+    {!import.meta.env.DEV && import.meta.env.SITE && import.meta.env.BASE_URL && <base href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/`} />}
     <link rel="apple-touch-icon" sizes="180x180" href={getRelativePath('/apple-touch-icon.png')}>
     <link rel="icon" type="image/png" sizes="32x32" href={getRelativePath('/favicon-32x32.png')}>
     <link rel="icon" type="image/png" sizes="16x16" href={getRelativePath('/favicon-16x16.png')}>
