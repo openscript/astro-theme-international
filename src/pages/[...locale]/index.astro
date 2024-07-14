@@ -1,20 +1,18 @@
 ---
+import { C } from '../../configuration';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
-import config from '../../../astro.config';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 export const getStaticPaths = (async () => {
-  if(!config.i18n) throw new Error('i18n config is required');
-
-	const locales = config.i18n.locales as string[];
+	const locales = Object.keys(C.LOCALES);
 
 	const translations = locales.reduce((acc, l) => {
-		acc[l] = l === config.i18n?.defaultLocale ? `/` : `/${l}`;
+		acc[l] = l === C.DEFAULT_LOCALE ? `/` : `/${l}`;
 		return acc;
 	}, {} as Record<string, string>);
 
 	return locales.map((l) => {
-		const locale = l === config.i18n?.defaultLocale ? undefined : l;
+		const locale = l === C.DEFAULT_LOCALE ? undefined : l;
 		return { params: { locale }, props: { locale: l, translations } };
 	});
 
