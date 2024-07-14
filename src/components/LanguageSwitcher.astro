@@ -1,5 +1,6 @@
 ---
 import {getNameFromLocale} from '../i18n';
+import { getRelativePath } from '../path';
 import Icon from './Icon.astro';
 
 
@@ -66,7 +67,7 @@ const { translations, currentLocale } = Astro.props;
       <ul>
         {Object.entries(translations || {}).map(([locale, path]) => (
           <li class:list={[{active: locale === currentLocale}]}>
-            <a href={path} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
+            <a href={getRelativePath(path)} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
           </li>
         ))}
       </ul>
