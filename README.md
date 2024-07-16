@@ -5,9 +5,14 @@ An Astro theme, focused on internationalization and simplicity.
 ## Features
 
 - [x] Internationalization
+  - [x] Language switcher
+  - [x] Static UI translations
+  - [x] Dynamic content translations
+  - [x] Language-specific URLs
 - [x] Pre-configured devcontainer
 - [x] MDX support
 - [x] Favicons
+- [x] Custom fonts
 
 ### Content types
 

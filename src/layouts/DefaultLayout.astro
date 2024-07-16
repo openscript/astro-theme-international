@@ -6,6 +6,7 @@ import { getLocaleFromUrl, useTranslations, getTranslatedPath } from '../i18n';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { C } from '../configuration';
 import { getRelativePath } from '../path';
+import Search from "astro-pagefind/components/Search";
 
 type Props = {
   translations?: Record<string, string>;
@@ -31,6 +32,7 @@ const { translations, currentLocale } = Astro.props;
   <body>
     <header>
       <a href={getRelativeLocaleUrl(locale)} class="title" set:html={t('site.title')}></a>
+      <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
       <LanguageSwitcher translations={translations} currentLocale={currentLocale || C.DEFAULT_LOCALE} />
     </header>
     <main>

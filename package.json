@@ -17,6 +17,7 @@
     "@fontsource-variable/playfair-display": "^5.0.25",
     "@timelet/i18n": "^0.0.2",
     "astro": "^4.11.5",
+    "astro-pagefind": "^1.5.0",
     "fsevents": "^2.3.3",
     "limax": "^4.1.0",
     "typescript": "^5.5.3"
