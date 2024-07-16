@@ -13,7 +13,7 @@ importers:
         version: 0.8.1(typescript@5.5.3)
       '@astrojs/mdx':
         specifier: ^3.1.2
-        version: 3.1.2(astro@4.11.5(typescript@5.5.3))
+        version: 3.1.2(astro@4.11.5(@types/node@20.14.10)(typescript@5.5.3))
       '@fontsource-variable/dosis':
         specifier: ^5.0.20
         version: 5.0.20
@@ -23,15 +23,15 @@ importers:
       '@fontsource-variable/playfair-display':
         specifier: ^5.0.25
         version: 5.0.25
+      '@pagefind/default-ui':
+        specifier: ^1.1.0
+        version: 1.1.0
       '@timelet/i18n':
         specifier: ^0.0.2
         version: 0.0.2
       astro:
         specifier: ^4.11.5
-        version: 4.11.5(typescript@5.5.3)
-      astro-pagefind:
-        specifier: ^1.5.0
-        version: 1.5.0(astro@4.11.5(typescript@5.5.3))
+        version: 4.11.5(@types/node@20.14.10)(typescript@5.5.3)
       fsevents:
         specifier: ^2.3.3
         version: 2.3.3
@@ -44,6 +44,13 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.10
+        version: 20.14.10
+      sirv:
+        specifier: ^2.0.4
+        version: 2.0.4
 
 packages:
 
@@ -675,6 +682,9 @@ packages:
   '@types/nlcst@2.0.3':
     resolution: {integrity: sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA==}
 
+  '@types/node@20.14.10':
+    resolution: {integrity: sha512-MdiXf+nDuMvY0gJKxyfZ7/6UFsETO7mGKF54MVD/ekJS6HdFtpZFBgrh6Pseu64XTb2MLyFPlbW6hj8HYRQNOQ==}
+
   '@types/unist@2.0.10':
     resolution: {integrity: sha512-IfYcSBWE3hLpBg8+X2SEa8LVkJdJEkT2Ese2aaLs3ptGdVtABxndrMaxuFlQ1qdFf9Q5rDvDpxI3WwgvKFAsQA==}
 
@@ -765,11 +775,6 @@ packages:
   astring@1.8.6:
     resolution: {integrity: sha512-ISvCdHdlTDlH5IpxQJIex7BWBywFWgjJSVdwst+/iQCoEYnyOaQ95+X1JGshuBjGp6nxKUy1jMgE3zPqN7fQdg==}
     hasBin: true
-
-  astro-pagefind@1.5.0:
-    resolution: {integrity: sha512-CN7Afe9qW640U1qliCQMXN259Dl6VPUnl8FneLfKE7STV4HLiif4PbNZejylC6yXYyP6uyNVDHNOfJfBBW5h6A==}
-    peerDependencies:
-      astro: ^2.0.4 || ^3.0.0 || ^4.0.0
 
   astro@4.11.5:
     resolution: {integrity: sha512-TCRhuaLwrxwMhS8S1GG+ZTdrAXigX9C8E/YUTs/r2t+owHxDgwl86IV9xH1IHrCPoqhK6civyAQNOT+GKmkb0A==}
@@ -1863,6 +1868,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
 
@@ -2160,12 +2168,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@3.1.2(astro@4.11.5(typescript@5.5.3))':
+  '@astrojs/mdx@3.1.2(astro@4.11.5(@types/node@20.14.10)(typescript@5.5.3))':
     dependencies:
       '@astrojs/markdown-remark': 5.1.1
       '@mdx-js/mdx': 3.0.1
       acorn: 8.12.1
-      astro: 4.11.5(typescript@5.5.3)
+      astro: 4.11.5(@types/node@20.14.10)(typescript@5.5.3)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       github-slugger: 2.0.0
@@ -2713,6 +2721,10 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.2
 
+  '@types/node@20.14.10':
+    dependencies:
+      undici-types: 5.26.5
+
   '@types/unist@2.0.10': {}
 
   '@types/unist@3.0.2': {}
@@ -2818,14 +2830,7 @@ snapshots:
 
   astring@1.8.6: {}
 
-  astro-pagefind@1.5.0(astro@4.11.5(typescript@5.5.3)):
-    dependencies:
-      '@pagefind/default-ui': 1.1.0
-      astro: 4.11.5(typescript@5.5.3)
-      pagefind: 1.1.0
-      sirv: 2.0.4
-
-  astro@4.11.5(typescript@5.5.3):
+  astro@4.11.5(@types/node@20.14.10)(typescript@5.5.3):
     dependencies:
       '@astrojs/compiler': 2.8.2
       '@astrojs/internal-helpers': 0.4.1
@@ -2883,8 +2888,8 @@ snapshots:
       tsconfck: 3.1.1(typescript@5.5.3)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.3.3
-      vitefu: 0.2.5(vite@5.3.3)
+      vite: 5.3.3(@types/node@20.14.10)
+      vitefu: 0.2.5(vite@5.3.3(@types/node@20.14.10))
       which-pm: 2.2.0
       yargs-parser: 21.1.1
       zod: 3.23.8
@@ -4383,6 +4388,8 @@ snapshots:
 
   typescript@5.5.3: {}
 
+  undici-types@5.26.5: {}
+
   unified@11.0.5:
     dependencies:
       '@types/unist': 3.0.2
@@ -4461,17 +4468,18 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite@5.3.3:
+  vite@5.3.3(@types/node@20.14.10):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.39
       rollup: 4.18.1
     optionalDependencies:
+      '@types/node': 20.14.10
       fsevents: 2.3.3
 
-  vitefu@0.2.5(vite@5.3.3):
+  vitefu@0.2.5(vite@5.3.3(@types/node@20.14.10)):
     optionalDependencies:
-      vite: 5.3.3
+      vite: 5.3.3(@types/node@20.14.10)
 
   volar-service-css@0.0.59(@volar/language-service@2.4.0-alpha.15):
     dependencies:
