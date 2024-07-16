@@ -9,7 +9,11 @@ export function getNameFromLocale(locale?: string) {
 }
 
 export function getLocaleFromUrl(url: URL) {
-  const [, locale] = url.pathname.split('/');
+  let path = url.pathname;
+
+  if (url.pathname.startsWith(import.meta.env.BASE_URL)) path = url.pathname.slice(import.meta.env.BASE_URL.length);
+
+  const [, locale] = path.split('/');
   return parseLocale(locale);
 }
 
