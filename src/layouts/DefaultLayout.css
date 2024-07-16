@@ -47,6 +47,8 @@ header a:visited {
 }
 
 footer {
+  display: flex;
+  align-items: center;
   height: 3rem;
 }
 

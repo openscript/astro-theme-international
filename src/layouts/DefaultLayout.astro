@@ -2,7 +2,7 @@
 import './layouts';
 import './DefaultLayout.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-import { getLocaleFromUrl, useTranslations } from '../i18n';
+import { getLocaleFromUrl, useTranslations, getTranslatedPath } from '../i18n';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { C } from '../configuration';
 import { getRelativePath } from '../path';
@@ -37,7 +37,7 @@ const { translations, currentLocale } = Astro.props;
       <slot />
     </main>
     <footer>
-      Footer
+      <span><a href={await getTranslatedPath('pages', `${locale}/license`)}>{t('site.license')}</a></span>
     </footer>
   </body>
 </html>

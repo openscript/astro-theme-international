@@ -5,10 +5,12 @@ export const C = {
     'en': {
       'site.title': '<span>Astro Theme:</span> International',
       'site.license': 'MIT License',
+      'slugs.blog': 'blog',
     },
     'de': {
       'site.title': '<span>Astro Theme:</span> International',
       'site.license': 'MIT Lizenz',
+      'slugs.blog': 'blog',
     }
   },
   MENUS: {
