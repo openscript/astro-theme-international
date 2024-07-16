@@ -20,6 +20,7 @@
     "astro-pagefind": "^1.5.0",
     "fsevents": "^2.3.3",
     "limax": "^4.1.0",
+    "pagefind": "^1.1.0",
     "typescript": "^5.5.3"
   },
   "packageManager": "pnpm@9.1.3"
