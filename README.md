@@ -9,11 +9,12 @@ An Astro theme, focused on internationalization and simplicity.
   - [x] UI translations
   - [x] Content translations
   - [x] Route translations
-- [x] Static search via [Pagefind](https://pagefind.app/)
 - [x] MDX support
 - [x] Favicons
 - [x] Custom fonts
+- [x] 404 page
 - [x] Pre-configured devcontainer
+- [x] Static search via [Pagefind](https://pagefind.app/)
 - [x] Interactive components with [Preact](https://preactjs.com/)
 - [x] Sitemap via [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
 
