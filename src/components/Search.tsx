@@ -45,6 +45,7 @@ export default function Search({ path, placeholder }: Props) {
         onFocus={onFocus}
         onInput={(e) => setQuery(e.currentTarget.value)}
       />
+      {loading && <p>Searching...</p>}
       <ul>
         {results.map((r) => (
           <li key={r.url}>

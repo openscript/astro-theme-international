@@ -4,8 +4,8 @@ import { splitLocaleFromPath } from '@timelet/i18n';
 import { getRelativePath } from './path';
 
 export function getNameFromLocale(locale?: string) {
-  if (locale && locale in C.LOCALES) return C.LOCALES[locale as keyof typeof C.LOCALES];
-  return C.LOCALES[C.DEFAULT_LOCALE];
+  const l = parseLocale(locale);
+  return C.MESSAGES[l].language;
 }
 
 export function getLocaleFromUrl(url: URL) {
