@@ -34,7 +34,7 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
   </head>
   <body>
     <header>
-      <a href={getRelativePath(`/${currentLocale || ''}`)} class="title" set:html={t('site.title')}></a>
+      <a href={getRelativePath(`/${locale === C.DEFAULT_LOCALE ? '' : locale}`)} class="title" set:html={t('site.title')}></a>
       <Search path={pagefindPath} placeholder={t('search.placeholder')} client:load />
       <LanguageSwitcher translations={translations} currentLocale={currentLocale || C.DEFAULT_LOCALE} />
     </header>
