@@ -39,6 +39,8 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
       <LanguageSwitcher translations={translations} currentLocale={currentLocale || C.DEFAULT_LOCALE} />
     </header>
     <main data-pagefind-body>
+      {Astro.url}
+      {Astro.url.pathname}
       <slot />
     </main>
     <footer>
