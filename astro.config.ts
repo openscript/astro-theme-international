@@ -3,6 +3,8 @@ import mdx from "@astrojs/mdx";
 import { C } from './src/configuration';
 import search from './src/integrations/search';
 
+import preact from "@astrojs/preact";
+
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
@@ -11,7 +13,7 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: C.DEFAULT_LOCALE,
-    locales: Object.keys(C.LOCALES),
+    locales: Object.keys(C.LOCALES)
   },
-  integrations: [mdx(), search()]
+  integrations: [mdx(), search(), preact()]
 });

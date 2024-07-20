@@ -3,6 +3,8 @@
   "compilerOptions": {
     "moduleResolution": "bundler",
     "exactOptionalPropertyTypes": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   },
   "exclude": [
     "dist"

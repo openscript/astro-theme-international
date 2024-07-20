@@ -14,6 +14,7 @@ An Astro theme, focused on internationalization and simplicity.
 - [x] Favicons
 - [x] Custom fonts
 - [x] Pre-configured devcontainer
+- [x] Interactive components with Preact
 
 ### Content types
 
