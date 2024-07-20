@@ -55,3 +55,9 @@ footer {
 .padded, header, main, footer {
   padding: 0 10%;
 }
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}

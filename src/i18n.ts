@@ -40,6 +40,22 @@ export async function getTranslatedPath<
   return getRelativePath(`/${[urlLocale, collectionSlug, e.data.path].filter(Boolean).join('/')}`);
 }
 
+export async function makeMenu(
+  locale: keyof typeof C.LOCALES,
+  items: { title: string, path: ((locale: keyof typeof C.LOCALES) => Promise<string>) | string }[]
+) {
+  return Promise.all(items.map(async (item) => {
+    const urlLocale = locale === C.DEFAULT_LOCALE ? '' : locale;
+    const path = typeof item.path === 'string'
+      ? getRelativePath(`/${[urlLocale, item.path].filter(Boolean).join('/')}`)
+      : await item.path(locale);
+    return {
+      title: item.title,
+      path,
+    };
+  }));
+}
+
 export function useTranslations(locale: keyof typeof C.MESSAGES) {
   return function t(key: keyof typeof C.MESSAGES[typeof C.DEFAULT_LOCALE]) {
     return C.MESSAGES[locale][key] || C.MESSAGES[C.DEFAULT_LOCALE][key];

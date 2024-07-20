@@ -18,9 +18,5 @@ export const C = {
       'slugs.blog': 'blog',
       'search.placeholder': 'Schreibe um zu suchen...',
     }
-  },
-  MENUS: {
-    header: [],
-    footer: [],
-  }
+  } satisfies { [key: string]: {[key: string]: string }},
 } as const;
