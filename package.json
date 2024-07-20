@@ -15,7 +15,6 @@
     "@fontsource-variable/dosis": "^5.0.20",
     "@fontsource-variable/fira-code": "^5.0.18",
     "@fontsource-variable/playfair-display": "^5.0.25",
-    "@pagefind/default-ui": "^1.1.0",
     "@timelet/i18n": "^0.0.2",
     "astro": "^4.11.5",
     "fsevents": "^2.3.3",

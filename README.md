@@ -6,13 +6,14 @@ An Astro theme, focused on internationalization and simplicity.
 
 - [x] Internationalization
   - [x] Language switcher
-  - [x] Static UI translations
-  - [x] Dynamic content translations
-  - [x] Language-specific URLs
-- [x] Pre-configured devcontainer
+  - [x] UI translations
+  - [x] Content translations
+  - [x] Route translations
+- [x] Static search via [Pagefind](https://pagefind.app/)
 - [x] MDX support
 - [x] Favicons
 - [x] Custom fonts
+- [x] Pre-configured devcontainer
 
 ### Content types
 
@@ -26,9 +27,13 @@ An Astro theme, focused on internationalization and simplicity.
 ### Sections
 
 
-## Ressources
+## Resources
 
 - Fonts: https://fontsource.org/
 - Colors: https://colorhunt.co/palette/eeeeee686d76373a40dc5f00
 - Icons: https://tabler.io/icons
 - Favicon Generator: https://realfavicongenerator.net/
+
+### Articles
+
+- https://dominuskelvin.dev/blog/understanding-astro-components

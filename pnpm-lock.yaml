@@ -23,9 +23,6 @@ importers:
       '@fontsource-variable/playfair-display':
         specifier: ^5.0.25
         version: 5.0.25
-      '@pagefind/default-ui':
-        specifier: ^1.1.0
-        version: 1.1.0
       '@timelet/i18n':
         specifier: ^0.0.2
         version: 0.0.2
@@ -532,9 +529,6 @@ packages:
     resolution: {integrity: sha512-QjQSE/L5oS1C8N8GdljGaWtjCBMgMtfrPAoiCmINTu9Y9dp0ggAyXvF8K7Qg3VyIMYJ6v8vg2PN7Z3b+AaAqUA==}
     cpu: [x64]
     os: [darwin]
-
-  '@pagefind/default-ui@1.1.0':
-    resolution: {integrity: sha512-+XiAJAK++C64nQcD7s3Prdmd5S92lT05fwjOxm0L1jj80jbL+tmvcqkkFnPpoqhnicIPgcAX/Y5W0HRZnBt35w==}
 
   '@pagefind/linux-arm64@1.1.0':
     resolution: {integrity: sha512-8zjYCa2BtNEL7KnXtysPtBELCyv5DSQ4yHeK/nsEq6w4ToAMTBl0K06khqxdSGgjMSwwrxvLzq3so0LC5Q14dA==}
@@ -2600,8 +2594,6 @@ snapshots:
 
   '@pagefind/darwin-x64@1.1.0':
     optional: true
-
-  '@pagefind/default-ui@1.1.0': {}
 
   '@pagefind/linux-arm64@1.1.0':
     optional: true
