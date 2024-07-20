@@ -12,6 +12,7 @@ export function getLocaleFromUrl(url: URL) {
   let path = url.pathname;
 
   if (url.pathname.startsWith(import.meta.env.BASE_URL)) path = url.pathname.slice(import.meta.env.BASE_URL.length);
+  if (!path.startsWith('/')) path = `/${path}`;
 
   const [, locale] = path.split('/');
   return parseLocale(locale);
