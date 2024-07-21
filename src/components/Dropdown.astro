@@ -1,0 +1,63 @@
+---
+---
+
+<ul>
+  <li class="dropdown">
+    <button><slot name="button" /></button>
+    <ul>
+      <slot />
+    </ul>
+  </li>
+</ul>
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dropdown :global(a:focus) {
+    color: red;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .dropdown ul {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid var(--white-color);
+    background-color: var(--gray-color);
+  }
+
+  .dropdown:hover :global(ul),
+  .dropdown:focus-within :global(ul) {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown :global(li a) {
+    display: block;
+    padding: 0.8rem 2rem;
+    text-align: center;
+  }
+
+  .dropdown :global(li.active) {
+    background-color: var(--dark-color);
+  }
+
+  .dropdown :global(ul) {
+    display: block;
+  }
+</style>

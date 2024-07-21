@@ -1,0 +1,64 @@
+---
+
+import Dropdown from './Dropdown.astro';
+import Icon from './Icon.astro';
+---
+
+<nav role="navigation" class="theme-switcher">
+  <Dropdown>
+    <Fragment slot="button">
+      <span class="light">
+        <Icon name="light" /> Light
+      </span>
+      <span class="dark">
+        <Icon name="dark" /> Dark
+      </span>
+      <span class="system">
+        <Icon name="brightnessAuto" /> System
+      </span>
+    </Fragment>
+    <li>
+      <a href="#" data-theme="light">Light</a>
+    </li>
+    <li>
+      <a href="#" data-theme="dark">Dark</a>
+    </li>
+    <li>
+      <a href="#" data-theme="system">System</a>
+    </li>
+  </Dropdown>
+</nav>
+
+<style>
+  :global(html.dark) .theme-switcher span:not(.dark) {
+    display: none;
+  }
+  :global(html.light) .theme-switcher span:not(.light) {
+    display: none;
+  }
+  :global(html.system) .theme-switcher span:not(.system) {
+    display: none;
+  }
+</style>
+
+<script is:inline>
+  const theme = localStorage.getItem("theme") || "system";
+  document.documentElement.classList.add(theme);
+
+  const themes = document.querySelectorAll(".theme-switcher a[data-theme]");
+  themes.forEach((theme) => {
+    theme.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (!(event.target instanceof HTMLElement) || !(document.activeElement instanceof HTMLElement)) return;
+
+      const { theme } = event.target.dataset;
+      if (!theme) return;
+
+      document.documentElement.classList.remove("dark", "light", "system");
+      document.documentElement.classList.add(theme);
+
+      localStorage.setItem("theme", theme);
+      document.activeElement.blur();
+    });
+  });
+</script>
