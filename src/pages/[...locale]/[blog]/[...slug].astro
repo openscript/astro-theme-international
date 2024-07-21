@@ -5,6 +5,8 @@ import { splitLocaleFromPath } from '@timelet/i18n';
 import slugify from 'limax';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { C } from '../../../configuration';
+import { joinPath } from '../../../path';
+import { dirname } from 'path';
 
 export const getStaticPaths = (async () => {
   const pages = await getCollection('blog');
@@ -12,11 +14,11 @@ export const getStaticPaths = (async () => {
   const paths = pages.map(page => {
     const split = splitLocaleFromPath(page.slug);
     const locale = split && split.locale !== C.DEFAULT_LOCALE ? split.locale : undefined;
-    const slug = slugify(page.data.title);
+    const slug = joinPath(dirname(split?.path || ''), slugify(page.data.title));
     const translations = pages.reduce((acc, p) => {
       const s = splitLocaleFromPath(p.slug);
       if(s && s.path === split?.path) {
-        acc[s.locale] = [s.locale !== C.DEFAULT_LOCALE ? `/${s.locale}` : undefined, "blog", slugify(p.data.title)].join("/");
+        acc[s.locale] = [s.locale !== C.DEFAULT_LOCALE ? `/${s.locale}` : undefined, "blog", dirname(s.path) ,slugify(p.data.title)].join("/");
       }
       return acc;
     }, {} as Record<string, string>);
