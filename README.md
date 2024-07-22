@@ -14,6 +14,7 @@ An Astro theme, focused on internationalization and simplicity.
 - [x] Favicons
 - [x] Custom fonts
 - [x] 404 page
+- [x] Pagination
 - [x] Pre-configured devcontainer
 - [x] Pre-configured Github Actions
 - [x] Compatible with Github Pages
@@ -43,3 +44,4 @@ An Astro theme, focused on internationalization and simplicity.
 ### Articles
 
 - https://dominuskelvin.dev/blog/understanding-astro-components
+- https://simonhearne.com/2021/layout-shifts-webfonts/

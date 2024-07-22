@@ -1,6 +1,11 @@
 export const C = {
   LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
   DEFAULT_LOCALE: 'en' as const,
+  SETTINGS: {
+    BLOG: {
+      PAGE_SIZE: 1
+    }
+  },
   MESSAGES: {
     'en': {
       'language': 'English',
