@@ -11,7 +11,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 
   const translations = locales.reduce(
     (acc, l) => {
-      acc[l] = l === C.DEFAULT_LOCALE ? `/` : `/${l}`;
+      acc[l] = l === C.DEFAULT_LOCALE ? `/blog` : `/${l}/blog`;
       return acc;
     },
     {} as Record<string, string>,

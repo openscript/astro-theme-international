@@ -9,7 +9,7 @@ An Astro theme, focused on internationalization and simplicity.
   - [x] UI translations
   - [x] Content translations
   - [x] Route translations
-  - [ ] Link hreflang tags
+  - [x] Link alternate tags
 - [x] MDX support
 - [x] Favicons
 - [x] Custom fonts
