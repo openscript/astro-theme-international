@@ -21,6 +21,12 @@ An Astro theme, focused on internationalization and simplicity.
 - [x] Static search via [Pagefind](https://pagefind.app/)
 - [x] Interactive components with [Preact](https://preactjs.com/)
 - [x] Sitemap via [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
+  - with I18n support
+- [x] RSS feed via [@astrojs/rss](https://docs.astro.build/en/guides/rss/)
+  - with I18n support
+- [x] Works on a subpath (e.g. `http://example.com/my-cool-astro-site/`)
+- [x] Dark mode
+- [x] Built with Typescript: As type-safe as possible
 
 ### Content types
 

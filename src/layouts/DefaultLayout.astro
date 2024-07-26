@@ -32,6 +32,11 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
           <link rel="alternate" hreflang={C.LOCALES[parseLocale(locale)]} href={new URL(path, Astro.url).href} />
           <meta property="og:locale:alternate" content={C.LOCALES[parseLocale(locale)].replace(`-`, `_`)} />
     ))}
+    <link rel="alternate" type="application/rss+xml" title={C.MESSAGES[locale]['site.feed.title']} href={getRelativePath('/rss.xml')} />
+    {Object.keys(C.LOCALES).map((l) => {
+      const currentLocale = parseLocale(l);
+      return <link rel="alternate" type="application/rss+xml" title={C.MESSAGES[currentLocale]['site.feed.language']} href={getRelativePath(`/rss-${l}.xml`)} />
+    })}
     <link rel="sitemap" href={getRelativePath('/sitemap-index.xml')} />
     <link rel="apple-touch-icon" sizes="180x180" href={getRelativePath('/apple-touch-icon.png')}>
     <link rel="icon" type="image/png" sizes="32x32" href={getRelativePath('/favicon-32x32.png')}>
