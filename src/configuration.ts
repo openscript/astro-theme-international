@@ -3,7 +3,7 @@ export const C = {
   DEFAULT_LOCALE: 'en' as const,
   SETTINGS: {
     BLOG: {
-      PAGE_SIZE: 1
+      PAGE_SIZE: 20
     }
   },
   MESSAGES: {
