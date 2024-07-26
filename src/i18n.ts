@@ -1,7 +1,8 @@
 import { getEntry, type ContentEntryMap, type ValidContentEntrySlug } from 'astro:content';
 import { C } from './configuration';
 import { parseLocaleTagFromPath, splitLocaleFromPath } from '@timelet/i18n';
-import { getRelativePath } from './path';
+import { dirname, getRelativePath } from './path';
+import slugify from 'limax';
 
 export function getNameFromLocale(locale?: string) {
   const l = parseLocale(locale);
@@ -29,15 +30,20 @@ export async function getTranslatedPath<
   const e = await getEntry(collection, slug);
 
   if (!e) throw new Error(`Entry not found: ${collection}/${slug}`);
-  if (!('path' in e.data)) throw new Error(`Entry has no path in its data: ${collection}/${slug}`);
 
   const split = splitLocaleFromPath(e.slug);
-  const locale = parseLocale(split?.locale);
+  if (!split) throw new Error(`Entry has no international path: ${collection}/${slug}`);
+
+  let pageSlug = split.path;
+  if ('path' in e.data) pageSlug = e.data.path;
+  if ('title' in e.data) pageSlug = `${dirname(pageSlug)}/${slugify(e.data.title)}`;
+
+  const locale = parseLocale(split.locale);
   const urlLocale = locale === C.DEFAULT_LOCALE ? '' : locale;
   const collectionSlugName = `slugs.${e.collection}` as keyof typeof C.MESSAGES[typeof locale];
   const collectionSlug = C.MESSAGES[locale][collectionSlugName] || '';
 
-  return getRelativePath(`/${[urlLocale, collectionSlug, e.data.path].filter(Boolean).join('/')}`);
+  return getRelativePath(`/${[urlLocale, collectionSlug, pageSlug].filter(Boolean).join('/')}`);
 }
 
 export async function makeMenu(

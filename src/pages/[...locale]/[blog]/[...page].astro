@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import { C } from "../../../configuration";
 import DefaultLayout from "../../../layouts/DefaultLayout.astro";
 import { getRelativePath } from "../../../path";
+import { getTranslatedPath } from "../../../i18n";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const pages = await getCollection("blog");
@@ -26,7 +27,6 @@ export const getStaticPaths = (async ({ paginate }) => {
     });
 	});
 }) satisfies GetStaticPaths;
-// All paginated data is passed on the "page" prop
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, locale, translations } = Astro.props as Props;
@@ -34,11 +34,9 @@ const { page, locale, translations } = Astro.props as Props;
 ---
 
 <DefaultLayout translations={translations} currentLocale={locale}>
-  <!--Display the current page number. Astro.params.page can also be used!-->
-  <h1>Page {page.currentPage}</h1>
+  <h1>Blog (Page {page.currentPage})</h1>
   <ul>
-    <!--List the array of astronaut info-->
-    {page.data.map((post) => <li>{post.data.title}</li>)}
+    {page.data.map(async (post) => <li><a href={await getTranslatedPath('blog', post.slug)}>{post.data.title}</a></li>)}
   </ul>
   {page.url.prev ? <a href={getRelativePath(page.url.prev)}>Vorherige Seite</a> : null}
   {page.url.next ? <a href={getRelativePath(page.url.next)}>Nächste Seite</a> : null}
