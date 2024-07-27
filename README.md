@@ -27,6 +27,7 @@ An Astro theme, focused on internationalization and simplicity.
 - [x] Works on a subpath (e.g. `http://example.com/my-cool-astro-site/`)
 - [x] Dark mode
 - [x] Built with Typescript: As type-safe as possible
+- [ ] Responsive design
 
 ### Content types
 

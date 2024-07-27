@@ -5,9 +5,11 @@ import { C } from "../../../configuration";
 import DefaultLayout from "../../../layouts/DefaultLayout.astro";
 import { getRelativePath } from "../../../path";
 import { getTranslatedPath } from "../../../i18n";
+import Image from "astro/components/Image.astro";
+import defaultCover from "../../../assets/default-cover.jpg";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const pages = await getCollection("blog");
+  const pages = (await getCollection("blog")).reverse();
   const locales = Object.keys(C.LOCALES);
 
   const translations = locales.reduce(
@@ -19,25 +21,50 @@ export const getStaticPaths = (async ({ paginate }) => {
   );
 
   return locales.flatMap((l) => {
-		const locale = l === C.DEFAULT_LOCALE ? undefined : l;
+    const locale = l === C.DEFAULT_LOCALE ? undefined : l;
     return paginate(pages, {
       pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
       params: { locale, blog: "blog" },
       props: { locale: l, translations },
     });
-	});
+  });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, locale, translations } = Astro.props as Props;
-
 ---
+
+<style>
+  img {
+    width: 600px;
+    height: 320px;
+    object-fit: cover;
+  }
+</style>
 
 <DefaultLayout translations={translations} currentLocale={locale}>
   <h1>Blog (Page {page.currentPage})</h1>
   <ul>
-    {page.data.map(async (post) => <li><a href={await getTranslatedPath('blog', post.slug)}>{post.data.title}</a></li>)}
+    {
+      page.data.map(async (post) => (
+        <li>
+          <a href={await getTranslatedPath("blog", post.slug)}>
+            <Image src={post.data.cover?.src || defaultCover} alt={post.data.cover?.alt || post.data.title} widths={[720]} />
+            {post.data.title}
+            {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
+          </a>
+        </li>
+      ))
+    }
   </ul>
-  {page.url.prev ? <a href={getRelativePath(page.url.prev)}>Vorherige Seite</a> : null}
-  {page.url.next ? <a href={getRelativePath(page.url.next)}>Nächste Seite</a> : null}
+  {
+    page.url.prev ? (
+      <a href={getRelativePath(page.url.prev)}>Vorherige Seite</a>
+    ) : null
+  }
+  {
+    page.url.next ? (
+      <a href={getRelativePath(page.url.next)}>Nächste Seite</a>
+    ) : null
+  }
 </DefaultLayout>

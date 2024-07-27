@@ -5,7 +5,8 @@ tags:
   - Tag 1
   - Tag B
   - Tag Z
-featured: tplink-archer-a7-set-up.jpg
+cover:
+  src: ./feature4.jpg
 ---
 
 # Willkommen zu meinem Blog!
