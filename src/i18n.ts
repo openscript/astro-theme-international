@@ -1,4 +1,4 @@
-import { getEntry, type ContentEntryMap, type ValidContentEntrySlug } from 'astro:content';
+import { getEntry, type ContentEntryMap, type DataEntryMap, type ValidContentEntrySlug } from 'astro:content';
 import { C } from './configuration';
 import { dirname, getRelativePath } from './path';
 import slugify from 'limax';
