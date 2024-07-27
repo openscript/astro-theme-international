@@ -1,8 +1,24 @@
 import { getEntry, type ContentEntryMap, type ValidContentEntrySlug } from 'astro:content';
 import { C } from './configuration';
-import { parseLocaleTagFromPath, splitLocaleFromPath } from '@timelet/i18n';
 import { dirname, getRelativePath } from './path';
 import slugify from 'limax';
+
+const IETF_BCP_47_LOCALE_PATTERN = /^\/?(\w{2}(?!\w)(-\w{1,})*)\/?/;
+const SINGLE_LEADING_SLASH_PATTERN = /^\/(?=\/)/;
+const REMOVE_LEADING_SLASH_PATTERN = /^\/+/;
+
+export function splitLocaleFromPath(path: string) {
+  const locale = parseLocaleTagFromPath(path);
+  if (!locale) return undefined;
+
+  const p = path.replace(locale, "").replace(path.startsWith("/") ? SINGLE_LEADING_SLASH_PATTERN : REMOVE_LEADING_SLASH_PATTERN, "");
+  return { locale, path: p };
+}
+
+export function parseLocaleTagFromPath(path: string) {
+  const match = path.match(IETF_BCP_47_LOCALE_PATTERN);
+  return match ? match[1] : undefined;
+}
 
 export function getNameFromLocale(locale?: string) {
   const l = parseLocale(locale);

@@ -1,12 +1,12 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
-import { splitLocaleFromPath } from '@timelet/i18n';
 import slugify from 'limax';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { C } from '../../../configuration';
 import { joinPath } from '../../../path';
 import { dirname } from 'path';
+import { splitLocaleFromPath } from '../../../i18n';
 
 export const getStaticPaths = (async () => {
   const pages = await getCollection('blog');
