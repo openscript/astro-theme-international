@@ -3,16 +3,16 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import { C } from '../../configuration';
-import { splitLocaleFromPath } from '../../i18n';
+import { splitLocaleAndPath } from '../../i18n';
 
 export const getStaticPaths = (async () => {
   const pages = await getCollection('pages');
 
   const paths = pages.map(page => {
-    const split = splitLocaleFromPath(page.slug);
+    const split = splitLocaleAndPath(page.slug);
     const locale = split && split.locale !== C.DEFAULT_LOCALE ? split.locale : undefined;
     const translations = pages.reduce((acc, p) => {
-      const s = splitLocaleFromPath(p.slug);
+      const s = splitLocaleAndPath(p.slug);
       if(s && s.path === split?.path) {
         acc[s.locale] = [s.locale !== C.DEFAULT_LOCALE ? `/${s.locale}` : undefined, p.data.path].join("/");
       }

@@ -16,6 +16,7 @@ export const C = {
       'site.description': 'A humble Astronauts guide to the international space station.',
       'site.license': 'MIT License',
       'slugs.blog': 'blog',
+      'slugs.gallery': 'gallery',
       'search.placeholder': 'Type to search...',
     },
     'de': {
@@ -27,6 +28,7 @@ export const C = {
       'site.description': 'Ein bescheidener Astronautenführer zur internationalen Raumstation.',
       'site.license': 'MIT Lizenz',
       'slugs.blog': 'blog',
+      'slugs.gallery': 'galerie',
       'search.placeholder': 'Schreibe um zu suchen...',
     }
   } satisfies { [key: string]: {[key: string]: string }},

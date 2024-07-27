@@ -7,17 +7,17 @@ const IETF_BCP_47_LOCALE_PATTERN = /^\/?(\w{2}(?!\w)(-\w{1,})*)\/?/;
 const SINGLE_LEADING_SLASH_PATTERN = /^\/(?=\/)/;
 const REMOVE_LEADING_SLASH_PATTERN = /^\/+/;
 
-export function splitLocaleFromPath(path: string) {
+export function parseLocaleTagFromPath(path: string) {
+  const match = path.match(IETF_BCP_47_LOCALE_PATTERN);
+  return match ? match[1] : undefined;
+}
+
+export function splitLocaleAndPath(path: string) {
   const locale = parseLocaleTagFromPath(path);
   if (!locale) return undefined;
 
   const p = path.replace(locale, "").replace(path.startsWith("/") ? SINGLE_LEADING_SLASH_PATTERN : REMOVE_LEADING_SLASH_PATTERN, "");
   return { locale, path: p };
-}
-
-export function parseLocaleTagFromPath(path: string) {
-  const match = path.match(IETF_BCP_47_LOCALE_PATTERN);
-  return match ? match[1] : undefined;
 }
 
 export function getNameFromLocale(locale?: string) {
@@ -47,7 +47,7 @@ export async function getTranslatedPath<
 
   if (!e) throw new Error(`Entry not found: ${collection}/${slug}`);
 
-  const split = splitLocaleFromPath(e.slug);
+  const split = splitLocaleAndPath(e.slug);
   if (!split) throw new Error(`Entry has no international path: ${collection}/${slug}`);
 
   let pageSlug = split.path;
