@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import { C } from "../../../configuration";
 import DefaultLayout from "../../../layouts/DefaultLayout.astro";
 import { getRelativePath } from "../../../path";
-import { getTranslatedPath } from "../../../i18n";
+import { getContentEntryPath } from "../../../i18n";
 import Image from "astro/components/Image.astro";
 import defaultCover from "../../../assets/default-cover.jpg";
 
@@ -48,7 +48,7 @@ const { page, locale, translations } = Astro.props as Props;
     {
       page.data.map(async (post) => (
         <li>
-          <a href={await getTranslatedPath("blog", post.slug)}>
+          <a href={await getContentEntryPath("blog", post.slug)}>
             <Image src={post.data.cover?.src || defaultCover} alt={post.data.cover?.alt || post.data.title} widths={[720]} />
             {post.data.title}
             {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}

@@ -1,7 +1,7 @@
 import rss from '@astrojs/rss';
 import type { APIRoute, GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 import { C } from '../configuration';
-import { getTranslatedPath, parseLocale } from '../i18n';
+import { getContentEntryPath, parseLocale } from '../i18n';
 import { getCollection } from 'astro:content';
 
 export const getStaticPaths = (async () => {
@@ -24,7 +24,7 @@ export const GET: APIRoute<Props, Params> = async (context) => {
     items: await Promise.all(blogs.map(async (blog) => ({
       title: blog.data.title,
       pubDate: blog.data.publishedAt,
-      link: await getTranslatedPath("blog", blog.slug)
+      link: await getContentEntryPath("blog", blog.slug)
     }))),
     customData: `<language>${C.LOCALES[locale]}</language>`,
   });

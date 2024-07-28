@@ -1,6 +1,6 @@
-import { getEntry, type ContentEntryMap, type DataEntryMap, type ValidContentEntrySlug } from 'astro:content';
-import { C } from './configuration';
-import { dirname, getRelativePath } from './path';
+import { getEntry, type CollectionEntry, type ContentEntryMap, type DataEntryMap, type ValidContentEntrySlug } from 'astro:content';
+import { C, type Locale } from './configuration';
+import { dirname, getRelativePath, joinPath } from './path';
 import slugify from 'limax';
 
 const IETF_BCP_47_LOCALE_PATTERN = /^\/?(\w{2}(?!\w)(-\w{1,})*)\/?/;
@@ -39,27 +39,67 @@ export function parseLocale(locale?: string) {
   return locale && locale in C.MESSAGES ? locale as keyof typeof C.MESSAGES : C.DEFAULT_LOCALE;
 }
 
-export async function getTranslatedPath<
+export function getMessage(key: string, locale: Locale) {
+  if (!(locale in C.MESSAGES)) throw new Error(`Invalid locale: ${locale}`);
+  if (!(key in C.MESSAGES[locale])) throw new Error(`Invalid message key: ${key}`);
+
+  const k = key as keyof typeof C.MESSAGES[typeof locale];
+
+  return C.MESSAGES[locale][k];
+}
+
+export function getLocaleSlug(locale: Locale) {
+  return locale === C.DEFAULT_LOCALE ? "" : locale;
+}
+
+export async function getContentEntryPath<
   C extends keyof ContentEntryMap,
   E extends ValidContentEntrySlug<C> | (string & {}),
->(collection: C, slug: E){
-  const e = await getEntry(collection, slug);
-
-  if (!e) throw new Error(`Entry not found: ${collection}/${slug}`);
+>(
+  collection: C,
+  entrySlug: E
+) {
+  const e = await getEntry(collection, entrySlug);
+  if (!e) throw new Error(`Content entry not found: ${collection}/${entrySlug}`);
 
   const split = splitLocaleAndPath(e.slug);
-  if (!split) throw new Error(`Entry has no international path: ${collection}/${slug}`);
+  if (!split) throw new Error(`Entry has no international path: ${collection}/${entrySlug}`);
 
   let pageSlug = split.path;
   if ('path' in e.data) pageSlug = e.data.path;
   if ('title' in e.data) pageSlug = `${dirname(pageSlug)}/${slugify(e.data.title)}`;
 
-  const locale = parseLocale(split.locale);
-  const urlLocale = locale === C.DEFAULT_LOCALE ? '' : locale;
-  const collectionSlugName = `slugs.${e.collection}` as keyof typeof C.MESSAGES[typeof locale];
-  const collectionSlug = C.MESSAGES[locale][collectionSlugName] || '';
+  return getTranslatedPath(parseLocale(split.locale), collection, pageSlug);
+}
 
-  return getRelativePath(`/${[urlLocale, collectionSlug, pageSlug].filter(Boolean).join('/')}`);
+export async function getDataEntryPath<
+  C extends keyof DataEntryMap,
+  E extends keyof DataEntryMap[C]
+>(
+  collection: C,
+  entryId: E,
+  locale: Locale
+) {
+  const e = await getEntry(collection, entryId) as CollectionEntry<C> | undefined;
+  if (!e) throw new Error(`Data entry not found: ${collection}/${String(entryId)}`);
+  if (!(locale in e.data)) throw new Error(`Data entry has no locale: ${collection}/${String(entryId)}`);
+
+  const data = e.data[locale];
+  let pageSlug = dirname(e.id);
+  if (data?.title) {
+    const folders = pageSlug.split('/').slice(1, -1);
+    pageSlug = joinPath(...folders, slugify(data.title));
+  }
+  console.log(pageSlug)
+
+  return getTranslatedPath(locale, collection, pageSlug);
+}
+
+function getTranslatedPath(locale: Locale, collection: string, pageSlug: string) {
+  const localeSlug = getLocaleSlug(locale);
+  const collectionSlug = collection === 'pages' ? undefined : getMessage(`slugs.${collection}`, locale);
+
+  return getRelativePath(`/${[localeSlug, collectionSlug, pageSlug].filter(Boolean).join('/')}`);
 }
 
 export async function makeMenu(

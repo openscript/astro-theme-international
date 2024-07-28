@@ -4,9 +4,13 @@ export function getRelativePath(path: string) {
 }
 
 export function joinPath(...paths: Array<string | undefined>) {
-  return `/${paths.filter(Boolean).join('/')}`;
+  return `${paths.filter(Boolean).join('/')}`;
 }
 
 export function dirname(path: string) {
-  return path.replace(/\/[^/]*$/, '');
+  return path.replace(/\/[^\/]*$/, '');
+}
+
+export function trimExtension(path: string) {
+  return path.replace(/\.[^\/.]+$/, '');
 }

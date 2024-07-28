@@ -33,3 +33,5 @@ export const C = {
     }
   } satisfies { [key: string]: {[key: string]: string }},
 } as const;
+
+export type Locale = keyof typeof C.LOCALES;

@@ -2,7 +2,7 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { C } from '../../../configuration';
-import { parseLocale } from '../../../i18n';
+import { getDataEntryPath, parseLocale } from '../../../i18n';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
@@ -19,7 +19,6 @@ export const getStaticPaths = (async () => {
 	return locales.map((l) => {
     const parsedLocale = parseLocale(l);
     const slug = C.MESSAGES[parsedLocale]['slugs.gallery'];
-    console.log(slug);
 		const locale = l === C.DEFAULT_LOCALE ? undefined : l;
 		return { params: { locale, gallery: slug }, props: { locale: parsedLocale, translations } };
 	});
@@ -42,7 +41,7 @@ const gallery = await getCollection('gallery');
         const c = category.data[locale];
         if (!c) return undefined;
         return <li>
-          <a href={category.id}>
+          <a href={await getDataEntryPath('gallery', category.id, locale)}>
             <Image src={c.cover} alt={`Cover: ${c.title}`} width={320} />
             {c.title}
           </a>
