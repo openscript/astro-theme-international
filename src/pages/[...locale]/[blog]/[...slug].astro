@@ -1,7 +1,7 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
-import slugify from 'limax';
+import slug from "limax";
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { C } from '../../../configuration';
 import { joinPath } from '../../../path';
@@ -14,15 +14,15 @@ export const getStaticPaths = (async () => {
   const paths = pages.map(page => {
     const split = splitLocaleAndPath(page.slug);
     const locale = split && split.locale !== C.DEFAULT_LOCALE ? split.locale : undefined;
-    const slug = joinPath(dirname(split?.path || ''), slugify(page.data.title));
+    const pageSlug = joinPath(dirname(split?.path || ''), slug(page.data.title));
     const translations = pages.reduce((acc, p) => {
       const s = splitLocaleAndPath(p.slug);
       if(s && s.path === split?.path) {
-        acc[s.locale] = [s.locale !== C.DEFAULT_LOCALE ? `/${s.locale}` : undefined, "blog", dirname(s.path) ,slugify(p.data.title)].join("/");
+        acc[s.locale] = [s.locale !== C.DEFAULT_LOCALE ? `/${s.locale}` : undefined, "blog", dirname(s.path), slug(p.data.title)].join("/");
       }
       return acc;
     }, {} as Record<string, string>);
-    return { params: { locale, slug, blog: "blog" }, props: {...page, translations, locale} };
+    return { params: { locale, slug: pageSlug, blog: "blog" }, props: {...page, translations, locale} };
   });
 
   return paths;

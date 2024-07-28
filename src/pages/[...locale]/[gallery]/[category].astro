@@ -1,0 +1,64 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import DefaultLayout from "../../../layouts/DefaultLayout.astro";
+import { C } from "../../../configuration";
+import { getLocaleSlug } from "../../../i18n";
+import { parseLocale } from "../../../i18n";
+import { joinPath } from "../../../path";
+import slug from "limax";
+
+export const getStaticPaths = (async () => {
+  const categories = await getCollection("gallery");
+  const locales = Object.keys(C.LOCALES);
+  const paths = categories.flatMap((category) => {
+    const pages = locales.map((l) => {
+      const locale = parseLocale(l);
+      const localeSlug = getLocaleSlug(locale);
+      const gallerySlug = C.MESSAGES[locale]["slugs.gallery"];
+      if (!category.data[locale])
+        throw new Error(
+          `Category ${category.id} does not have a translation for locale ${locale}`,
+        );
+      const categorySlug = slug(category.data[locale].title);
+      return {
+        params: {
+          locale: localeSlug,
+          gallery: gallerySlug,
+          category: categorySlug,
+        },
+        props: { locale },
+      };
+    });
+
+    return pages.map((p) => ({
+      ...p,
+      props: {
+        ...p.props,
+        translations: pages.reduce(
+          (acc, pp) => ({
+            ...acc,
+            [pp.props.locale]: `/${joinPath(
+              pp.params.locale,
+              pp.params.gallery,
+              pp.params.category,
+            )}`,
+          }),
+          {} as Record<string, string>,
+        ),
+      },
+    }));
+  });
+  console.log(paths);
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { translations, locale } = Astro.props as Props;
+---
+
+<DefaultLayout translations={translations} currentLocale={locale}>
+  Gugus
+</DefaultLayout>
