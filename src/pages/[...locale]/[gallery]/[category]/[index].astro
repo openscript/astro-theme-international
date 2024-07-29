@@ -17,12 +17,8 @@ export const getStaticPaths = (async () => {
       const locale = parseLocale(l);
       const localeSlug = getLocaleSlug(locale);
       const gallerySlug = C.MESSAGES[locale]["slugs.gallery"];
-      if (!category.data[locale])
-        throw new Error(
-          `Category ${category.id} does not have a translation for locale ${locale}`,
-        );
-      const categorySlug = slug(category.data[locale].title);
-      return category.data[locale].images.map((image, index) => {
+      const categorySlug = slug(category.data.title[locale] ?? category.data.title[C.DEFAULT_LOCALE]);
+      return category.data.images.map((image, index) => {
         return {
           params: {
             locale: localeSlug,
@@ -64,5 +60,5 @@ const { page, translations, locale } = Astro.props as Props;
 
 <DefaultLayout translations={translations} currentLocale={locale}>
 	<h1>Bild</h1>
-  <Image src={page.src} alt={`Photo: ${page.alt}`} width={1920} />
+  <Image src={page.src} alt={`Photo: ${page.title}`} width={1920} />
 </DefaultLayout>

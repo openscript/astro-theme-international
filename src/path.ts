@@ -14,3 +14,7 @@ export function dirname(path: string) {
 export function trimExtension(path: string) {
   return path.replace(/\.[^\/.]+$/, '');
 }
+
+export function addTrailingSlash(path: string) {
+  return path.endsWith('/') ? path : `${path}/`;
+}

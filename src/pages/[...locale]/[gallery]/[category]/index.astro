@@ -5,7 +5,7 @@ import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
 import { C } from "../../../../configuration";
 import { getLocaleSlug } from "../../../../i18n";
 import { parseLocale } from "../../../../i18n";
-import { joinPath } from "../../../../path";
+import { joinPath, addTrailingSlash } from "../../../../path";
 import slug from "limax";
 import { Image } from "astro:assets";
 
@@ -17,18 +17,14 @@ export const getStaticPaths = (async () => {
       const locale = parseLocale(l);
       const localeSlug = getLocaleSlug(locale);
       const gallerySlug = C.MESSAGES[locale]["slugs.gallery"];
-      if (!category.data[locale])
-        throw new Error(
-          `Category ${category.id} does not have a translation for locale ${locale}`,
-        );
-      const categorySlug = slug(category.data[locale].title);
+      const categorySlug = slug(category.data.title[locale] ?? category.data.title[C.DEFAULT_LOCALE]);
       return {
         params: {
           locale: localeSlug,
           gallery: gallerySlug,
           category: categorySlug,
         },
-        props: { locale, page: category.data[locale] },
+        props: { locale, page: category.data },
       };
     });
 
@@ -61,13 +57,13 @@ const url = Astro.url;
 ---
 
 <DefaultLayout translations={translations} currentLocale={locale}>
-	<h1>{page.title}</h1>
+	<h1>{page.title[locale] ?? page.title[C.DEFAULT_LOCALE]}</h1>
   <ul>
     {
       page.images.map((image, index) => (
         <li>
-          <a href={new URL(index.toString(), url).href}>
-            <Image src={image.src} alt={`Photo: ${image.alt}`} width={320} />
+          <a href={new URL(index.toString(), addTrailingSlash(url.toString())).href}>
+            <Image src={image.src} alt={`Photo: ${image.title ? image.title[locale] : ''}`} width={320} />
           </a>
         </li>
       ))

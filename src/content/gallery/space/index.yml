@@ -1,12 +1,10 @@
-en: &default
-  title: Space
-  cover: ./space1.jpg
-  images:
-    - src: ./space1.jpg
-    - src: ./space2.jpg
-    - src: ./space3.jpg
-    - src: ./space4.jpg
-    - src: ./space5.jpg
-de:
-  <<: *default
-  title: Weltraum
+title:
+  en: Space
+  de: Weltraum
+cover: ./space1.jpg
+images:
+  - src: ./space1.jpg
+  - src: ./space2.jpg
+  - src: ./space3.jpg
+  - src: ./space4.jpg
+  - src: ./space5.jpg

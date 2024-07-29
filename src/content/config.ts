@@ -1,5 +1,9 @@
-import { defineCollection, z, type ImageFunction } from 'astro:content';
-import { C } from '../configuration';
+import { defineCollection, z } from 'astro:content';
+
+const localizedString = z.object({
+  en: z.string(),
+  de: z.string().optional(),
+});
 
 const blogCollection = defineCollection({
   schema: ({ image }) => z.object({
@@ -13,22 +17,24 @@ const blogCollection = defineCollection({
     }).optional(),
   })
 });
-const createGalleryCollection = (image: ImageFunction) => z.object({
-  title: z.string(),
-  cover: image(),
-  images: z.array(
-    z.object({
-      src: image().refine((img) => img.width >= 800, {
-        message: "Image must be at least 800 pixels wide!",
-      }),
-      alt: z.string().optional(),
-    })
-  ),
-}).optional();
+
+
 
 const galleryCollection = defineCollection({
   type: 'data',
-  schema: ({ image }) => z.object({...Object.keys(C.LOCALES).reduce<Record<string, ReturnType<typeof createGalleryCollection>>>((acc, locale) => ({...acc, [locale]: createGalleryCollection(image)}), {})}),
+  schema: ({ image }) => z.object({
+    title: localizedString,
+    cover: image(),
+    images: z.array(
+      z.object({
+        src: image().refine((img) => img.width >= 800, {
+          message: "Image must be at least 800 pixels wide!",
+        }),
+        title: localizedString.optional(),
+        description: localizedString.optional(),
+      })
+    ),
+  }),
 });
 const pagesCollection = defineCollection({
   schema: z.object({

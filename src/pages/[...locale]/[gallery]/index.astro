@@ -38,12 +38,12 @@ const gallery = await getCollection('gallery');
   <ul>
     {
       gallery.map(async (category) => {
-        const c = category.data[locale];
+        const c = category.data;
         if (!c) return undefined;
         return <li>
-          <a href={`${await getDataEntryPath('gallery', category.id, locale)}/`}>
-            <Image src={c.cover} alt={`Cover: ${c.title}`} width={320} />
-            {c.title}
+          <a href={await getDataEntryPath('gallery', category.id, locale)}>
+            <Image src={c.cover} alt={`Cover: ${c.title[locale]}`} width={320} />
+            {c.title[locale]}
           </a>
         </li>
       }).filter(Boolean)

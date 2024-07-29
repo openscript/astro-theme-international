@@ -82,13 +82,11 @@ export async function getDataEntryPath<
 ) {
   const e = await getEntry(collection, entryId) as CollectionEntry<C> | undefined;
   if (!e) throw new Error(`Data entry not found: ${collection}/${String(entryId)}`);
-  if (!(locale in e.data)) throw new Error(`Data entry has no locale: ${collection}/${String(entryId)}`);
 
-  const data = e.data[locale];
   let pageSlug = dirname(e.id);
-  if (data?.title) {
+  if (e.data.title) {
     const folders = pageSlug.split('/').slice(1, -1);
-    pageSlug = joinPath(...folders, slug(data.title));
+    pageSlug = joinPath(...folders, slug(e.data.title[locale] || e.data.title[C.DEFAULT_LOCALE]));
   }
   console.log(pageSlug)
 

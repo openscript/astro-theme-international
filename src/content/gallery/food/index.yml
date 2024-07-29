@@ -1,10 +1,8 @@
-en: &default
-  title: Food
-  cover: ./food1.jpg
-  images:
-    - src: ./food1.jpg
-    - src: ./food2.jpg
-    - src: ./food3.jpg
-de:
-  <<: *default
-  title: Essen
+title:
+  en: Food
+  de: Essen
+cover: ./food1.jpg
+images:
+  - src: ./food1.jpg
+  - src: ./food2.jpg
+  - src: ./food3.jpg
