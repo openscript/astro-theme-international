@@ -1,11 +1,11 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
+import type { InferGetStaticPropsType, GetStaticPaths, InferGetStaticParamsType } from "astro";
 import { getCollection } from "astro:content";
 import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
 import { C } from "../../../../configuration";
 import { getLocaleSlug } from "../../../../i18n";
 import { parseLocale } from "../../../../i18n";
-import { joinPath, addTrailingSlash } from "../../../../path";
+import { joinPath, resolvePath } from "../../../../path";
 import slug from "limax";
 import { Image } from "astro:assets";
 
@@ -51,9 +51,9 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 const { page, translations, locale } = Astro.props as Props;
-const url = Astro.url;
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const { locale: localeSlug, gallery: gallerySlug, category: categorySlug } = Astro.params as Params;
 ---
 
 <DefaultLayout translations={translations} currentLocale={locale}>
@@ -62,7 +62,7 @@ const url = Astro.url;
     {
       page.images.map((image, index) => (
         <li>
-          <a href={new URL(index.toString(), addTrailingSlash(url.toString())).href}>
+          <a href={resolvePath(localeSlug, gallerySlug, categorySlug, index.toString())}>
             <Image src={image.src} alt={`Photo: ${image.title ? image.title[locale] : ''}`} width={320} />
           </a>
         </li>

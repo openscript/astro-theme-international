@@ -4,7 +4,11 @@ export function getRelativePath(path: string) {
 }
 
 export function joinPath(...paths: Array<string | undefined>) {
-  return `${paths.filter(Boolean).join('/')}`;
+  return paths.filter(Boolean).join('/');
+}
+
+export function resolvePath(...paths: Array<string | undefined>) {
+  return getRelativePath(`/${joinPath(...paths)}`);
 }
 
 export function dirname(path: string) {

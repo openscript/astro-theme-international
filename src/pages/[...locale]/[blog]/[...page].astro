@@ -1,9 +1,9 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
 import { getCollection } from "astro:content";
 import { C } from "../../../configuration";
 import DefaultLayout from "../../../layouts/DefaultLayout.astro";
-import { getRelativePath, addTrailingSlash } from "../../../path";
+import { getRelativePath, resolvePath } from "../../../path";
 import { getContentEntryPath } from "../../../i18n";
 import Image from "astro/components/Image.astro";
 import defaultCover from "../../../assets/default-cover.jpg";
@@ -33,7 +33,8 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, locale, translations } = Astro.props as Props;
-const url = Astro.url;
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const { locale: localeSlug, blog: blogSlug } = Astro.params as Params;
 ---
 
 <style>
@@ -57,7 +58,7 @@ const url = Astro.url;
           </a>
           <div>
             {post.data.tags.map((tag) => (
-              <a href={new URL(slug(tag), addTrailingSlash(url.toString()))}>{tag}</a>
+              <a href={resolvePath(localeSlug, blogSlug, slug(tag))}>{tag}</a>
             ))}
           </div>
         </li>
