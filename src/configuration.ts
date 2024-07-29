@@ -1,11 +1,8 @@
 export const C = {
+  // Key is the locale slug, value is the locale code
   LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
+  // Default locale referencing one of the keys in LOCALES
   DEFAULT_LOCALE: 'en' as const,
-  SETTINGS: {
-    BLOG: {
-      PAGE_SIZE: 20
-    }
-  },
   MESSAGES: {
     'en': {
       'language': 'English',
@@ -32,6 +29,11 @@ export const C = {
       'search.placeholder': 'Schreibe um zu suchen...',
     }
   } satisfies { [key: string]: {[key: string]: string }},
+  SETTINGS: {
+    BLOG: {
+      PAGE_SIZE: 20
+    }
+  },
 } as const;
 
 export type Locale = keyof typeof C.LOCALES;

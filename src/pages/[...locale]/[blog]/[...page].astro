@@ -28,7 +28,6 @@ export const getStaticPaths = (async ({ paginate }) => {
     return acc;
   }, {});
   const locales = Object.keys(C.LOCALES);
-  console.log(groupedPageSlug)
 
   const translations = locales.reduce<Record<string, string>>((acc, l) => {
     acc[l] = l === C.DEFAULT_LOCALE ? `/blog` : `/${l}/blog`;

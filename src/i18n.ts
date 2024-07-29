@@ -88,7 +88,6 @@ export async function getDataEntryPath<
     const folders = pageSlug.split('/').slice(1, -1);
     pageSlug = joinPath(...folders, slug(e.data.title[locale] || e.data.title[C.DEFAULT_LOCALE]));
   }
-  console.log(pageSlug)
 
   return getTranslatedPath(locale, collection, pageSlug);
 }
