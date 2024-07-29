@@ -9,6 +9,7 @@ const blogCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     publishedAt: z.date(),
+    tags: z.array(z.string()),
     cover: z.object({
       src: image().refine((img) => img.width >= 800, {
         message: "Cover image must be at least 800 pixels wide!",
@@ -17,9 +18,6 @@ const blogCollection = defineCollection({
     }).optional(),
   })
 });
-
-
-
 const galleryCollection = defineCollection({
   type: 'data',
   schema: ({ image }) => z.object({

@@ -1,39 +1,51 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getCollection } from "astro:content";
-import { C } from "../../../configuration";
-import DefaultLayout from "../../../layouts/DefaultLayout.astro";
-import { getRelativePath, addTrailingSlash } from "../../../path";
-import { getContentEntryPath } from "../../../i18n";
+import { C } from "../../../../configuration";
+import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
+import { getRelativePath } from "../../../../path";
+import { getContentEntryPath } from "../../../../i18n";
 import Image from "astro/components/Image.astro";
-import defaultCover from "../../../assets/default-cover.jpg";
+import defaultCover from "../../../../assets/default-cover.jpg";
+import type { CollectionEntry } from "astro:content";
 import slug from "limax";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const pages = (await getCollection("blog")).reverse();
+  const groupedPages = pages.reduce<Record<string, CollectionEntry<'blog'>[]>>((acc, page) => {
+    page.data.tags.forEach((tag) => {
+      const tagSlug = slug(tag);
+      if (!acc[tagSlug]) {
+        acc[tagSlug] = [];
+      }
+      acc[tagSlug].push(page);
+    });
+    return acc;
+  }, {});
   const locales = Object.keys(C.LOCALES);
-
-  const translations = locales.reduce<Record<string, string>>(
-    (acc, l) => {
-      acc[l] = l === C.DEFAULT_LOCALE ? `/blog` : `/${l}/blog`;
-      return acc;
-    },
-    {},
-  );
 
   return locales.flatMap((l) => {
     const locale = l === C.DEFAULT_LOCALE ? undefined : l;
-    return paginate(pages, {
-      pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
-      params: { locale, blog: "blog" },
-      props: { locale: l, translations },
+    return Object.entries(groupedPages).flatMap(([tag, pages]) => {
+      const translations = locales.reduce<Record<string, string>>(
+        (acc, l) => {
+          acc[l] = l === C.DEFAULT_LOCALE ? `/blog/${tag}` : `/${l}/blog/${tag}`;
+          return acc;
+        },
+        {},
+      );
+      return paginate(pages, {
+        pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
+        params: { locale, blog: "blog", tag },
+        props: { locale: l, translations, tag },
+      });
     });
   });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { page, locale, translations } = Astro.props as Props;
-const url = Astro.url;
+const { page, locale, translations, tag } = Astro.props as Props;
+
 ---
 
 <style>
@@ -45,7 +57,7 @@ const url = Astro.url;
 </style>
 
 <DefaultLayout translations={translations} currentLocale={locale}>
-  <h1>Blog (Page {page.currentPage})</h1>
+  <h1>Tag {tag}</h1>
   <ul>
     {
       page.data.map(async (post) => (
@@ -55,11 +67,6 @@ const url = Astro.url;
             {post.data.title}
             {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
           </a>
-          <div>
-            {post.data.tags.map((tag) => (
-              <a href={new URL(slug(tag), addTrailingSlash(url.toString()))}>{tag}</a>
-            ))}
-          </div>
         </li>
       ))
     }
