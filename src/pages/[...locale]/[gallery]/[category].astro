@@ -7,6 +7,7 @@ import { getLocaleSlug } from "../../../i18n";
 import { parseLocale } from "../../../i18n";
 import { joinPath } from "../../../path";
 import slug from "limax";
+import { Image } from "astro:assets";
 
 export const getStaticPaths = (async () => {
   const categories = await getCollection("gallery");
@@ -27,7 +28,7 @@ export const getStaticPaths = (async () => {
           gallery: gallerySlug,
           category: categorySlug,
         },
-        props: { locale },
+        props: { locale, page: category.data[locale] },
       };
     });
 
@@ -49,16 +50,24 @@ export const getStaticPaths = (async () => {
       },
     }));
   });
-  console.log(paths);
 
   return paths;
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { translations, locale } = Astro.props as Props;
+const { page, translations, locale } = Astro.props as Props;
 ---
 
 <DefaultLayout translations={translations} currentLocale={locale}>
-  Gugus
+	<h1>{page.title}</h1>
+  <ul>
+    {
+      page.images.map((image) => (
+        <li>
+          <Image src={image.src} alt={`Photo: ${image.alt}`} width={320} />
+        </li>
+      ))
+    }
+  </ul>
 </DefaultLayout>
