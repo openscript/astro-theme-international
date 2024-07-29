@@ -41,7 +41,7 @@ const gallery = await getCollection('gallery');
         const c = category.data[locale];
         if (!c) return undefined;
         return <li>
-          <a href={await getDataEntryPath('gallery', category.id, locale)}>
+          <a href={`${await getDataEntryPath('gallery', category.id, locale)}/`}>
             <Image src={c.cover} alt={`Cover: ${c.title}`} width={320} />
             {c.title}
           </a>

@@ -1,11 +1,11 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import DefaultLayout from "../../../layouts/DefaultLayout.astro";
-import { C } from "../../../configuration";
-import { getLocaleSlug } from "../../../i18n";
-import { parseLocale } from "../../../i18n";
-import { joinPath } from "../../../path";
+import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
+import { C } from "../../../../configuration";
+import { getLocaleSlug } from "../../../../i18n";
+import { parseLocale } from "../../../../i18n";
+import { joinPath } from "../../../../path";
 import slug from "limax";
 import { Image } from "astro:assets";
 
@@ -57,15 +57,18 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page, translations, locale } = Astro.props as Props;
+const url = Astro.url;
 ---
 
 <DefaultLayout translations={translations} currentLocale={locale}>
 	<h1>{page.title}</h1>
   <ul>
     {
-      page.images.map((image) => (
+      page.images.map((image, index) => (
         <li>
-          <Image src={image.src} alt={`Photo: ${image.alt}`} width={320} />
+          <a href={new URL(index.toString(), url).href}>
+            <Image src={image.src} alt={`Photo: ${image.alt}`} width={320} />
+          </a>
         </li>
       ))
     }
