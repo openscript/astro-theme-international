@@ -1,29 +1,68 @@
 ---
-import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
+import type {
+  GetStaticPaths,
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+} from "astro";
 import { getCollection } from "astro:content";
 import { C } from "../../../configuration";
 import DefaultLayout from "../../../layouts/DefaultLayout.astro";
 import { getRelativePath, resolvePath } from "../../../path";
-import { getContentEntryPath } from "../../../i18n";
+import { getContentEntryPath, splitLocaleAndPath } from "../../../i18n";
 import Image from "astro/components/Image.astro";
 import defaultCover from "../../../assets/default-cover.jpg";
 import slug from "limax";
+import type { CollectionEntry } from "astro:content";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const pages = (await getCollection("blog")).reverse();
+  const groupedPageSlug = pages.reduce<
+    Record<string, CollectionEntry<"blog">[]>
+  >((acc, page) => {
+    const split = splitLocaleAndPath(page.slug);
+    if (split) {
+      const locales = acc[split.path] || [];
+      locales.push(page);
+      acc[split.path] = locales;
+    }
+    return acc;
+  }, {});
   const locales = Object.keys(C.LOCALES);
+  console.log(groupedPageSlug)
 
-  const translations = locales.reduce<Record<string, string>>(
-    (acc, l) => {
-      acc[l] = l === C.DEFAULT_LOCALE ? `/blog` : `/${l}/blog`;
-      return acc;
-    },
-    {},
-  );
+  const translations = locales.reduce<Record<string, string>>((acc, l) => {
+    acc[l] = l === C.DEFAULT_LOCALE ? `/blog` : `/${l}/blog`;
+    return acc;
+  }, {});
 
   return locales.flatMap((l) => {
     const locale = l === C.DEFAULT_LOCALE ? undefined : l;
-    return paginate(pages, {
+    const filteredPages = Object.entries(groupedPageSlug).reduce<
+      CollectionEntry<"blog">[]
+    >((acc, [_, pages]) => {
+      if (pages.length === 1) {
+        acc.push(...pages);
+      } else {
+        let page = pages.find((p) => {
+          const split = splitLocaleAndPath(p.slug);
+          return split && split.locale === l;
+        });
+        if (!page) {
+          page = pages.find((p) => {
+            const split = splitLocaleAndPath(p.slug);
+            return split && split.locale === C.DEFAULT_LOCALE;
+          });
+        }
+        if (!page) {
+          page = pages[0];
+        }
+        if(page) {
+          acc.push(page);
+        }
+      }
+      return acc;
+    }, []);
+    return paginate(filteredPages, {
       pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
       params: { locale, blog: "blog" },
       props: { locale: l, translations },
@@ -33,6 +72,10 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, locale, translations } = Astro.props as Props;
+const pagedTranslations = Object.entries(translations).reduce<Record<string, string>>((acc, [l, t]) => {
+  acc[l] = page.currentPage === 1 ? t : `${t}/${page.currentPage}`;
+  return acc;
+}, {});
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 const { locale: localeSlug, blog: blogSlug } = Astro.params as Params;
 ---
@@ -45,14 +88,18 @@ const { locale: localeSlug, blog: blogSlug } = Astro.params as Params;
   }
 </style>
 
-<DefaultLayout translations={translations} currentLocale={locale}>
+<DefaultLayout translations={pagedTranslations} currentLocale={locale}>
   <h1>Blog (Page {page.currentPage})</h1>
   <ul>
     {
       page.data.map(async (post) => (
         <li>
           <a href={await getContentEntryPath("blog", post.slug)}>
-            <Image src={post.data.cover?.src || defaultCover} alt={post.data.cover?.alt || post.data.title} widths={[720]} />
+            <Image
+              src={post.data.cover?.src || defaultCover}
+              alt={post.data.cover?.alt || post.data.title}
+              widths={[720]}
+            />
             {post.data.title}
             {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
           </a>
