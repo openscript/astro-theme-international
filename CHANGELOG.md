@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.0.3
+
+### Patch Changes
+
+- 292203c: Add changeset scripts
+
 ## 0.0.2
 
 ### Patch Changes
