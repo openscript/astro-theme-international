@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.0.5
+
+### Patch Changes
+
+- 96fd519: Tune deployment workflow
+
 ## 0.0.4
 
 ### Patch Changes
