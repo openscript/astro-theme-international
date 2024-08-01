@@ -1,10 +1,11 @@
-name: Deploy to Pages
+name: Deploy to static file host
 
 on:
-  push:
-    branches: [main]
-
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -13,56 +14,52 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
-
-env:
-  BUILD_PATH: "."
+  cancel-in-progress: true
 
 jobs:
   build:
-    name: Build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v3
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 22
           cache: "pnpm"
-          cache-dependency-path: ${{ env.BUILD_PATH }}/pnpm-lock.yaml
 
       - name: Setup Pages
-        id: pages
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: ${{ env.BUILD_PATH }}
+        run: pnpm install
 
-      - name: Build with Astro
-        run: |
-          pnpm astro build \
-            --site "${{ steps.pages.outputs.origin }}" \
-            --base "${{ steps.pages.outputs.base_path }}"
-        working-directory: ${{ env.BUILD_PATH }}
+      - name: Build
+        run: pnpm build
+
+      - name: Prepare for publishing
+        run: pnpm prepare:web
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.BUILD_PATH }}/dist
+          path: "./dist"
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
     runs-on: ubuntu-latest
-    name: Deploy
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

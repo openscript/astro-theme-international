@@ -1,0 +1,54 @@
+name: Publish
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  publish:
+    if: github.event.pull_request.merged == true && github.head_ref == 'changeset-release/main'
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Publish
+        uses: changesets/action@v1
+        id: changesets
+        with:
+          version: pnpm version
+          publish: pnpm tag
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      ref: ${{ github.ref }}
+      published: ${{ steps.changesets.outputs.published }}
+
+  deploy-to-static-file-host:
+    name: Deploy to Static File Host
+    uses: ./.github/workflows/cd-static-file-host.yml
+    needs: publish
+    with:
+      ref: ${{ needs.publish.outputs.ref }}
+    if: ${{ needs.publish.outputs.published }}
