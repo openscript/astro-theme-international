@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.0.4
+
+### Patch Changes
+
+- ae25044: Upgrade dependencies
+
 ## 0.0.3
 
 ### Patch Changes
