@@ -4,6 +4,6 @@ import { getViteConfig } from 'astro/config';
 // see https://docs.astro.build/en/guides/testing/
 export default getViteConfig({
   test: {
-    // Vitest configuration options
+    unstubEnvs: true,
   },
 });
