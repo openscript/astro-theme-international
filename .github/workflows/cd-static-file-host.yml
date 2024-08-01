@@ -46,9 +46,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Prepare for publishing
-        run: pnpm prepare:web
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
