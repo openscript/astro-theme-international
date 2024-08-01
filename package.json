@@ -9,7 +9,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest",
-    "coverage": "vitest --coverage"
+    "coverage": "vitest --coverage",
+    "version": "changeset version",
+    "release": "changeset publish",
+    "tag": "changeset tag"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.1",
