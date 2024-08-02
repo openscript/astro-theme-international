@@ -16,6 +16,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  BUILD_PATH: "."
+
 jobs:
   build:
     environment:
@@ -29,7 +32,7 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -41,15 +44,20 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+        working-directory: ${{ env.BUILD_PATH }}
 
-      - name: Build
-        run: pnpm build
+      - name: Build with Astro
+        run: |
+          pnpm astro build \
+            --site "${{ steps.pages.outputs.origin }}" \
+            --base "${{ steps.pages.outputs.base_path }}"
+        working-directory: ${{ env.BUILD_PATH }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          path: ${{ env.BUILD_PATH }}/dist
 
   deploy:
     environment:
