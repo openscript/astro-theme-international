@@ -1,35 +1,56 @@
 # `astro-theme-international`
 
-An Astro theme, focused on internationalization and simplicity.
+An Astro theme, focused on internationalization.
+
+## Usage
+
+<details>
+<summary>🛠️ How to use this theme?</summary>
+
+1. Use this repository as a template.
+1. Enable Github Pages in the repository settings: <br> ![Enable Github Pages](./res/enable-github-pages.png)
+
+</details>
+
+<details>
+<summary>🎁 How to contribute to this theme?</summary>
+
+1. Fork the project.
+1. Add your changes.
+1. Open a pull request.
+
+</details>
 
 ## Features
 
-- [x] Internationalization
-  - [x] Language switcher
-  - [x] UI translations
-  - [x] Content translations
-  - [x] Route translations
-  - [x] Link alternate tags
-- [x] MDX support
-- [x] Favicons
-- [x] Custom fonts
-- [x] 404 page
-- [x] Pagination
-- [x] Pre-configured devcontainer
-- [x] Pre-configured Github Actions
-- [x] Compatible with Github Pages
-- [x] Static search via [Pagefind](https://pagefind.app/)
-- [x] Interactive components with [Preact](https://preactjs.com/)
-- [x] Sitemap via [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
-  - with I18n support
-- [x] RSS feed via [@astrojs/rss](https://docs.astro.build/en/guides/rss/)
-  - with I18n support
-- [x] Works on a subpath (e.g. `http://example.com/my-cool-astro-site/`)
-- [x] Dark mode
-- [x] Built with Typescript: As type-safe as possible
-- [ ] Responsive design
-- [x] Unit and intergation tests with [vitest](https://vitest.dev/) included
-- [x] Release cycle generating changelogs with [changesets](https://github.com/changesets/changesets)
+- Internationalization
+  - UI translations
+  - Content translations
+  - Route translations
+  - Language switcher
+  - `hreflang` and others meta tags
+- Automated testing
+  - Unit and integration tests using [vitest](https://vitest.dev/)
+  - Coverage reports [![codecov](https://codecov.io/github/openscript/astro-theme-international/graph/badge.svg?token=JDCTMFS7NW)](https://codecov.io/github/openscript/astro-theme-international)
+- Opinionated pre-configured developer setup
+  - [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/remote/containers)
+  - Type-safe development with [Typescript](https://www.typescriptlang.org/)
+  - Pre-configured [Github Actions](https://github.com/features/actions) for CI/CD
+  - Compatible with [Github Pages](https://pages.github.com/)
+  - Works on a subpath (e.g. `http://example.com/my-cool-astro-site/`)
+  - MDX support [(@astrojs/mdx)](https://docs.astro.build/en/guides/mdx/)
+  - Interactive components with [Preact](https://preactjs.com/)
+  - Release cycle including generating changelogs with [changesets](https://github.com/changesets/changesets)
+- Connectivity
+  - RSS Feeds with i18n support [(@astrojs/rss)](https://docs.astro.build/en/guides/rss/)
+  - Sitemaps with i18n support [(@astrojs/sitemap)](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
+  - Static search using [Pagefind](https://pagefind.app/)
+- Userfacing features
+  - Dark mode
+  - Pagination
+  - 404 page
+  - Favicons
+  - Custom fonts
 
 ### Content types
 
@@ -38,7 +59,7 @@ An Astro theme, focused on internationalization and simplicity.
 
 ### Layouts
 
-- DefaultLayout: Simple layout with a header, main and footer.
+- DefaultLayout: Layout with a header, main and footer.
 
 ### Sections
 
