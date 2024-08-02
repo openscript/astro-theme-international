@@ -9,6 +9,10 @@ An Astro theme, focused on internationalization.
 
 1. Use this repository as a template.
 1. Enable Github Pages in the repository settings: <br> ![Enable Github Pages](./res/enable-github-pages.png)
+1. Open the repository with Visual Studio Code.
+1. Make sure you have Docker and the Dev Containers extension installed.
+1. Open the repository in a Dev Container.
+1. Start making your changes.
 
 </details>
 
