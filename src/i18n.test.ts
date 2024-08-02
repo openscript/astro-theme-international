@@ -1,5 +1,20 @@
-import { describe, it, expect } from "vitest";
-import { parseLocaleTagFromPath, splitLocaleAndPath } from "./i18n";
+import { describe, it, expect, vi } from "vitest";
+import { getNameFromLocale, parseLocaleTagFromPath, splitLocaleAndPath } from "./i18n";
+
+vi.mock("./configuration", () => ({
+  C: {
+    LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
+    DEFAULT_LOCALE: 'en' as const,
+    MESSAGES: {
+      'en': {
+        'language': 'English',
+      },
+      'de': {
+        'language': 'Deutsch',
+      }
+    }
+  }
+}));
 
 describe("parseLocaleTagFromPath", () => {
   it("should parse the locale from a URL", () => {
@@ -51,3 +66,11 @@ describe("splitLocaleAndPath", () => {
     expect(splitPath?.path).toBe("docs/getting-started");
   });
 });
+
+describe("getNameFromLocale", () => {
+  it("should return the name of the locale", () => {
+    expect(getNameFromLocale("en")).toBe("English");
+    expect(getNameFromLocale("de")).toBe("Deutsch");
+  });
+});
+
