@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.0.6
+
+### Patch Changes
+
+- 87ad7c1: Fix paths
+
 ## 0.0.5
 
 ### Patch Changes
