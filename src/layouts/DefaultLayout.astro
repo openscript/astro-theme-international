@@ -8,6 +8,7 @@ import { N } from '../navigation';
 import { getRelativePath } from '../path';
 import Search from '../components/Search.tsx';
 import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import { version } from '../../package.json';
 
 
 type Props = {
@@ -62,6 +63,7 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
       <slot />
     </main>
     <footer>
+      <span>Version {version} </span>
       <nav>
         <ul>
           {N.footer[locale].map((i) => <li><a href={i.path}>{i.title}</a></li>)}

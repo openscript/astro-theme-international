@@ -18,12 +18,14 @@ export const N = {
   'footer': {
     'en': await makeMenu('en', [
       { title: 'License', path: (locale) => getContentEntryPath('pages', `${locale}/license`) },
+      { title: 'Changelog', path: (locale) => getContentEntryPath('pages', `${locale}/changelog`) },
       { title: 'Privacy', path: 'privacy' },
       { title: 'Terms', path: 'terms' },
       { title: 'Contact', path: 'contact' },
     ]),
     'de': await makeMenu('de', [
       { title: 'Lizenz', path: (locale) => getContentEntryPath('pages', `${locale}/license`) },
+      { title: 'Änderungsverlauf', path: (locale) => getContentEntryPath('pages', `${locale}/changelog`) },
       { title: 'Datenschutz', path: 'datenschutz' },
       { title: 'AGB', path: 'agb' },
       { title: 'Kontakt', path: 'kontakt' },

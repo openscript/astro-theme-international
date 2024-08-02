@@ -29,6 +29,7 @@ An Astro theme, focused on internationalization and simplicity.
 - [x] Built with Typescript: As type-safe as possible
 - [ ] Responsive design
 - [x] Unit and intergation tests with [vitest](https://vitest.dev/) included
+- [x] Release cycle generating changelogs with [changesets](https://github.com/changesets/changesets)
 
 ### Content types
 
