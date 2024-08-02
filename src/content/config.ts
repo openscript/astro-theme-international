@@ -39,9 +39,21 @@ const pagesCollection = defineCollection({
     path: z.string()
   })
 });
+const projectsCollection = defineCollection({
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    cover: z.object({
+      src: image().refine((img) => img.width >= 800, {
+        message: "Cover image must be at least 800 pixels wide!",
+      }),
+      alt: z.string().optional(),
+    }).optional(),
+  })
+});
 
 export const collections = {
   'blog': blogCollection,
   'gallery': galleryCollection,
-  'pages': pagesCollection
+  'pages': pagesCollection,
+  'projects': projectsCollection,
 };

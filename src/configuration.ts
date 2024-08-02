@@ -15,6 +15,7 @@ export const C = {
       'site.license': 'MIT License',
       'slugs.blog': 'blog',
       'slugs.gallery': 'gallery',
+      'slugs.projects': 'projects',
       'search.placeholder': 'Type to search...',
     },
     'de': {
@@ -27,6 +28,7 @@ export const C = {
       'site.license': 'MIT Lizenz',
       'slugs.blog': 'blog',
       'slugs.gallery': 'galerie',
+      'slugs.projects': 'projekte',
       'search.placeholder': 'Schreibe um zu suchen...',
     }
   } satisfies { [key: string]: {[key: string]: string }},
