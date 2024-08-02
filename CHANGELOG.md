@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.0.7
+
+### Patch Changes
+
+- 0af2c24: Fix output paths
+
 ## 0.0.6
 
 ### Patch Changes
