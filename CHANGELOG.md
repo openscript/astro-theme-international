@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.0.8
+
+### Patch Changes
+
+- d996678: Fix build pages
+
 ## 0.0.7
 
 ### Patch Changes
