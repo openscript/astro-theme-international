@@ -33,7 +33,7 @@ importers:
         specifier: ^5.0.25
         version: 5.0.25
       astro:
-        specifier: ^4.13.0
+        specifier: ^4.13.1
         version: 4.13.1(@types/node@22.1.0)(typescript@5.5.4)
       fsevents:
         specifier: ^2.3.3
@@ -58,7 +58,7 @@ importers:
         specifier: ^2.27.7
         version: 2.27.7
       '@types/node':
-        specifier: ^22.0.3
+        specifier: ^22.1.0
         version: 22.1.0
       '@vitest/coverage-v8':
         specifier: ^2.0.5
