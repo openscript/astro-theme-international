@@ -8,7 +8,8 @@
 		"vscode": {
 			"extensions": [
 				"astro-build.astro-vscode",
-				"unifiedjs.vscode-mdx"
+				"unifiedjs.vscode-mdx",
+				"vitest.explorer"
 			]
 		}
 	}

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { getNameFromLocale, parseLocaleTagFromPath, splitLocaleAndPath } from "./i18n";
+import { getLocaleFromUrl, getNameFromLocale, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath } from "./i18n";
 
 vi.mock("./configuration", () => ({
   C: {
@@ -74,3 +74,20 @@ describe("getNameFromLocale", () => {
   });
 });
 
+describe("getLocaleFromUrl", () => {
+  it("should return the locale from a URL", () => {
+    const url = new URL("https://example.com/en-US/docs/getting-started");
+    expect(getLocaleFromUrl(url)).toBe("en");
+  });
+});
+
+describe("parseLocale", () => {
+  it("should parse the locale", () => {
+    const locale = parseLocale("de");
+    expect(locale).toBe("de");
+  });
+  it("should return default locale if unknown locale given", () => {
+    const locale = parseLocale("es");
+    expect(locale).toBe("en");
+  });
+});
