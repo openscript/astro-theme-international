@@ -1,4 +1,4 @@
-import { getContentEntryPath, makeMenu } from "./i18n";
+import { getContentEntryPath, makeMenu } from "./utils/i18n";
 
 export const N = {
   'main': {

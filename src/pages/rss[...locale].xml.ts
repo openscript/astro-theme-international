@@ -1,7 +1,7 @@
 import rss from '@astrojs/rss';
 import type { APIRoute, GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 import { C } from '../configuration';
-import { getContentEntryPath, parseLocale } from '../i18n';
+import { getContentEntryPath, parseLocale } from '../utils/i18n';
 import { getCollection } from 'astro:content';
 
 export const getStaticPaths = (async () => {

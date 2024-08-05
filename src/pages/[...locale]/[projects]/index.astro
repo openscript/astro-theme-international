@@ -2,7 +2,7 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { C } from '../../../configuration';
-import { getContentEntryPath, parseLocale } from '../../../i18n';
+import { getContentEntryPath, parseLocale } from '../../../utils/i18n';
 import { getCollection } from 'astro:content';
 
 export const getStaticPaths = (async () => {

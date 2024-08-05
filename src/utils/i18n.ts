@@ -1,5 +1,5 @@
 import { getEntry, type CollectionEntry, type ContentEntryMap, type DataEntryMap, type ValidContentEntrySlug } from 'astro:content';
-import { C, type Locale } from './configuration';
+import { C, type Locale } from '../configuration';
 import { dirname, getRelativePath, joinPath } from './path';
 import slug from "limax";
 

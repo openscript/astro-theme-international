@@ -3,9 +3,9 @@ import type { InferGetStaticPropsType, GetStaticPaths, InferGetStaticParamsType 
 import { getCollection } from "astro:content";
 import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
 import { C } from "../../../../configuration";
-import { getLocaleSlug } from "../../../../i18n";
-import { parseLocale } from "../../../../i18n";
-import { joinPath, resolvePath } from "../../../../path";
+import { getLocaleSlug } from "../../../../utils/i18n";
+import { parseLocale } from "../../../../utils/i18n";
+import { joinPath, resolvePath } from "../../../../utils/path";
 import slug from "limax";
 import { Image } from "astro:assets";
 

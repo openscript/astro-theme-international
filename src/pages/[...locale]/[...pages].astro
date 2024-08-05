@@ -3,7 +3,7 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import { C } from '../../configuration';
-import { splitLocaleAndPath } from '../../i18n';
+import { splitLocaleAndPath } from '../../utils/i18n';
 
 export const getStaticPaths = (async () => {
   const pages = await getCollection('pages');

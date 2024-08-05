@@ -4,9 +4,9 @@ import { getCollection } from 'astro:content';
 import slug from "limax";
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { C } from '../../../configuration';
-import { joinPath } from '../../../path';
+import { joinPath } from '../../../utils/path';
 import { dirname } from 'path';
-import { splitLocaleAndPath } from '../../../i18n';
+import { splitLocaleAndPath } from '../../../utils/i18n';
 
 export const getStaticPaths = (async () => {
   const pages = await getCollection('blog');

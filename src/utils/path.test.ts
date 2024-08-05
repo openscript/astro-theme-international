@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { addTrailingSlash, dirname, getRelativePath, joinPath, resolvePath, trimExtension } from "./path";
+import { addTrailingSlash, dirname, getRelativePath, joinPath, resolvePath, trimExtension } from "../utils/path";
 
 describe("getRelativePath", () => {
   it("should return an unchanged path in dev mode", () => {

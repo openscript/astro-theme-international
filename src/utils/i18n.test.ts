@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
-import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getLocaleSlug, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "./i18n";
+import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getLocaleSlug, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
 
-vi.mock("./configuration", () => ({
+vi.mock("../configuration", () => ({
   C: {
     LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
     DEFAULT_LOCALE: 'en' as const,
