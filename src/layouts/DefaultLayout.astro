@@ -61,7 +61,7 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
       <ThemeSwitcher />
       <LanguageSwitcher translations={translations} currentLocale={currentLocale || C.DEFAULT_LOCALE} />
     </header>
-    <main data-pagefind-body transition:animate>
+    <main data-pagefind-body transition:animate="fade">
       <slot />
     </main>
     <footer transition:persist>
