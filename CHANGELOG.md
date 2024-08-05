@@ -1,5 +1,13 @@
 # astro-theme-international
 
+## 0.0.9
+
+### Patch Changes
+
+- 4748e33: Add projects
+- f94fd63: Upgrade dependencies
+- da754c4: Add view transitions
+
 ## 0.0.8
 
 ### Patch Changes
