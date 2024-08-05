@@ -42,23 +42,25 @@ import Icon from './Icon.astro';
 </style>
 
 <script is:inline>
-  const theme = localStorage.getItem("theme") || "system";
-  document.documentElement.classList.add(theme);
+  document.addEventListener('astro:page-load', () => {
+    const theme = localStorage.getItem("theme") || "system";
+    document.documentElement.classList.add(theme);
 
-  const themes = document.querySelectorAll(".theme-switcher a[data-theme]");
-  themes.forEach((theme) => {
-    theme.addEventListener("click", (event) => {
-      event.preventDefault();
-      if (!(event.target instanceof HTMLElement) || !(document.activeElement instanceof HTMLElement)) return;
+    const themes = document.querySelectorAll(".theme-switcher a[data-theme]");
+    themes.forEach((theme) => {
+      theme.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (!(event.target instanceof HTMLElement) || !(document.activeElement instanceof HTMLElement)) return;
 
-      const { theme } = event.target.dataset;
-      if (!theme) return;
+        const { theme } = event.target.dataset;
+        if (!theme) return;
 
-      document.documentElement.classList.remove("dark", "light", "system");
-      document.documentElement.classList.add(theme);
+        document.documentElement.classList.remove("dark", "light", "system");
+        document.documentElement.classList.add(theme);
 
-      localStorage.setItem("theme", theme);
-      document.activeElement.blur();
+        localStorage.setItem("theme", theme);
+        document.activeElement.blur();
+      });
     });
   });
 </script>

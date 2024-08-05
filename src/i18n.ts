@@ -36,7 +36,7 @@ export function getLocaleFromUrl(url: URL) {
 }
 
 export function parseLocale(locale?: string) {
-  return locale && locale in C.MESSAGES ? locale as keyof typeof C.MESSAGES : C.DEFAULT_LOCALE;
+  return locale && locale in C.LOCALES ? locale as keyof typeof C.LOCALES : C.DEFAULT_LOCALE;
 }
 
 export function getMessage(key: string, locale: Locale) {

@@ -1,9 +1,33 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
-
-
 ---
 
+<script>
+	const localeElements = document.querySelectorAll('[data-translation]');
+	localeElements.forEach((element) => {
+		if (!(element instanceof HTMLElement)) return;
+		const { translation } = element.dataset;
+		if (translation && !navigator.language.startsWith(translation)) return;
+
+		element.classList.add('active');
+	});
+</script>
+
+<style>
+	[data-translation] {
+		display: none;
+	}
+
+	.active[data-translation] {
+		display: block;
+	}
+</style>
+
 <DefaultLayout>
-	<h1>404 Not Found</h1>
+	<div data-translation="en">
+		<h1>404 Page not found</h1>
+	</div>
+	<div data-translation="de">
+		<h1>404 Seite nicht gefunden</h1>
+	</div>
 </DefaultLayout>
