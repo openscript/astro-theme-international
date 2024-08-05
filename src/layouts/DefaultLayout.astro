@@ -9,6 +9,7 @@ import { getRelativePath } from '../path';
 import Search from '../components/Search.tsx';
 import ThemeSwitcher from '../components/ThemeSwitcher.astro';
 import { version } from '../../package.json';
+import { ViewTransitions } from 'astro:transitions';
 
 
 type Props = {
@@ -46,6 +47,7 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
     <link rel="mask-icon" href={getRelativePath('/safari-pinned-tab.svg')} color="#DC5F00">
     <meta name="msapplication-TileColor" content="#DC5F00">
     <meta name="theme-color" content="#DC5F00">
+    <ViewTransitions />
   </head>
   <body>
     <header>
@@ -59,10 +61,10 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
       <ThemeSwitcher />
       <LanguageSwitcher translations={translations} currentLocale={currentLocale || C.DEFAULT_LOCALE} />
     </header>
-    <main data-pagefind-body>
+    <main data-pagefind-body transition:animate>
       <slot />
     </main>
-    <footer>
+    <footer transition:persist>
       <span>Version {version} </span>
       <nav>
         <ul>
