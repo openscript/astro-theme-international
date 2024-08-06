@@ -12,6 +12,8 @@ export function resolvePath(...paths: Array<string | number | undefined>) {
 }
 
 export function dirname(path: string) {
+  if (!path.includes('/')) return '';
+
   return path.replace(/\/[^\/]*$/, '');
 }
 

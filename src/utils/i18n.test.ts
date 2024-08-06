@@ -32,6 +32,16 @@ vi.mock("astro:content", () => ({
         }
       };
     }
+    if (collection === "docs" && entrySlug === "root") {
+      return {
+        id: "de/test-article.md",
+        slug: "de/test-article",
+        collection: "docs",
+        data: {
+          title: "Test Article",
+        }
+      };
+    }
     if (collection === "docs" && entrySlug === "no-international-path") {
       return {
         id: "2020/09/11/test-article.md",
@@ -168,6 +178,10 @@ describe("getContentEntryPath", () => {
     const path = await getContentEntryPath("docs" as any, "getting-started");
     expect(path).toMatchInlineSnapshot(`"/de/docs/2020/09/11/test-article"`);
   });
+  it("should return the content entry path without double slug", async () => {
+    const path = await getContentEntryPath("docs" as any, "root");
+    expect(path).toMatchInlineSnapshot(`"/de/docs/test-article"`);
+  })
 });
 
 describe("getDataEntryPath", () => {

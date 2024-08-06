@@ -67,7 +67,7 @@ export async function getContentEntryPath<
 
   let pageSlug = split.path;
   if ('path' in e.data) pageSlug = e.data.path;
-  if ('title' in e.data) pageSlug = `${dirname(pageSlug)}/${slug(e.data.title)}`;
+  if ('title' in e.data) pageSlug = joinPath(dirname(pageSlug), slug(e.data.title));
 
   return getTranslatedPath(parseLocale(split.locale), collection, pageSlug);
 }

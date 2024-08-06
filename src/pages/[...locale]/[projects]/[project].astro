@@ -1,0 +1,37 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import slug from "limax";
+import DefaultLayout from '../../../layouts/DefaultLayout.astro';
+import { C } from '../../../configuration';
+import { dirname } from 'path';
+import { getMessage, parseLocale, splitLocaleAndPath } from '../../../utils/i18n';
+
+export const getStaticPaths = (async () => {
+  const pages = await getCollection('projects');
+
+  const paths = pages.map(page => {
+    const split = splitLocaleAndPath(page.slug);
+    const locale = split && split.locale !== C.DEFAULT_LOCALE ? split.locale : undefined;
+    const pageSlug = slug(page.data.title);
+    const translations = pages.reduce((acc, p) => {
+      const s = splitLocaleAndPath(p.slug);
+      if(s && s.path === split?.path) {
+        acc[s.locale] = [s.locale !== C.DEFAULT_LOCALE ? `/${s.locale}` : undefined, getMessage(`slugs.projects`, parseLocale(s.locale)), dirname(s.path), slug(p.data.title)].join("/");
+      }
+      return acc;
+    }, {} as Record<string, string>);
+    return { params: { locale, project: pageSlug, projects: getMessage(`slugs.projects`, parseLocale(locale)) }, props: {...page, translations, locale} };
+  });
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const page = Astro.props as Props;
+
+const { Content } = await page.render();
+---
+<DefaultLayout translations={page.translations} currentLocale={page.locale}>
+  <Content/>
+</DefaultLayout>
