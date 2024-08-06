@@ -1,0 +1,90 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`paths > generates indexPaths 1`] = `
+[
+  {
+    "params": {
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "translations": {
+        "de": "/de",
+        "en": "/",
+      },
+    },
+  },
+  {
+    "params": {
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "translations": {
+        "de": "/de",
+        "en": "/",
+      },
+    },
+  },
+]
+`;
+
+exports[`paths > generates indexPaths with kind 1`] = `
+[
+  {
+    "params": {
+      "docs": "docs",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "translations": {
+        "de": "/de/doku",
+        "en": "/docs",
+      },
+    },
+  },
+  {
+    "params": {
+      "docs": "doku",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "translations": {
+        "de": "/de/doku",
+        "en": "/docs",
+      },
+    },
+  },
+]
+`;
+
+exports[`paths > generates rssXmlPaths 1`] = `
+[
+  {
+    "params": {
+      "locale": undefined,
+    },
+    "props": {
+      "locale": undefined,
+    },
+  },
+  {
+    "params": {
+      "locale": "-en",
+    },
+    "props": {
+      "locale": "en",
+    },
+  },
+  {
+    "params": {
+      "locale": "-de",
+    },
+    "props": {
+      "locale": "de",
+    },
+  },
+]
+`;
