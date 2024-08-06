@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { route } from './routes';
+import { buildPageRoute } from './pageRoutes';
 
 vi.mock("../configuration", () => ({
   C: {
@@ -23,7 +23,7 @@ vi.mock("../configuration", () => ({
 
 describe("route", () => {
   it("should chain as route().locale().build()", () => {
-    expect(route().locale().build()).toMatchInlineSnapshot(`
+    expect(buildPageRoute().locale().build()).toMatchInlineSnapshot(`
       [
         {
           "params": {
@@ -54,7 +54,7 @@ describe("route", () => {
   });
 
   it("should chain as route().slug().build()", () => {
-    expect(route().kind("test").build()).toMatchInlineSnapshot(`
+    expect(buildPageRoute().kind("test").build()).toMatchInlineSnapshot(`
       [
         {
           "params": {
@@ -66,7 +66,7 @@ describe("route", () => {
   })
 
   it("should chain as route().locale().slug().build()", () => {
-    expect(route().locale().kind("docs").build()).toMatchInlineSnapshot(`
+    expect(buildPageRoute().locale().kind("docs").build()).toMatchInlineSnapshot(`
       [
         {
           "params": {

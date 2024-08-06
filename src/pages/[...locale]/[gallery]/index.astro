@@ -4,10 +4,10 @@ import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { getDataEntryPath } from '../../../utils/i18n';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
-import { route, type RouteLocale, type RouteKind, type RouteTranslations } from '../../../utils/routes';
+import { buildPageRoute, type PageRouteLocale, type PageRouteKind, type PageRouteTranslations } from '../../../utils/pageRoutes';
 
 export const getStaticPaths = async () => {
-	return route().locale().kind('gallery').build<RouteLocale & RouteKind<'gallery'> & RouteTranslations>();
+	return buildPageRoute().locale().kind('gallery').build<PageRouteLocale & PageRouteKind<'gallery'> & PageRouteTranslations>();
 };
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

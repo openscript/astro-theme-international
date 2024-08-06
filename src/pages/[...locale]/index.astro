@@ -1,11 +1,11 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import type { InferGetStaticPropsType } from 'astro';
-import { route } from '../../utils/routes';
-import type { RouteLocale, RouteTranslations } from '../../utils/routes';
+import { buildPageRoute } from '../../utils/pageRoutes';
+import type { PageRouteLocale, PageRouteTranslations } from '../../utils/pageRoutes';
 
 export const getStaticPaths = async () => {
-	return route().locale().build<RouteLocale & RouteTranslations>();
+	return buildPageRoute().locale().build<PageRouteLocale & PageRouteTranslations>();
 };
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

@@ -3,15 +3,15 @@ import { localeSlugs, type Locale } from '../configuration';
 import { getLocaleSlug, getMessage, parseLocale } from './i18n';
 import { resolvePath } from './path';
 
-export type RouteLocale = { params: { locale: string | undefined }, props: { locale: Locale } }
-export type RouteKind<T extends string> = { params: { [key in T]: string } }
-export type RouteTranslations = { props: { translations: Record<string, string> } }
+export type PageRouteLocale = { params: { locale: string | undefined }, props: { locale: Locale } }
+export type PageRouteKind<T extends string> = { params: { [key in T]: string } }
+export type PageRouteTranslations = { props: { translations: Record<string, string> } }
 
-export function route() {
-  return new RoutesBuilder();
+export function buildPageRoute() {
+  return new PageRoutesBuilder();
 }
 
-class RoutesBuilder {
+class PageRoutesBuilder {
   private staticPaths: GetStaticPathsResult = [];
   private order: string[] = [];
 
