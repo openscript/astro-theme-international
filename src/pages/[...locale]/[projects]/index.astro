@@ -3,10 +3,10 @@ import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { getContentEntryPath } from '../../../utils/i18n';
 import { getCollection } from 'astro:content';
-import { route, type RouteLocale, type RouteSlug, type RouteTranslations } from '../../../utils/routes';
+import { route, type RouteLocale, type RouteKind, type RouteTranslations } from '../../../utils/routes';
 
 export const getStaticPaths = async () => {
-	return route().locale().slug('projects').build<RouteLocale & RouteSlug<'projects'> & RouteTranslations>();
+	return route().locale().kind('projects').build<RouteLocale & RouteKind<'projects'> & RouteTranslations>();
 };
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

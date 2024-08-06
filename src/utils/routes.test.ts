@@ -54,7 +54,7 @@ describe("route", () => {
   });
 
   it("should chain as route().slug().build()", () => {
-    expect(route().slug("test").build()).toMatchInlineSnapshot(`
+    expect(route().kind("test").build()).toMatchInlineSnapshot(`
       [
         {
           "params": {
@@ -66,7 +66,7 @@ describe("route", () => {
   })
 
   it("should chain as route().locale().slug().build()", () => {
-    expect(route().locale().slug("docs").build()).toMatchInlineSnapshot(`
+    expect(route().locale().kind("docs").build()).toMatchInlineSnapshot(`
       [
         {
           "params": {

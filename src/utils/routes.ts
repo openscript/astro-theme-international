@@ -4,7 +4,7 @@ import { getLocaleSlug, getMessage, parseLocale } from './i18n';
 import { resolvePath } from './path';
 
 export type RouteLocale = { params: { locale: string | undefined }, props: { locale: Locale } }
-export type RouteSlug<T extends string> = { params: { [key in T]: string } }
+export type RouteKind<T extends string> = { params: { [key in T]: string } }
 export type RouteTranslations = { props: { translations: Record<string, string> } }
 
 export function route() {
@@ -36,7 +36,7 @@ class RoutesBuilder {
     return this;
   }
 
-  slug(name: string) {
+  kind(name: string) {
     if (this.staticPaths.length === 0) {
       this.staticPaths = [{ params: { [name]: name } }]
     } else {
