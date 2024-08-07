@@ -1,5 +1,26 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`paths > generates entryPaths 1`] = `
+[
+  {
+    "params": {
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+    },
+  },
+  {
+    "params": {
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+    },
+  },
+]
+`;
+
 exports[`paths > generates indexPaths 1`] = `
 [
   {

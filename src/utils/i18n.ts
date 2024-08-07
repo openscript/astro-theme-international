@@ -2,6 +2,7 @@ import { getEntry, type CollectionEntry, type ContentEntryMap, type DataEntryMap
 import { C, type Locale } from '../configuration';
 import { dirname, getRelativePath, joinPath } from './path';
 import slug from "limax";
+import { getLocaleSlug } from './slugs';
 
 const IETF_BCP_47_LOCALE_PATTERN = /^\/?(\w{2}(?!\w)(-\w{1,})*)\/?/;
 const SINGLE_LEADING_SLASH_PATTERN = /^\/(?=\/)/;
@@ -46,10 +47,6 @@ export function getMessage(key: string, locale: Locale) {
   const k = key as keyof typeof C.MESSAGES[typeof locale];
 
   return C.MESSAGES[locale][k];
-}
-
-export function getLocaleSlug(locale: Locale) {
-  return locale === C.DEFAULT_LOCALE ? undefined : locale;
 }
 
 export async function getContentEntryPath<

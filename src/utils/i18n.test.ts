@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getLocaleSlug, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
+import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
 
 vi.mock("../configuration", () => ({
   C: {
@@ -159,13 +159,6 @@ describe("getMessage", () => {
     expect(getMessage("language", "en")).toBe("English");
   });
 });
-
-describe("getLocaleSlug", () => {
-  it("should return the locale slug", () => {
-    expect(getLocaleSlug("en")).toBe(undefined);
-    expect(getLocaleSlug("de")).toBe("de");
-  });
-})
 
 describe("getContentEntryPath", () => {
   it("should throw an error if content entry not found", async () => {
