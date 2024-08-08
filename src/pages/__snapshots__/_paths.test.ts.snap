@@ -1,26 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`paths > generates entryPaths 1`] = `
-[
-  {
-    "params": {
-      "locale": undefined,
-    },
-    "props": {
-      "locale": "en",
-    },
-  },
-  {
-    "params": {
-      "locale": "de",
-    },
-    "props": {
-      "locale": "de",
-    },
-  },
-]
-`;
-
 exports[`paths > generates indexPaths 1`] = `
 [
   {
@@ -75,6 +54,49 @@ exports[`paths > generates indexPaths with kind 1`] = `
       "translations": {
         "de": "/de/doku",
         "en": "/docs",
+      },
+    },
+  },
+]
+`;
+
+exports[`paths > generates pagesPaths 1`] = `
+[
+  {
+    "params": {
+      "locale": "de",
+      "pages": "2020/09/11/testartikel",
+    },
+    "props": {
+      "collection": "docs",
+      "data": {
+        "title": "Testartikel",
+      },
+      "id": "de/2020/09/11/test-article.md",
+      "locale": "de",
+      "slug": "de/2020/09/11/test-article",
+      "translations": {
+        "de": "/de/2020/09/11/testartikel",
+        "en": "/2020/09/11/test-article",
+      },
+    },
+  },
+  {
+    "params": {
+      "locale": undefined,
+      "pages": "2020/09/11/test-article",
+    },
+    "props": {
+      "collection": "docs",
+      "data": {
+        "title": "Test Article",
+      },
+      "id": "en/2020/09/11/test-article.md",
+      "locale": "en",
+      "slug": "en/2020/09/11/test-article",
+      "translations": {
+        "de": "/de/2020/09/11/testartikel",
+        "en": "/2020/09/11/test-article",
       },
     },
   },

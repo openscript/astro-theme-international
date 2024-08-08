@@ -2,7 +2,7 @@ import type { GetStaticPaths } from 'astro';
 import { localeSlugs, type Locale } from '../configuration';
 import { getMessage, parseLocale, splitLocaleAndPath } from '../utils/i18n';
 import { resolvePath } from '../utils/path';
-import type { CollectionEntry, ContentEntryMap } from 'astro:content';
+import { getCollection, type CollectionEntry, type ContentEntryMap } from 'astro:content';
 import { getEntrySlug, getLocaleSlug } from '../utils/slugs';
 
 export const rssXmlPaths = (async () => {
@@ -25,6 +25,32 @@ export const indexPaths = (kind?: string) => {
     });
   }) satisfies GetStaticPaths;
 };
+
+export const pagesPaths = (async () => {
+  const entries = await getCollection('pages');
+    return entries.map((entry) => {
+      const split = splitLocaleAndPath(entry.slug);
+      if (!split) throw new Error(`Invalid entry slug: ${entry.slug}`);
+
+      const translations = entries.reduce((acc, curr) => {
+        const s = splitLocaleAndPath(curr.slug);
+        if (!s) throw new Error(`Invalid entry slug: ${curr.slug}`);
+
+        const l = parseLocale(s.locale);
+        const localeSlug = getLocaleSlug(l);
+        const pageSlug = getEntrySlug(curr);
+
+        if (s.path === split.path) acc[l] = resolvePath(localeSlug, pageSlug);
+
+        return acc;
+      }, {} as Record<Locale, string>);
+
+      const locale = parseLocale(split.locale);
+      const localeSlug = getLocaleSlug(locale);
+      const pageSlug = getEntrySlug(entry);
+      return { params: { locale: localeSlug, pages: pageSlug }, props: { ...entry, locale, translations } };
+    });
+  }) satisfies GetStaticPaths;
 
 export const entryPaths = <C extends keyof ContentEntryMap>(collection: C, entries: CollectionEntry<C>[]) => {
   return (async () => {
