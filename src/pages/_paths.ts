@@ -100,7 +100,7 @@ export const galleryCategoryPaths = (async () => {
   });
 }) satisfies GetStaticPaths;
 
-export const galleryCategoryIndexPaths = (async () => {
+export const galleryCategoryItemPaths = (async () => {
   const categories = await getCollection("gallery");
   return categories.flatMap((category) => {
     const pages = localeSlugs.flatMap((l) => {
@@ -114,7 +114,7 @@ export const galleryCategoryIndexPaths = (async () => {
             locale: localeSlug,
             gallery: gallerySlug,
             category: categorySlug,
-            index: index.toString(),
+            item: index.toString(),
           },
           props: {
             locale,

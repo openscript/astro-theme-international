@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { entryPaths, galleryCategoryIndexPaths, galleryCategoryPaths, indexPaths, rssXmlPaths } from './_paths';
+import { entryPaths, galleryCategoryItemPaths, galleryCategoryPaths, indexPaths, rssXmlPaths } from './_paths';
 
 vi.mock("../configuration", () => ({
   C: {
@@ -162,7 +162,7 @@ describe('paths', () => {
   it('generates galleryCategoryPaths', async () => {
     expect(await galleryCategoryPaths()).toMatchSnapshot();
   });
-  it('generates galleryCategoryIndexPaths', async () => {
-    expect(await galleryCategoryIndexPaths()).toMatchSnapshot();
+  it('generates galleryCategoryItemPaths', async () => {
+    expect(await galleryCategoryItemPaths()).toMatchSnapshot();
   });
 })
