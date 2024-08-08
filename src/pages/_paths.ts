@@ -99,3 +99,53 @@ export const galleryCategoryPaths = (async () => {
     }));
   });
 }) satisfies GetStaticPaths;
+
+export const galleryCategoryIndexPaths = (async () => {
+  const categories = await getCollection("gallery");
+  return categories.flatMap((category) => {
+    const pages = localeSlugs.flatMap((l) => {
+      const locale = parseLocale(l);
+      const localeSlug = getLocaleSlug(locale);
+      const gallerySlug = getCollectionSlug(category.collection, locale);
+      const categorySlug = slug(category.data.title[locale] ?? category.data.title[C.DEFAULT_LOCALE]);
+      return category.data.images.map((image, index) => {
+        return {
+          params: {
+            locale: localeSlug,
+            gallery: gallerySlug,
+            category: categorySlug,
+            index: index.toString(),
+          },
+          props: {
+            locale,
+            page: image,
+            prev: category.data.images[index - 1]
+              ? (index - 1).toString()
+              : undefined,
+            next: category.data.images[index + 1]
+              ? (index + 1).toString()
+              : undefined,
+          },
+        };
+      });
+    });
+
+    return pages.map((p) => ({
+      ...p,
+      props: {
+        ...p.props,
+        translations: pages.reduce(
+          (acc, pp) => ({
+            ...acc,
+            [pp.props.locale]: resolvePath(
+              pp.params.locale,
+              pp.params.gallery,
+              pp.params.category,
+            ),
+          }),
+          {} as Record<string, string>,
+        ),
+      },
+    }));
+  });
+}) satisfies GetStaticPaths;

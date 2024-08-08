@@ -88,6 +88,491 @@ exports[`paths > generates entryPaths 2`] = `
 ]
 `;
 
+exports[`paths > generates galleryCategoryIndexPaths 1`] = `
+[
+  {
+    "params": {
+      "category": "food",
+      "gallery": "gallery",
+      "index": "0",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "1",
+      "page": {
+        "src": "./food1.jpg",
+      },
+      "prev": undefined,
+      "translations": {
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "food",
+      "gallery": "gallery",
+      "index": "1",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "2",
+      "page": {
+        "src": "./food2.jpg",
+      },
+      "prev": "0",
+      "translations": {
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "food",
+      "gallery": "gallery",
+      "index": "2",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": undefined,
+      "page": {
+        "src": "./food3.jpg",
+      },
+      "prev": "1",
+      "translations": {
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "essen",
+      "gallery": "galerie",
+      "index": "0",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "1",
+      "page": {
+        "src": "./food1.jpg",
+      },
+      "prev": undefined,
+      "translations": {
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "essen",
+      "gallery": "galerie",
+      "index": "1",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "2",
+      "page": {
+        "src": "./food2.jpg",
+      },
+      "prev": "0",
+      "translations": {
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "essen",
+      "gallery": "galerie",
+      "index": "2",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": undefined,
+      "page": {
+        "src": "./food3.jpg",
+      },
+      "prev": "1",
+      "translations": {
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "sea",
+      "gallery": "gallery",
+      "index": "0",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "1",
+      "page": {
+        "src": "./sea1.jpg",
+      },
+      "prev": undefined,
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "sea",
+      "gallery": "gallery",
+      "index": "1",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "2",
+      "page": {
+        "src": "./sea2.jpg",
+      },
+      "prev": "0",
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "sea",
+      "gallery": "gallery",
+      "index": "2",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "3",
+      "page": {
+        "src": "./sea3.jpg",
+      },
+      "prev": "1",
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "sea",
+      "gallery": "gallery",
+      "index": "3",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": undefined,
+      "page": {
+        "src": "./sea4.jpg",
+      },
+      "prev": "2",
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "meer",
+      "gallery": "galerie",
+      "index": "0",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "1",
+      "page": {
+        "src": "./sea1.jpg",
+      },
+      "prev": undefined,
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "meer",
+      "gallery": "galerie",
+      "index": "1",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "2",
+      "page": {
+        "src": "./sea2.jpg",
+      },
+      "prev": "0",
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "meer",
+      "gallery": "galerie",
+      "index": "2",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "3",
+      "page": {
+        "src": "./sea3.jpg",
+      },
+      "prev": "1",
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "meer",
+      "gallery": "galerie",
+      "index": "3",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": undefined,
+      "page": {
+        "src": "./sea4.jpg",
+      },
+      "prev": "2",
+      "translations": {
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "space",
+      "gallery": "gallery",
+      "index": "0",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "1",
+      "page": {
+        "src": "./space1.jpg",
+      },
+      "prev": undefined,
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "space",
+      "gallery": "gallery",
+      "index": "1",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "2",
+      "page": {
+        "src": "./space2.jpg",
+      },
+      "prev": "0",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "space",
+      "gallery": "gallery",
+      "index": "2",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "3",
+      "page": {
+        "src": "./space3.jpg",
+      },
+      "prev": "1",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "space",
+      "gallery": "gallery",
+      "index": "3",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": "4",
+      "page": {
+        "src": "./space4.jpg",
+      },
+      "prev": "2",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "space",
+      "gallery": "gallery",
+      "index": "4",
+      "locale": undefined,
+    },
+    "props": {
+      "locale": "en",
+      "next": undefined,
+      "page": {
+        "src": "./space5.jpg",
+      },
+      "prev": "3",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "weltraum",
+      "gallery": "galerie",
+      "index": "0",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "1",
+      "page": {
+        "src": "./space1.jpg",
+      },
+      "prev": undefined,
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "weltraum",
+      "gallery": "galerie",
+      "index": "1",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "2",
+      "page": {
+        "src": "./space2.jpg",
+      },
+      "prev": "0",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "weltraum",
+      "gallery": "galerie",
+      "index": "2",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "3",
+      "page": {
+        "src": "./space3.jpg",
+      },
+      "prev": "1",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "weltraum",
+      "gallery": "galerie",
+      "index": "3",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": "4",
+      "page": {
+        "src": "./space4.jpg",
+      },
+      "prev": "2",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+  {
+    "params": {
+      "category": "weltraum",
+      "gallery": "galerie",
+      "index": "4",
+      "locale": "de",
+    },
+    "props": {
+      "locale": "de",
+      "next": undefined,
+      "page": {
+        "src": "./space5.jpg",
+      },
+      "prev": "3",
+      "translations": {
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
+      },
+    },
+  },
+]
+`;
+
 exports[`paths > generates galleryCategoryPaths 1`] = `
 [
   {
