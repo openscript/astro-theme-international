@@ -1,9 +1,10 @@
 import type { GetStaticPaths } from 'astro';
-import { localeSlugs, type Locale } from '../configuration';
+import { C, localeSlugs, type Locale } from '../configuration';
 import { getMessage, parseLocale, splitLocaleAndPath } from '../utils/i18n';
-import { resolvePath } from '../utils/path';
-import { getCollection, type CollectionEntry, type ContentEntryMap } from 'astro:content';
+import { joinPath, resolvePath } from '../utils/path';
+import { getCollection, type ContentEntryMap } from 'astro:content';
 import { getEntrySlug, getLocaleSlug } from '../utils/slugs';
+import slug from 'limax';
 
 export const rssXmlPaths = (async () => {
   const versions = [undefined, ...localeSlugs];
@@ -61,3 +62,43 @@ export const entryPaths = <C extends keyof ContentEntryMap>(collection: C, slugN
   }) satisfies GetStaticPaths;
 };
 
+export const galleryCategoryPaths = (async () => {
+  const categories = await getCollection("gallery");
+  const locales = localeSlugs;
+  const paths = categories.flatMap((category) => {
+    const pages = locales.map((l) => {
+      const locale = parseLocale(l);
+      const localeSlug = getLocaleSlug(locale);
+      const gallerySlug = C.MESSAGES[locale]["slugs.gallery"];
+      const categorySlug = slug(category.data.title[locale] ?? category.data.title[C.DEFAULT_LOCALE]);
+      return {
+        params: {
+          locale: localeSlug,
+          gallery: gallerySlug,
+          category: categorySlug,
+        },
+        props: { locale, page: category.data },
+      };
+    });
+
+    return pages.map((p) => ({
+      ...p,
+      props: {
+        ...p.props,
+        translations: pages.reduce(
+          (acc, pp) => ({
+            ...acc,
+            [pp.props.locale]: `/${joinPath(
+              pp.params.locale,
+              pp.params.gallery,
+              pp.params.category,
+            )}`,
+          }),
+          {} as Record<string, string>,
+        ),
+      },
+    }));
+  });
+
+  return paths;
+}) satisfies GetStaticPaths;
