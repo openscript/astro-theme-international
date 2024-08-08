@@ -1,5 +1,93 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`paths > generates entryPaths 1`] = `
+[
+  {
+    "params": {
+      "locale": "de",
+      "pages": "2020/09/11/testartikel",
+    },
+    "props": {
+      "collection": "docs",
+      "data": {
+        "title": "Testartikel",
+      },
+      "id": "de/2020/09/11/test-article.md",
+      "locale": "de",
+      "slug": "de/2020/09/11/test-article",
+      "translations": {
+        "de": "/de/2020/09/11/testartikel",
+        "en": "/2020/09/11/test-article",
+      },
+    },
+  },
+  {
+    "params": {
+      "locale": undefined,
+      "pages": "2020/09/11/test-article",
+    },
+    "props": {
+      "collection": "docs",
+      "data": {
+        "title": "Test Article",
+      },
+      "id": "en/2020/09/11/test-article.md",
+      "locale": "en",
+      "slug": "en/2020/09/11/test-article",
+      "translations": {
+        "de": "/de/2020/09/11/testartikel",
+        "en": "/2020/09/11/test-article",
+      },
+    },
+  },
+]
+`;
+
+exports[`paths > generates entryPaths 2`] = `
+[
+  {
+    "params": {
+      "docs": "doku",
+      "locale": "de",
+      "slug": "2020/09/11/testartikel",
+    },
+    "props": {
+      "collection": "docs",
+      "data": {
+        "title": "Testartikel",
+      },
+      "id": "de/2020/09/11/test-article.md",
+      "locale": "de",
+      "slug": "de/2020/09/11/test-article",
+      "translations": {
+        "de": "/de/doku/2020/09/11/testartikel",
+        "en": "/docs/2020/09/11/test-article",
+      },
+    },
+  },
+  {
+    "params": {
+      "docs": "docs",
+      "locale": undefined,
+      "slug": "2020/09/11/test-article",
+    },
+    "props": {
+      "collection": "docs",
+      "data": {
+        "title": "Test Article",
+      },
+      "id": "en/2020/09/11/test-article.md",
+      "locale": "en",
+      "slug": "en/2020/09/11/test-article",
+      "translations": {
+        "de": "/de/doku/2020/09/11/testartikel",
+        "en": "/docs/2020/09/11/test-article",
+      },
+    },
+  },
+]
+`;
+
 exports[`paths > generates indexPaths 1`] = `
 [
   {

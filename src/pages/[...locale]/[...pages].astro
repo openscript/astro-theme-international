@@ -1,9 +1,9 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
-import { pagesPaths } from '../_paths';
+import { entryPaths } from '../_paths';
 
-export const getStaticPaths = pagesPaths;
+export const getStaticPaths = entryPaths('pages');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const page = Astro.props as Props;

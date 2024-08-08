@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { entryPaths, indexPaths, pagesPaths, rssXmlPaths } from './_paths';
+import { entryPaths, indexPaths, rssXmlPaths } from './_paths';
 
 vi.mock("../configuration", () => ({
   C: {
@@ -54,11 +54,8 @@ describe('paths', () => {
   it('generates indexPaths with kind', async () => {
     expect(await indexPaths('docs')()).toMatchSnapshot();
   });
-  it('generates pagesPaths', async () => {
-    expect(await pagesPaths()).toMatchSnapshot();
+  it('generates entryPaths', async () => {
+    expect(await entryPaths('pages' as any, 'pages')()).toMatchSnapshot();
+    expect(await entryPaths('docs' as any, 'slug')()).toMatchSnapshot();
   });
-  //it('generates entryPaths', async () => {
-  //  const entries = (await getCollection('docs' as any)) as { slug: string }[];
-  //  expect(await entryPaths('blog')()).toMatchSnapshot();
-  //});
 })
