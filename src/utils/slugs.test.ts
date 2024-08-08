@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { getEntrySlug, getLocaleSlug } from './slugs';
+import { getCollectionSlug, getEntrySlug, getLocaleSlug } from './slugs';
 import { getEntry } from 'astro:content';
 
 vi.mock("../configuration", () => ({
@@ -71,6 +71,13 @@ describe("getLocaleSlug", () => {
     expect(getLocaleSlug("de")).toBe("de");
   });
 })
+
+describe('getCollectionSlug', () => {
+  it('should return the collection slug', () => {
+    expect(getCollectionSlug('docs', 'de')).toMatchInlineSnapshot(`"doku"`);
+    expect(getCollectionSlug('data', 'en')).toMatchInlineSnapshot(`"data"`);
+  });
+});
 
 describe("getEntrySlug", () => {
   it("should return the entry slug", async () => {

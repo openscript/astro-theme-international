@@ -1,10 +1,14 @@
 import { C, type Locale } from '../configuration';
-import { splitLocaleAndPath } from './i18n';
+import { getMessage, splitLocaleAndPath } from './i18n';
 import { dirname, joinPath } from './path';
 import slug from 'limax';
 
 export function getLocaleSlug(locale: Locale) {
   return locale === C.DEFAULT_LOCALE ? undefined : locale;
+}
+
+export function getCollectionSlug(collection: string, locale: Locale) {
+  return getMessage(`slugs.${collection}`, locale);
 }
 
 export function getEntrySlug(entry: { slug: string, data?: { path?: string, title?: string } }) {

@@ -93,7 +93,7 @@ exports[`paths > generates galleryCategoryPaths 1`] = `
   {
     "params": {
       "category": "food",
-      "gallery": undefined,
+      "gallery": "gallery",
       "locale": undefined,
     },
     "props": {
@@ -117,15 +117,15 @@ exports[`paths > generates galleryCategoryPaths 1`] = `
         },
       },
       "translations": {
-        "de": "/de/essen",
-        "en": "/food",
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
       },
     },
   },
   {
     "params": {
       "category": "essen",
-      "gallery": undefined,
+      "gallery": "galerie",
       "locale": "de",
     },
     "props": {
@@ -149,15 +149,15 @@ exports[`paths > generates galleryCategoryPaths 1`] = `
         },
       },
       "translations": {
-        "de": "/de/essen",
-        "en": "/food",
+        "de": "/de/galerie/essen",
+        "en": "/gallery/food",
       },
     },
   },
   {
     "params": {
       "category": "sea",
-      "gallery": undefined,
+      "gallery": "gallery",
       "locale": undefined,
     },
     "props": {
@@ -184,15 +184,15 @@ exports[`paths > generates galleryCategoryPaths 1`] = `
         },
       },
       "translations": {
-        "de": "/de/meer",
-        "en": "/sea",
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
       },
     },
   },
   {
     "params": {
       "category": "meer",
-      "gallery": undefined,
+      "gallery": "galerie",
       "locale": "de",
     },
     "props": {
@@ -219,15 +219,15 @@ exports[`paths > generates galleryCategoryPaths 1`] = `
         },
       },
       "translations": {
-        "de": "/de/meer",
-        "en": "/sea",
+        "de": "/de/galerie/meer",
+        "en": "/gallery/sea",
       },
     },
   },
   {
     "params": {
       "category": "space",
-      "gallery": undefined,
+      "gallery": "gallery",
       "locale": undefined,
     },
     "props": {
@@ -257,15 +257,15 @@ exports[`paths > generates galleryCategoryPaths 1`] = `
         },
       },
       "translations": {
-        "de": "/de/weltraum",
-        "en": "/space",
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
       },
     },
   },
   {
     "params": {
       "category": "weltraum",
-      "gallery": undefined,
+      "gallery": "galerie",
       "locale": "de",
     },
     "props": {
@@ -295,8 +295,8 @@ exports[`paths > generates galleryCategoryPaths 1`] = `
         },
       },
       "translations": {
-        "de": "/de/weltraum",
-        "en": "/space",
+        "de": "/de/galerie/weltraum",
+        "en": "/gallery/space",
       },
     },
   },

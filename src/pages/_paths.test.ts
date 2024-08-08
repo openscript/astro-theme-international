@@ -10,11 +10,13 @@ vi.mock("../configuration", () => ({
         'language': 'English',
         'slugs.docs': 'docs',
         'slugs.data': 'data',
+        'slugs.gallery': 'gallery',
       },
       'de': {
         'language': 'Deutsch',
         'slugs.docs': 'doku',
         'slugs.data': 'daten',
+        'slugs.gallery': 'galerie',
       }
     }
   },
