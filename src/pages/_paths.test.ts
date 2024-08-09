@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { entryPaths, galleryCategoryItemPaths, galleryCategoryPaths, indexPaths, rssXmlPaths } from './_paths';
+import { blogPagePaths, blogTagPagePaths, entryPaths, galleryCategoryItemPaths, galleryCategoryPaths, indexPaths, rssXmlPaths } from './_paths';
 
 vi.mock("../configuration", () => ({
   C: {
@@ -8,22 +8,51 @@ vi.mock("../configuration", () => ({
     MESSAGES: {
       'en': {
         'language': 'English',
+        'slugs.blog': 'blog',
         'slugs.docs': 'docs',
         'slugs.data': 'data',
         'slugs.gallery': 'gallery',
       },
       'de': {
         'language': 'Deutsch',
+        'slugs.blog': 'blog',
         'slugs.docs': 'doku',
         'slugs.data': 'daten',
         'slugs.gallery': 'galerie',
+      }
+    },
+    SETTINGS: {
+      BLOG: {
+        PAGE_SIZE: 10
       }
     }
   },
   localeSlugs: ['en', 'de']
 }));
 
+const blogCollectionMock = Array.from({ length: 50 }).flatMap((_, i) => ([
+  {
+    id: `en/2020/09/${i % 27 + 1}/test-article.md`,
+    slug: `en/2020/09/${i % 27 + 1}/test-article`,
+    collection: "blog",
+    data: {
+      title: `Test Article ${i + 1}`,
+      tags: ["tag1", "tag2"]
+    }
+  },
+  {
+    id: `de/2020/09/${i % 27 + 1}/test-article.md`,
+    slug: `de/2020/09/${i % 27 + 1}/test-article`,
+    collection: "blog",
+    data: {
+      title: `Test Article ${i + 1}`,
+      tags: ["tag1", "tag2"]
+    }
+  }
+]));
+
 const collectionMock = {
+  blog: blogCollectionMock,
   pages: [
     {
       id: "de/2020/09/11/test-article.md",
@@ -164,5 +193,15 @@ describe('paths', () => {
   });
   it('generates galleryCategoryItemPaths', async () => {
     expect(await galleryCategoryItemPaths()).toMatchSnapshot();
+  });
+  it('generates blogPagePaths', async () => {
+    const paginate = vi.fn()
+    await blogPagePaths({paginate});
+    expect(paginate).toMatchSnapshot();
+  });
+  it('generates blogTagPagePaths', async () => {
+    const paginate = vi.fn()
+    await blogTagPagePaths({paginate});
+    expect(paginate).toMatchSnapshot();
   });
 })
