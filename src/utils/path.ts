@@ -3,15 +3,17 @@ export function getRelativePath(path: string) {
   return path.replace(/^\/+/, './');
 }
 
-export function joinPath(...paths: Array<string | undefined>) {
+export function joinPath(...paths: Array<string | number | undefined>) {
   return paths.filter(Boolean).join('/');
 }
 
-export function resolvePath(...paths: Array<string | undefined>) {
+export function resolvePath(...paths: Array<string | number | undefined>) {
   return getRelativePath(`/${joinPath(...paths)}`);
 }
 
 export function dirname(path: string) {
+  if (!path.includes('/')) return '';
+
   return path.replace(/\/[^\/]*$/, '');
 }
 

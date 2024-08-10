@@ -1,29 +1,12 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import { C } from '../../../configuration';
-import { getDataEntryPath, parseLocale } from '../../../i18n';
+import { getDataEntryPath } from '../../../utils/i18n';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import { indexPaths } from '../../_paths';
 
-export const getStaticPaths = (async () => {
-	const locales = Object.keys(C.LOCALES);
-
-	const translations = locales.reduce((acc, l) => {
-    const parsedLocale = parseLocale(l);
-    const slug = C.MESSAGES[parsedLocale]['slugs.gallery'];
-		acc[l] = l === C.DEFAULT_LOCALE ? `/${slug}` : `/${l}/${slug}`;
-		return acc;
-	}, {} as Record<string, string>);
-
-	return locales.map((l) => {
-    const parsedLocale = parseLocale(l);
-    const slug = C.MESSAGES[parsedLocale]['slugs.gallery'];
-		const locale = l === C.DEFAULT_LOCALE ? undefined : l;
-		return { params: { locale, gallery: slug }, props: { locale: parsedLocale, translations } };
-	});
-
-}) satisfies GetStaticPaths;
+export const getStaticPaths = indexPaths('gallery');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 

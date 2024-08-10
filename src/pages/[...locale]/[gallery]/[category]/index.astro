@@ -1,54 +1,12 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths, InferGetStaticParamsType } from "astro";
-import { getCollection } from "astro:content";
+import type { InferGetStaticPropsType, InferGetStaticParamsType } from "astro";
 import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
 import { C } from "../../../../configuration";
-import { getLocaleSlug } from "../../../../i18n";
-import { parseLocale } from "../../../../i18n";
-import { joinPath, resolvePath } from "../../../../path";
-import slug from "limax";
+import { resolvePath } from "../../../../utils/path";
 import { Image } from "astro:assets";
+import { galleryCategoryPaths } from '../../../_paths';
 
-export const getStaticPaths = (async () => {
-  const categories = await getCollection("gallery");
-  const locales = Object.keys(C.LOCALES);
-  const paths = categories.flatMap((category) => {
-    const pages = locales.map((l) => {
-      const locale = parseLocale(l);
-      const localeSlug = getLocaleSlug(locale);
-      const gallerySlug = C.MESSAGES[locale]["slugs.gallery"];
-      const categorySlug = slug(category.data.title[locale] ?? category.data.title[C.DEFAULT_LOCALE]);
-      return {
-        params: {
-          locale: localeSlug,
-          gallery: gallerySlug,
-          category: categorySlug,
-        },
-        props: { locale, page: category.data },
-      };
-    });
-
-    return pages.map((p) => ({
-      ...p,
-      props: {
-        ...p.props,
-        translations: pages.reduce(
-          (acc, pp) => ({
-            ...acc,
-            [pp.props.locale]: `/${joinPath(
-              pp.params.locale,
-              pp.params.gallery,
-              pp.params.category,
-            )}`,
-          }),
-          {} as Record<string, string>,
-        ),
-      },
-    }));
-  });
-
-  return paths;
-}) satisfies GetStaticPaths;
+export const getStaticPaths = galleryCategoryPaths
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, translations, locale } = Astro.props as Props;

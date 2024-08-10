@@ -1,35 +1,16 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import { C } from '../../../configuration';
-import { getContentEntryPath, parseLocale } from '../../../i18n';
+import { getContentEntryPath } from '../../../utils/i18n';
 import { getCollection } from 'astro:content';
+import { indexPaths } from '../../_paths';
 
-export const getStaticPaths = (async () => {
-	const locales = Object.keys(C.LOCALES);
-
-	const translations = locales.reduce((acc, l) => {
-    const parsedLocale = parseLocale(l);
-    const slug = C.MESSAGES[parsedLocale]['slugs.projects'];
-		acc[l] = l === C.DEFAULT_LOCALE ? `/${slug}` : `/${l}/${slug}`;
-		return acc;
-	}, {} as Record<string, string>);
-
-	return locales.map((l) => {
-    const parsedLocale = parseLocale(l);
-    const slug = C.MESSAGES[parsedLocale]['slugs.projects'];
-		const locale = l === C.DEFAULT_LOCALE ? undefined : l;
-		return { params: { locale, projects: slug }, props: { locale: parsedLocale, translations } };
-	});
-
-}) satisfies GetStaticPaths;
+export const getStaticPaths = indexPaths('projects');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 const { translations, locale } = Astro.props as Props;
 
 const projects = await getCollection('projects');
-
 ---
 
 <DefaultLayout translations={translations} currentLocale={locale}>

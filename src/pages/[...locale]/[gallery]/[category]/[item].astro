@@ -1,0 +1,36 @@
+---
+import type {
+  InferGetStaticPropsType,
+  InferGetStaticParamsType,
+} from "astro";
+import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
+import { resolvePath } from "../../../../utils/path";
+import { Image } from "astro:assets";
+import { galleryCategoryItemPaths } from '../../../_paths';
+
+export const getStaticPaths = galleryCategoryItemPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { page, translations, locale, next, prev } = Astro.props as Props;
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const {
+  locale: localeSlug,
+  gallery: gallerySlug,
+  category: categorySlug,
+} = Astro.params as Params;
+---
+
+<DefaultLayout translations={translations} currentLocale={locale}>
+  <h1>Bild</h1>
+  <Image src={page.src} alt={`Photo: ${page.title}`} width={1920} />
+  {
+    prev && (
+      <a href={resolvePath(localeSlug, gallerySlug, categorySlug, prev)}>Previous</a>
+    )
+  }
+  {
+    next && (
+      <a href={resolvePath(localeSlug, gallerySlug, categorySlug, next)}>Next</a>
+    )
+  }
+</DefaultLayout>

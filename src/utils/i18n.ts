@@ -1,7 +1,8 @@
 import { getEntry, type CollectionEntry, type ContentEntryMap, type DataEntryMap, type ValidContentEntrySlug } from 'astro:content';
-import { C, type Locale } from './configuration';
+import { C, type Locale } from '../configuration';
 import { dirname, getRelativePath, joinPath } from './path';
 import slug from "limax";
+import { getLocaleSlug } from './slugs';
 
 const IETF_BCP_47_LOCALE_PATTERN = /^\/?(\w{2}(?!\w)(-\w{1,})*)\/?/;
 const SINGLE_LEADING_SLASH_PATTERN = /^\/(?=\/)/;
@@ -48,10 +49,6 @@ export function getMessage(key: string, locale: Locale) {
   return C.MESSAGES[locale][k];
 }
 
-export function getLocaleSlug(locale: Locale) {
-  return locale === C.DEFAULT_LOCALE ? undefined : locale;
-}
-
 export async function getContentEntryPath<
   C extends keyof ContentEntryMap,
   E extends ValidContentEntrySlug<C> | (string & {}),
@@ -67,7 +64,7 @@ export async function getContentEntryPath<
 
   let pageSlug = split.path;
   if ('path' in e.data) pageSlug = e.data.path;
-  if ('title' in e.data) pageSlug = `${dirname(pageSlug)}/${slug(e.data.title)}`;
+  if ('title' in e.data) pageSlug = joinPath(dirname(pageSlug), slug(e.data.title));
 
   return getTranslatedPath(parseLocale(split.locale), collection, pageSlug);
 }

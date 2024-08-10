@@ -1,47 +1,13 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
-import { getCollection } from "astro:content";
-import { C } from "../../../../configuration";
+import type { InferGetStaticPropsType } from "astro";
 import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
-import { getRelativePath } from "../../../../path";
-import { getContentEntryPath } from "../../../../i18n";
+import { getRelativePath } from "../../../../utils/path";
+import { getContentEntryPath } from "../../../../utils/i18n";
 import Image from "astro/components/Image.astro";
 import defaultCover from "../../../../assets/default-cover.jpg";
-import type { CollectionEntry } from "astro:content";
-import slug from "limax";
+import { blogTagPagePaths } from '../../../_paths';
 
-export const getStaticPaths = (async ({ paginate }) => {
-  const pages = (await getCollection("blog")).reverse();
-  const groupedPages = pages.reduce<Record<string, CollectionEntry<'blog'>[]>>((acc, page) => {
-    page.data.tags.forEach((tag) => {
-      const tagSlug = slug(tag);
-      if (!acc[tagSlug]) {
-        acc[tagSlug] = [];
-      }
-      acc[tagSlug].push(page);
-    });
-    return acc;
-  }, {});
-  const locales = Object.keys(C.LOCALES);
-
-  return locales.flatMap((l) => {
-    const locale = l === C.DEFAULT_LOCALE ? undefined : l;
-    return Object.entries(groupedPages).flatMap(([tag, pages]) => {
-      const translations = locales.reduce<Record<string, string>>(
-        (acc, l) => {
-          acc[l] = l === C.DEFAULT_LOCALE ? `/blog/${tag}` : `/${l}/blog/${tag}`;
-          return acc;
-        },
-        {},
-      );
-      return paginate(pages, {
-        pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
-        params: { locale, blog: "blog", tag },
-        props: { locale: l, translations, tag },
-      });
-    });
-  });
-}) satisfies GetStaticPaths;
+export const getStaticPaths = blogTagPagePaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, locale, translations, tag } = Astro.props as Props;

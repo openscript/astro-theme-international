@@ -1,73 +1,17 @@
 ---
 import type {
-  GetStaticPaths,
   InferGetStaticParamsType,
   InferGetStaticPropsType,
 } from "astro";
-import { getCollection } from "astro:content";
-import { C } from "../../../configuration";
 import DefaultLayout from "../../../layouts/DefaultLayout.astro";
-import { getRelativePath, resolvePath } from "../../../path";
-import { getContentEntryPath, splitLocaleAndPath } from "../../../i18n";
+import { getRelativePath, resolvePath } from "../../../utils/path";
+import { getContentEntryPath } from "../../../utils/i18n";
 import Image from "astro/components/Image.astro";
 import defaultCover from "../../../assets/default-cover.jpg";
 import slug from "limax";
-import type { CollectionEntry } from "astro:content";
+import { blogPagePaths } from '../../_paths';
 
-export const getStaticPaths = (async ({ paginate }) => {
-  const pages = (await getCollection("blog")).reverse();
-  const groupedPageSlug = pages.reduce<
-    Record<string, CollectionEntry<"blog">[]>
-  >((acc, page) => {
-    const split = splitLocaleAndPath(page.slug);
-    if (split) {
-      const locales = acc[split.path] || [];
-      locales.push(page);
-      acc[split.path] = locales;
-    }
-    return acc;
-  }, {});
-  const locales = Object.keys(C.LOCALES);
-
-  const translations = locales.reduce<Record<string, string>>((acc, l) => {
-    acc[l] = l === C.DEFAULT_LOCALE ? `/blog` : `/${l}/blog`;
-    return acc;
-  }, {});
-
-  return locales.flatMap((l) => {
-    const locale = l === C.DEFAULT_LOCALE ? undefined : l;
-    const filteredPages = Object.entries(groupedPageSlug).reduce<
-      CollectionEntry<"blog">[]
-    >((acc, [_, pages]) => {
-      if (pages.length === 1) {
-        acc.push(...pages);
-      } else {
-        let page = pages.find((p) => {
-          const split = splitLocaleAndPath(p.slug);
-          return split && split.locale === l;
-        });
-        if (!page) {
-          page = pages.find((p) => {
-            const split = splitLocaleAndPath(p.slug);
-            return split && split.locale === C.DEFAULT_LOCALE;
-          });
-        }
-        if (!page) {
-          page = pages[0];
-        }
-        if(page) {
-          acc.push(page);
-        }
-      }
-      return acc;
-    }, []);
-    return paginate(filteredPages, {
-      pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
-      params: { locale, blog: "blog" },
-      props: { locale: l, translations },
-    });
-  });
-}) satisfies GetStaticPaths;
+export const getStaticPaths = blogPagePaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, locale, translations } = Astro.props as Props;

@@ -1,28 +1,9 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import { getCollection } from 'astro:content';
+import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
-import { C } from '../../configuration';
-import { splitLocaleAndPath } from '../../i18n';
+import { entryPaths } from '../_paths';
 
-export const getStaticPaths = (async () => {
-  const pages = await getCollection('pages');
-
-  const paths = pages.map(page => {
-    const split = splitLocaleAndPath(page.slug);
-    const locale = split && split.locale !== C.DEFAULT_LOCALE ? split.locale : undefined;
-    const translations = pages.reduce((acc, p) => {
-      const s = splitLocaleAndPath(p.slug);
-      if(s && s.path === split?.path) {
-        acc[s.locale] = [s.locale !== C.DEFAULT_LOCALE ? `/${s.locale}` : undefined, p.data.path].join("/");
-      }
-      return acc;
-    }, {} as Record<string, string>);
-    return { params: { locale, pages: page.data.path }, props: {...page, translations, locale} };
-  });
-
-  return paths;
-}) satisfies GetStaticPaths;
+export const getStaticPaths = entryPaths('pages');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const page = Astro.props as Props;

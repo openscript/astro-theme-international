@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
-import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getLocaleSlug, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "./i18n";
+import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
 
-vi.mock("./configuration", () => ({
+vi.mock("../configuration", () => ({
   C: {
     LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
     DEFAULT_LOCALE: 'en' as const,
@@ -26,6 +26,16 @@ vi.mock("astro:content", () => ({
       return {
         id: "de/2020/09/11/test-article.md",
         slug: "de/2020/09/11/test-article",
+        collection: "docs",
+        data: {
+          title: "Test Article",
+        }
+      };
+    }
+    if (collection === "docs" && entrySlug === "root") {
+      return {
+        id: "de/test-article.md",
+        slug: "de/test-article",
         collection: "docs",
         data: {
           title: "Test Article",
@@ -150,13 +160,6 @@ describe("getMessage", () => {
   });
 });
 
-describe("getLocaleSlug", () => {
-  it("should return the locale slug", () => {
-    expect(getLocaleSlug("en")).toBe(undefined);
-    expect(getLocaleSlug("de")).toBe("de");
-  });
-})
-
 describe("getContentEntryPath", () => {
   it("should throw an error if content entry not found", async () => {
     await expect(getContentEntryPath("docs" as any, "invalid")).rejects.toThrow("Content entry not found: docs/invalid");
@@ -168,6 +171,10 @@ describe("getContentEntryPath", () => {
     const path = await getContentEntryPath("docs" as any, "getting-started");
     expect(path).toMatchInlineSnapshot(`"/de/docs/2020/09/11/test-article"`);
   });
+  it("should return the content entry path without double slug", async () => {
+    const path = await getContentEntryPath("docs" as any, "root");
+    expect(path).toMatchInlineSnapshot(`"/de/docs/test-article"`);
+  })
 });
 
 describe("getDataEntryPath", () => {

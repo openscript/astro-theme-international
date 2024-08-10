@@ -1,14 +1,11 @@
 import rss from '@astrojs/rss';
-import type { APIRoute, GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
+import type { APIRoute, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 import { C } from '../configuration';
-import { getContentEntryPath, parseLocale } from '../i18n';
+import { getContentEntryPath, parseLocale } from '../utils/i18n';
 import { getCollection } from 'astro:content';
+import { rssXmlPaths } from './_paths';
 
-export const getStaticPaths = (async () => {
-  const versions = [undefined, ...Object.keys(C.LOCALES)];
-
-  return versions.map((l) => ({params: {locale: l ? `-${l}` : undefined}, props: {locale: l}}));
-}) satisfies GetStaticPaths;
+export const getStaticPaths = rssXmlPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;

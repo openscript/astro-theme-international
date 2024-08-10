@@ -1,22 +1,9 @@
 ---
-import { C } from '../../configuration';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
-import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import type { InferGetStaticPropsType } from 'astro';
+import { indexPaths } from '../_paths';
 
-export const getStaticPaths = (async () => {
-	const locales = Object.keys(C.LOCALES);
-
-	const translations = locales.reduce((acc, l) => {
-		acc[l] = l === C.DEFAULT_LOCALE ? `/` : `/${l}`;
-		return acc;
-	}, {} as Record<string, string>);
-
-	return locales.map((l) => {
-		const locale = l === C.DEFAULT_LOCALE ? undefined : l;
-		return { params: { locale }, props: { locale: l, translations } };
-	});
-
-}) satisfies GetStaticPaths;
+export const getStaticPaths = indexPaths();
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 

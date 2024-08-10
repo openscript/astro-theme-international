@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { addTrailingSlash, dirname, getRelativePath, joinPath, resolvePath, trimExtension } from "./path";
+import { addTrailingSlash, dirname, getRelativePath, joinPath, resolvePath, trimExtension } from "../utils/path";
 
 describe("getRelativePath", () => {
   it("should return an unchanged path in dev mode", () => {
@@ -43,6 +43,10 @@ describe("resolvePath", () => {
 describe("dirname", () => {
   it("should return the directory name of a path", () => {
     expect(dirname("/en-US/docs/getting-started")).toBe("/en-US/docs");
+  });
+  it("should return empty string if there is no directory", () => {
+    expect(dirname("/en-US")).toBe("");
+    expect(dirname("en-US")).toBe("");
   });
 });
 

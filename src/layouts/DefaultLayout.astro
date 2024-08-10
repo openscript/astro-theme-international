@@ -2,10 +2,10 @@
 import './layouts';
 import './DefaultLayout.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-import { getLocaleFromUrl, parseLocale, useTranslations } from '../i18n';
+import { getLocaleFromUrl, parseLocale, useTranslations } from '../utils/i18n.ts';
 import { C } from '../configuration';
 import { N } from '../navigation';
-import { getRelativePath } from '../path';
+import { getRelativePath } from '../utils/path.ts';
 import Search from '../components/Search.tsx';
 import ThemeSwitcher from '../components/ThemeSwitcher.astro';
 import { version } from '../../package.json';
