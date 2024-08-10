@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
+import { getContentEntryPath, getDataEntryPath, getFullLocale, getLocaleFromUrl, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
 
 vi.mock("../configuration", () => ({
   C: {
@@ -145,6 +145,13 @@ describe("parseLocale", () => {
   it("should return default locale if unknown locale given", () => {
     const locale = parseLocale("es");
     expect(locale).toBe("en");
+  });
+});
+
+describe("getFullLocale", () => {
+  it("should return the full locale", () => {
+    expect(getFullLocale()).toBe("en-US");
+    expect(getFullLocale("de")).toBe("de-CH");
   });
 });
 

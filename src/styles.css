@@ -1,9 +1,10 @@
 :root {
-  --white-color: #EEEEEE;
-  --gray-color: #686D76;
-  --dark-color: #373A40;
-  --primary-color: #DC5F00;
-  --secondary-color: #f7bf94;
+  --white-color: #F8EDED;
+  --gray-color: #CFC6C6;
+  --dark-color: #173B45;
+  --dark-alternate-color: #245d6d;
+  --primary-color: #FF8225;
+  --secondary-color: #B43F3F;
   --font-heading: 'Playfair Display Variable', serif;
   --font-text: 'Dosis Variable', sans-serif;
   --font-monospace: 'Fira Code Variable', monospace;

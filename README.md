@@ -71,8 +71,9 @@ An Astro theme, focused on internationalization.
 ## Resources
 
 - Fonts: https://fontsource.org/
-- Colors: https://colorhunt.co/palette/eeeeee686d76373a40dc5f00
+- Colors: https://colorhunt.co/palette/f8ededff8225b43f3f173b45
 - Icons: https://tabler.io/icons
+- Backgrounds: https://www.fffuel.co/
 - Favicon Generator: https://realfavicongenerator.net/
 
 ### Articles

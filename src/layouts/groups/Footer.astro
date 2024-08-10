@@ -1,0 +1,21 @@
+---
+import { version } from '../../../package.json';
+import type { Locale } from '../../configuration';
+import { N } from '../../navigation';
+import { useTranslations } from '../../utils/i18n';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<footer transition:persist>
+  <nav>
+    <ul>
+      {N.footer[locale].map((i) => <li><a href={i.path}>{i.title}</a></li>)}
+    </ul>
+  </nav>
+  <span>{t('site.author')} &middot; Version {version} </span>
+</footer>

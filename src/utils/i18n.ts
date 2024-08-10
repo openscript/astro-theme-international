@@ -40,6 +40,10 @@ export function parseLocale(locale?: string) {
   return locale && locale in C.LOCALES ? locale as keyof typeof C.LOCALES : C.DEFAULT_LOCALE;
 }
 
+export function getFullLocale(locale?: string) {
+  return C.LOCALES[parseLocale(locale)];
+}
+
 export function getMessage(key: string, locale: Locale) {
   if (!(locale in C.MESSAGES)) throw new Error(`Invalid locale: ${locale}`);
   if (!(key in C.MESSAGES[locale])) throw new Error(`Invalid message key: ${key}`);
