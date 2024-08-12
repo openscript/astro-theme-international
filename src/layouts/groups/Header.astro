@@ -7,6 +7,7 @@ import { getRelativePath } from '../../utils/path';
 import Search from '../../components/Search';
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro';
 import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
+import Link from '../../components/Link.astro';
 
 type Props = {
   locale: Locale;
@@ -22,7 +23,7 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
   <a href={getRelativePath(`/${locale === C.DEFAULT_LOCALE ? '' : locale}`)} class="title" set:html={t('site.title')}></a>
   <nav id="main-navigation">
     <ul>
-      {N.main[locale].map((i) => <li><a href={i.path}>{i.title}</a></li>)}
+      {N.main[locale].map((i) => <li><Link href={i.path}>{i.title}</Link></li>)}
     </ul>
   </nav>
   <Search path={pagefindPath} placeholder={t('search.placeholder')} client:load />

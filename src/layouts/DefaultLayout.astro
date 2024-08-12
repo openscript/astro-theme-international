@@ -6,6 +6,7 @@ import Head from './groups/Head.astro';
 import TopBar from './groups/TopBar.astro';
 import Footer from './groups/Footer.astro';
 import Header from './groups/Header.astro';
+import BottomBar from './groups/BottomBar.astro';
 
 
 type Props = {
@@ -24,5 +25,6 @@ const { translations } = Astro.props;
       <slot />
     </main>
     <Footer locale={locale} />
+    <BottomBar locale={locale} />
   </body>
 </html>

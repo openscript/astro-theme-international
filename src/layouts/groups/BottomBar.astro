@@ -1,0 +1,15 @@
+---
+import type { Locale } from '../../configuration';
+import { useTranslations } from '../../utils/i18n';
+import { version } from '../../../package.json';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<div id="bottom-bar" class="padded">
+  <span>{t('site.author')} &middot; Version {version} </span>
+</div>
