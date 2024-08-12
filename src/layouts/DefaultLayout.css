@@ -1,3 +1,11 @@
+*:focus-visible {
+  outline: 0.2em solid var(--primary-color);
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -42,13 +50,10 @@ header, footer {
 }
 
 header {
-  height: 5rem;
-}
-
-header {
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-between;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 5rem;
 }
 
 header .title {
@@ -74,6 +79,49 @@ header a:visited {
   color: var(--secondary-color);
 }
 
+header > nav {
+  font-size: 1.1rem;
+  justify-self: center;
+}
+
+#tools {
+  display: flex;
+  justify-self: flex-end;
+  gap: 0.3rem;
+}
+
+#tools button, #tools input {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  border: none;
+  height: 1.9rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  border-collapse: separate;perspective: 1px;
+  overflow: hidden;
+}
+
+#tools ul ul, #tools input + ul {
+  border-top: 0.3rem solid transparent;
+}
+
+#tools ul ul li:first-of-type, #tools ul ul li:first-of-type a, #tools input + ul li:first-of-type a {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+#tools ul ul li:last-of-type, #tools ul ul li:last-of-type a, #tools input + ul li:last-of-type a {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+#tools ul ul li a, #tools input + ul li a {
+  display: block;
+  background-color: var(--dark-color);
+  padding: 1rem;
+  text-decoration: none;
+  color: var(--white-color);
+}
+
 footer {
   display: flex;
   flex-direction: column;
@@ -87,40 +135,44 @@ footer span {
   font-size: 0.8rem;
 }
 
-.padded, header, main, footer {
-  padding: 0 15%;
-}
-
-footer nav ul {
-  border: 2px solid var(--dark-color);
-  border-radius: 2rem;
-}
-
-footer nav ul:hover, footer nav ul:focus-within {
-  border-color: var(--primary-color);
-}
-
-footer nav ul a {
-  display: inline-block;
-  color: var(--white-color);
-  text-decoration: none;
-  padding: 0.3rem 1rem;
-  border-radius: 2rem;
-}
-
-footer nav ul a.active {
-  background-color: var(--dark-color);
-}
-
-footer nav ul a:hover, footer nav ul a:focus {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: var(--dark-color);
-}
-
 nav ul {
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.padded, header, main, footer {
+  padding: 0 15%;
+}
+
+.rounded ul {
+  display: inline-flex;
+  border: 0.2em solid var(--dark-color);
+  box-shadow: 0 0 0.2em var(--dark-color);
+  border-radius: 2rem;
+  transition: 0.2s;
+}
+
+.rounded ul:hover, .rounded ul:focus-within {
+  border-color: var(--primary-color);
+}
+
+.rounded ul a {
+  display: inline-block;
+  color: var(--white-color);
+  text-decoration: none;
+  padding: 0.3rem 1rem;
+  border-radius: 2rem;
+  transition: 0.2s;
+}
+
+.rounded ul a.active {
+  background-color: var(--dark-color);
+}
+
+.rounded ul a:hover, .rounded ul a:focus {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--dark-color);
 }

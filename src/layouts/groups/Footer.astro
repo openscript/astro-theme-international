@@ -10,7 +10,7 @@ type Props = {
 const { locale } = Astro.props;
 ---
 <footer>
-  <nav>
+  <nav class="rounded">
     <ul>
       {N.footer[locale].map((i) => <li><Link href={i.path}>{i.title}</Link></li>)}
     </ul>

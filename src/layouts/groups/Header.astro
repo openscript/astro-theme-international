@@ -21,12 +21,14 @@ const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pag
 
 <header>
   <a href={getRelativePath(`/${locale === C.DEFAULT_LOCALE ? '' : locale}`)} class="title" set:html={t('site.title')}></a>
-  <nav id="main-navigation">
+  <nav class="rounded">
     <ul>
       {N.main[locale].map((i) => <li><Link href={i.path}>{i.title}</Link></li>)}
     </ul>
   </nav>
-  <Search path={pagefindPath} placeholder={t('search.placeholder')} client:load />
-  <ThemeSwitcher />
-  <LanguageSwitcher translations={translations} currentLocale={locale} />
+  <div id="tools">
+    <Search path={pagefindPath} placeholder={t('search.placeholder')} client:load />
+    <ThemeSwitcher />
+    <LanguageSwitcher translations={translations} currentLocale={locale} />
+  </div>
 </header>

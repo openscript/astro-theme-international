@@ -16,7 +16,7 @@ const href = (() => {
 })();
 const { pathname } = Astro.url;
 function isActiveLink(url: string) {
-	return url === pathname || url === "." || url === "./";
+	return pathname.startsWith(url) || url === "." || url === "./";
 }
 function isExternalLink(url: string) {
 	return URL.canParse(url);

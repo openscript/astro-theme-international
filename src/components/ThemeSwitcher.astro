@@ -1,5 +1,4 @@
 ---
-
 import Dropdown from './Dropdown.astro';
 import Icon from './Icon.astro';
 ---
@@ -30,14 +29,20 @@ import Icon from './Icon.astro';
 </nav>
 
 <style>
-  :global(html.dark) .theme-switcher span:not(.dark) {
+  .theme-switcher span {
     display: none;
   }
-  :global(html.light) .theme-switcher span:not(.light) {
-    display: none;
+  :global(html:not([class])) .theme-switcher span.system {
+    display: flex;
   }
-  :global(html.system) .theme-switcher span:not(.system) {
-    display: none;
+  :global(html.dark) .theme-switcher span.dark {
+    display: flex;
+  }
+  :global(html.light) .theme-switcher span.light {
+    display: flex;
+  }
+  :global(html.system) .theme-switcher span.system {
+    display: flex;
   }
 </style>
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import classnames from './Search.module.css';
+import Icon from './Icon.astro';
 
 type Props = {
   path: string;
@@ -7,7 +8,7 @@ type Props = {
 }
 
 export default function Search({ path, placeholder }: Props) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>();
   const [results, setResults] = useState<PagefindSearchFragment[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +24,7 @@ export default function Search({ path, placeholder }: Props) {
 
   useEffect(() => {
     const runSearch = async () => {
+      if(!query) return;
       setLoading(true);
       const records = await globalThis.pagefind?.debouncedSearch(query);
       if (records?.results) {
