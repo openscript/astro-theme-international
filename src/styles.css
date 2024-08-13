@@ -8,7 +8,31 @@
   --font-heading: 'Playfair Display Variable', serif;
   --font-text: 'Dosis Variable', sans-serif;
   --font-monospace: 'Fira Code Variable', monospace;
-  --font-size: 14px;
+  --font-size: 16px;
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --font-size: 14px;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --font-size: 16px;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --font-size: 18px;
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --font-size: 20px;
+  }
 }
 
 html.dark:root {
@@ -21,6 +45,7 @@ html.dark:root {
 
 html {
   height: 100%;
+  font-size: var(--font-size);
 }
 
 body {

@@ -75,6 +75,7 @@ An Astro theme, focused on internationalization.
 - Icons: https://tabler.io/icons
 - Backgrounds: https://www.fffuel.co/
 - Favicon Generator: https://realfavicongenerator.net/
+- Data Protection: https://gdpr.eu/privacy-notice/
 
 ### Articles
 

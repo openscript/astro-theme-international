@@ -14,6 +14,12 @@ body {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+main > div {
   flex-grow: 1;
 }
 
@@ -24,12 +30,13 @@ main {
   gap: 1rem;
   background-color: var(--dark-color);
   color: var(--white-color);
-  height: 1.4rem;
-  line-height: 1.2rem;
+  height: 1.5rem;
   font-size: 0.8rem;
 }
 
 #top-bar a {
+  display: inline-flex;
+  align-items: center;
   color: var(--white-color);
   text-decoration: none;
 }
@@ -37,7 +44,6 @@ main {
 #top-bar a svg {
   display: inline-block;
   height: 1rem;
-  vertical-align: sub;
 }
 
 #top-bar a:hover svg {
@@ -90,7 +96,7 @@ header > nav {
   gap: 0.3rem;
 }
 
-#tools button, #tools input {
+#tools :is(button, input) {
   background-color: var(--dark-color);
   color: var(--white-color);
   border: none;
@@ -146,6 +152,18 @@ nav ul {
   margin: 0;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
 .padded, header, main, footer {
   padding: 0 15%;
 }
@@ -159,7 +177,7 @@ nav ul {
   white-space: nowrap;
 }
 
-.rounded ul:hover, .rounded ul:focus-within {
+.rounded ul:is(:hover, :focus-within) {
   border-color: var(--primary-color);
 }
 
@@ -176,14 +194,8 @@ nav ul {
   background-color: var(--dark-color);
 }
 
-.rounded ul a:hover, .rounded ul a:focus {
+.rounded ul a:is(:hover, :focus) {
   display: inline-block;
   background-color: var(--primary-color);
   color: var(--dark-color);
-}
-
-/* Sections */
-
-section.single-page {
-
 }

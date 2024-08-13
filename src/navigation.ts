@@ -19,16 +19,16 @@ export const N = {
     'en': await makeMenu('en', [
       { title: 'License', path: (locale) => getContentEntryPath('pages', `${locale}/license`) },
       { title: 'Changelog', path: (locale) => getContentEntryPath('pages', `${locale}/changelog`) },
-      { title: 'Privacy', path: 'privacy' },
-      { title: 'Terms', path: 'terms' },
-      { title: 'Contact', path: 'contact' },
+      { title: 'Data Protection', path: (locale) => getContentEntryPath('pages', `${locale}/data-protection`) },
+      { title: 'Terms and Conditions', path: (locale) => getContentEntryPath('pages', `${locale}/terms`) },
+      { title: 'Imprint', path: (locale) => getContentEntryPath('pages', `${locale}/imprint`) },
     ]),
     'de': await makeMenu('de', [
       { title: 'Lizenz', path: (locale) => getContentEntryPath('pages', `${locale}/license`) },
       { title: 'Änderungsverlauf', path: (locale) => getContentEntryPath('pages', `${locale}/changelog`) },
-      { title: 'Datenschutz', path: 'datenschutz' },
-      { title: 'AGB', path: 'agb' },
-      { title: 'Kontakt', path: 'kontakt' },
+      { title: 'Datenschutz', path: (locale) => getContentEntryPath('pages', `${locale}/data-protection`) },
+      { title: 'AGBs', path: (locale) => getContentEntryPath('pages', `${locale}/terms`) },
+      { title: 'Impressum', path: (locale) => getContentEntryPath('pages', `${locale}/imprint`) },
     ]),
   }
 }

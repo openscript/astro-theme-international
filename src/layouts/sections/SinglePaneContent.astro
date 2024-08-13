@@ -1,6 +1,25 @@
 ---
 ---
 
-<section class="single-pane">
-  <slot />
-</section>
+<style>
+  .single-pane {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  section {
+    max-width: 50rem;
+    padding: 1rem;
+  }
+
+  section :global(h1) {
+    text-align: center;
+  }
+</style>
+
+<div class="single-pane">
+  <section>
+    <slot />
+  </section>
+</div>
