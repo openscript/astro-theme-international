@@ -31,7 +31,7 @@ const { locale: localeSlug, blog: blogSlug } = Astro.params as Params;
   }
 </style>
 
-<DefaultLayout translations={pagedTranslations} currentLocale={locale}>
+<DefaultLayout translations={pagedTranslations}>
   <h1>Blog (Page {page.currentPage})</h1>
   <ul>
     {

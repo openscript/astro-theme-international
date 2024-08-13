@@ -22,7 +22,7 @@ const { page, locale, translations, tag } = Astro.props as Props;
   }
 </style>
 
-<DefaultLayout translations={translations} currentLocale={locale}>
+<DefaultLayout translations={translations}>
   <h1>Tag {tag}</h1>
   <ul>
     {

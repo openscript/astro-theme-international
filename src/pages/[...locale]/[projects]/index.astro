@@ -8,12 +8,12 @@ import { indexPaths } from '../../_paths';
 export const getStaticPaths = indexPaths('projects');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { translations, locale } = Astro.props as Props;
+const { translations } = Astro.props as Props;
 
 const projects = await getCollection('projects');
 ---
 
-<DefaultLayout translations={translations} currentLocale={locale}>
+<DefaultLayout translations={translations}>
 	<h1>Projekte</h1>
   <ul>
     {

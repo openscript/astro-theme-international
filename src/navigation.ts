@@ -6,13 +6,13 @@ export const N = {
       { title: 'Blog', path: 'blog' },
       { title: 'Projects', path: 'projects' },
       { title: 'Gallery', path: 'gallery' },
-      { title: 'About', path: 'about' },
+      { title: 'About us', path: (locale) => getContentEntryPath('pages', `${locale}/about`) },
     ]),
     'de': await makeMenu('de', [
       { title: 'Blog', path: 'blog' },
       { title: 'Projekte', path: 'projekte' },
       { title: 'Galerie', path: 'galerie' },
-      { title: 'Über uns', path: 'ueber-uns' },
+      { title: 'Über uns', path: (locale) => getContentEntryPath('pages', `${locale}/about`) },
     ]),
   },
   'footer': {

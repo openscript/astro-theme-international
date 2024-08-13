@@ -122,6 +122,10 @@ header > nav {
   color: var(--white-color);
 }
 
+#tools .active a {
+  color: var(--primary-color);
+}
+
 footer {
   display: flex;
   flex-direction: column;
@@ -152,6 +156,7 @@ nav ul {
   box-shadow: 0 0 0.2em var(--dark-color);
   border-radius: 2rem;
   transition: 0.2s;
+  white-space: nowrap;
 }
 
 .rounded ul:hover, .rounded ul:focus-within {
@@ -175,4 +180,10 @@ nav ul {
   display: inline-block;
   background-color: var(--primary-color);
   color: var(--dark-color);
+}
+
+/* Sections */
+
+section.single-page {
+
 }

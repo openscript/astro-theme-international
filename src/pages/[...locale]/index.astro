@@ -7,10 +7,10 @@ export const getStaticPaths = indexPaths();
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { translations, locale } = Astro.props as Props;
+const { translations } = Astro.props as Props;
 
 ---
 
-<DefaultLayout translations={translations} currentLocale={locale}>
+<DefaultLayout translations={translations}>
 	<h1>Start</h1>
 </DefaultLayout>

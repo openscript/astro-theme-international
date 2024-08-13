@@ -14,7 +14,7 @@ type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 const { locale: localeSlug, gallery: gallerySlug, category: categorySlug } = Astro.params as Params;
 ---
 
-<DefaultLayout translations={translations} currentLocale={locale}>
+<DefaultLayout translations={translations}>
 	<h1>{page.title[locale] ?? page.title[C.DEFAULT_LOCALE]}</h1>
   <ul>
     {

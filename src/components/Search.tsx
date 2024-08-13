@@ -1,6 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
 import classnames from './Search.module.css';
-import Icon from './Icon.astro';
 
 type Props = {
   path: string;

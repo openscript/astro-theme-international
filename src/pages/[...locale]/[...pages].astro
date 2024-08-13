@@ -10,6 +10,6 @@ const page = Astro.props as Props;
 
 const { Content } = await page.render();
 ---
-<DefaultLayout translations={page.translations} currentLocale={page.locale}>
+<DefaultLayout translations={page.translations}>
   <Content/>
 </DefaultLayout>
