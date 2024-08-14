@@ -3,10 +3,11 @@ path: changelog
 ---
 import { Content as Changelog, getHeadings } from '../../../../CHANGELOG.md';
 import TwoPaneContent from '../../../layouts/sections/TwoPaneContent.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
 
 <TwoPaneContent>
   <Fragment slot="aside">
-    {JSON.stringify(getHeadings())}
+    <TableOfContents headings={getHeadings()} />
   </Fragment>
   <Changelog />
 </TwoPaneContent>

@@ -1,0 +1,60 @@
+---
+type Props = {
+  fromDepth?: number;
+  headings: { slug: string, text: string, depth: number }[];
+}
+
+const headings = Astro.props.headings.filter(heading => heading.depth > (Astro.props.fromDepth || 1));
+
+---
+
+<style>
+  .table-of-contents {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin: 0.5rem 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .depth-2 {
+    margin-left: 1rem;
+  }
+
+  .depth-3 {
+    margin-left: 2rem;
+  }
+
+  .depth-4 {
+    margin-left: 3rem;
+  }
+
+  .depth-5 {
+    margin-left: 4rem;
+  }
+
+  .depth-6 {
+    margin-left: 5rem;
+  }
+</style>
+
+<nav class="table-of-contents">
+  <ul>
+    {headings.map(heading => (
+      <li class={`depth-${heading.depth}`}>
+        <a href={`#${heading.slug}`}>{heading.text}</a>
+      </li>
+    ))}
+  </ul>
+</nav>

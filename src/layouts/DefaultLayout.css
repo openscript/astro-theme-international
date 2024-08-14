@@ -145,7 +145,7 @@ footer span {
   font-size: 0.8rem;
 }
 
-nav ul {
+:is(header, footer) nav ul {
   display: flex;
   list-style: none;
   padding: 0;
@@ -186,7 +186,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .padded, header, main, footer {
-  padding: 0 15%;
+  padding: 0 var(--page-horizontal-padding);
 }
 
 .rounded ul {

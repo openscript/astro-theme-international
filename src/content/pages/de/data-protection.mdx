@@ -2,187 +2,195 @@
 path: datenschutz
 ---
 
-# Beispiel: Datenschutzrichtlinie von Unser Unternehmen
+import TwoPaneContent from '../../../layouts/sections/TwoPaneContent.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
 
-Our Company ist Teil der Our Company-Gruppe, zu der Our Company
-International und Our Company Direct umfasst. Diese Datenschutzrichtlinie erläutert, wie unser
-Organisation die persönlichen Daten verwendet, die wir von Ihnen sammeln, wenn Sie unsere
-Website nutzen.
+<TwoPaneContent>
+  <Fragment slot="aside">
+    <TableOfContents headings={getHeadings()} />
+  </Fragment>
 
-## Welche Daten sammeln wir?
+  # Beispiel: Datenschutzrichtlinie von Unser Unternehmen
 
-Unser Unternehmen sammelt die folgenden Daten:
+  Our Company ist Teil der Our Company-Gruppe, zu der Our Company
+  International und Our Company Direct umfasst. Diese Datenschutzrichtlinie erläutert, wie unser
+  Organisation die persönlichen Daten verwendet, die wir von Ihnen sammeln, wenn Sie unsere
+  Website nutzen.
 
-* Persönliche Identifikationsdaten (Name, E-Mail-Adresse, Telefonnummer,
-    usw.)
-* [Fügen Sie weitere Daten hinzu, die Ihr Unternehmen erhebt]
+  ## Welche Daten sammeln wir?
 
-## Wie sammeln wir Ihre Daten?
+  Unser Unternehmen sammelt die folgenden Daten:
 
-Die meisten der von uns erfassten Daten stellen Sie unserem Unternehmen direkt zur Verfügung. Wir sammeln
-Daten und verarbeiten Daten, wenn Sie:
+  * Persönliche Identifikationsdaten (Name, E-Mail-Adresse, Telefonnummer,
+      usw.)
+  * [Fügen Sie weitere Daten hinzu, die Ihr Unternehmen erhebt]
 
-* sich online registrieren oder eine Bestellung für eines unserer Produkte oder eine unserer Dienstleistungen aufgeben.
-* Freiwillig eine Kundenumfrage ausfüllen oder Feedback auf einem unserer
-    Messageboards oder per E-Mail übermitteln.
-* unsere Website über die Cookies Ihres Browsers nutzen oder ansehen.
-* [Fügen Sie weitere Möglichkeiten hinzu, wie Ihr Unternehmen Daten sammelt].
+  ## Wie sammeln wir Ihre Daten?
 
-Unser Unternehmen kann Ihre Daten auch indirekt aus den folgenden Quellen erhalten:
+  Die meisten der von uns erfassten Daten stellen Sie unserem Unternehmen direkt zur Verfügung. Wir sammeln
+  Daten und verarbeiten Daten, wenn Sie:
 
-* \[Fügen Sie alle indirekten Datenquellen hinzu, die Ihr Unternehmen hat\]
+  * sich online registrieren oder eine Bestellung für eines unserer Produkte oder eine unserer Dienstleistungen aufgeben.
+  * Freiwillig eine Kundenumfrage ausfüllen oder Feedback auf einem unserer
+      Messageboards oder per E-Mail übermitteln.
+  * unsere Website über die Cookies Ihres Browsers nutzen oder ansehen.
+  * [Fügen Sie weitere Möglichkeiten hinzu, wie Ihr Unternehmen Daten sammelt].
 
-## Wie werden Ihre Daten verwendet?
+  Unser Unternehmen kann Ihre Daten auch indirekt aus den folgenden Quellen erhalten:
 
-Unser Unternehmen sammelt Ihre Daten, damit wir sie verwenden können:
+  * \[Fügen Sie alle indirekten Datenquellen hinzu, die Ihr Unternehmen hat\]
 
-* Ihre Bestellung zu bearbeiten und Ihr Konto zu verwalten.
-* Ihnen per E-Mail Sonderangebote für andere Produkte und Dienstleistungen zukommen zu lassen, von denen wir glauben, dass sie Ihnen gefallen könnten.
-    mögen könnten.
-\[Fügen Sie hinzu, wie Ihr Unternehmen die Daten sonst noch verwendet\]
+  ## Wie werden Ihre Daten verwendet?
 
-Wenn Sie zustimmen, wird unser Unternehmen Ihre Daten an unsere Partnerunternehmen weitergeben, damit
-damit diese Ihnen ihre Produkte und Dienstleistungen anbieten können.
+  Unser Unternehmen sammelt Ihre Daten, damit wir sie verwenden können:
 
-\[Liste der Organisationen, die Daten erhalten werden\]
+  * Ihre Bestellung zu bearbeiten und Ihr Konto zu verwalten.
+  * Ihnen per E-Mail Sonderangebote für andere Produkte und Dienstleistungen zukommen zu lassen, von denen wir glauben, dass sie Ihnen gefallen könnten.
+      mögen könnten.
+  \[Fügen Sie hinzu, wie Ihr Unternehmen die Daten sonst noch verwendet\]
 
-Wenn unser Unternehmen Ihre Bestellung bearbeitet, kann es Ihre Daten an Kreditauskunfteien übermitteln und auch die daraus resultierenden Informationen verwenden.
-Kreditauskunfteien übermitteln und diese Informationen nutzen, um betrügerische Käufe zu verhindern.
-Käufe zu verhindern.
+  Wenn Sie zustimmen, wird unser Unternehmen Ihre Daten an unsere Partnerunternehmen weitergeben, damit
+  damit diese Ihnen ihre Produkte und Dienstleistungen anbieten können.
 
-## Wie speichern wir Ihre Daten?
+  \[Liste der Organisationen, die Daten erhalten werden\]
 
-Unser Unternehmen speichert Ihre Daten sicher bei \[geben Sie den Ort an und beschreiben Sie
-getroffenen Sicherheitsvorkehrungen].
+  Wenn unser Unternehmen Ihre Bestellung bearbeitet, kann es Ihre Daten an Kreditauskunfteien übermitteln und auch die daraus resultierenden Informationen verwenden.
+  Kreditauskunfteien übermitteln und diese Informationen nutzen, um betrügerische Käufe zu verhindern.
+  Käufe zu verhindern.
 
-Unser Unternehmen speichert Ihre \[Art der Daten eingeben\] für \[Zeitraum eingeben\].
-Nach Ablauf dieses Zeitraums löschen wir Ihre Daten durch \[geben Sie an, wie Sie
-Daten der Nutzer löschen\].
+  ## Wie speichern wir Ihre Daten?
 
-## Marketing
+  Unser Unternehmen speichert Ihre Daten sicher bei \[geben Sie den Ort an und beschreiben Sie
+  getroffenen Sicherheitsvorkehrungen].
 
-Unser Unternehmen würde Ihnen gerne Informationen über Produkte und Dienstleistungen von
-Unser Unternehmen möchte Ihnen Informationen über unsere Produkte und Dienstleistungen sowie die unserer Partnerunternehmen zusenden, von denen wir glauben, dass sie Ihnen gefallen könnten.
+  Unser Unternehmen speichert Ihre \[Art der Daten eingeben\] für \[Zeitraum eingeben\].
+  Nach Ablauf dieses Zeitraums löschen wir Ihre Daten durch \[geben Sie an, wie Sie
+  Daten der Nutzer löschen\].
 
-\[Liste der Organisationen, die Daten erhalten werden\]
+  ## Marketing
 
-Wenn Sie dem Erhalt von Marketing zugestimmt haben, können Sie sich jederzeit zu einem späteren Zeitpunkt abmelden.
-abmelden.
+  Unser Unternehmen würde Ihnen gerne Informationen über Produkte und Dienstleistungen von
+  Unser Unternehmen möchte Ihnen Informationen über unsere Produkte und Dienstleistungen sowie die unserer Partnerunternehmen zusenden, von denen wir glauben, dass sie Ihnen gefallen könnten.
 
-Sie haben das Recht, unser Unternehmen jederzeit daran zu hindern, Sie zu Marketingzwecken zu kontaktieren
-Marketingzwecken zu kontaktieren oder Ihre Daten an andere Mitglieder der Our Company
-Gruppe weiterzugeben.
+  \[Liste der Organisationen, die Daten erhalten werden\]
 
-Wenn Sie nicht mehr zu Marketingzwecken kontaktiert werden möchten, klicken Sie bitte
-hier.
+  Wenn Sie dem Erhalt von Marketing zugestimmt haben, können Sie sich jederzeit zu einem späteren Zeitpunkt abmelden.
+  abmelden.
 
-## Welche Rechte haben Sie beim Datenschutz?
+  Sie haben das Recht, unser Unternehmen jederzeit daran zu hindern, Sie zu Marketingzwecken zu kontaktieren
+  Marketingzwecken zu kontaktieren oder Ihre Daten an andere Mitglieder der Our Company
+  Gruppe weiterzugeben.
 
-Unser Unternehmen möchte sicherstellen, dass Sie über alle Ihre Datenschutzrechte informiert sind.
-schutzrechte kennen. Jeder Nutzer hat das Recht auf Folgendes:
+  Wenn Sie nicht mehr zu Marketingzwecken kontaktiert werden möchten, klicken Sie bitte
+  hier.
 
-**Recht auf Auskunft** - Sie haben das Recht, von unserem Unternehmen Kopien
-Ihrer persönlichen Daten zu verlangen. Für diesen Service können wir Ihnen eine geringe Gebühr in Rechnung stellen.
+  ## Welche Rechte haben Sie beim Datenschutz?
 
-**Das Recht auf Berichtigung** - Sie haben das Recht zu verlangen, dass unser Unternehmen
-Sie haben das Recht, von unserem Unternehmen die Berichtigung von Informationen zu verlangen, die Sie für unrichtig halten. Sie haben auch das Recht
-unser Unternehmen aufzufordern, die Informationen zu vervollständigen, die Sie für unvollständig halten.
+  Unser Unternehmen möchte sicherstellen, dass Sie über alle Ihre Datenschutzrechte informiert sind.
+  schutzrechte kennen. Jeder Nutzer hat das Recht auf Folgendes:
 
-**Das Recht auf Löschung** - Sie haben das Recht zu verlangen, dass unser Unternehmen Ihre persönlichen Daten unter bestimmten Bedingungen löscht.
-Ihre persönlichen Daten unter bestimmten Bedingungen zu löschen.
+  **Recht auf Auskunft** - Sie haben das Recht, von unserem Unternehmen Kopien
+  Ihrer persönlichen Daten zu verlangen. Für diesen Service können wir Ihnen eine geringe Gebühr in Rechnung stellen.
 
-**Das Recht auf Einschränkung der Verarbeitung** - Sie haben das Recht zu verlangen, dass unser Unternehmen
-Unternehmen die Verarbeitung Ihrer personenbezogenen Daten einschränkt, unter bestimmten
-Bedingungen.
+  **Das Recht auf Berichtigung** - Sie haben das Recht zu verlangen, dass unser Unternehmen
+  Sie haben das Recht, von unserem Unternehmen die Berichtigung von Informationen zu verlangen, die Sie für unrichtig halten. Sie haben auch das Recht
+  unser Unternehmen aufzufordern, die Informationen zu vervollständigen, die Sie für unvollständig halten.
 
-**Das Recht, der Verarbeitung zu widersprechen** - Sie haben das Recht, der Verarbeitung Ihrer personenbezogenen Daten durch unser Unternehmen zu widersprechen.
-Verarbeitung Ihrer personenbezogenen Daten durch unser Unternehmen unter bestimmten Bedingungen zu widersprechen.
+  **Das Recht auf Löschung** - Sie haben das Recht zu verlangen, dass unser Unternehmen Ihre persönlichen Daten unter bestimmten Bedingungen löscht.
+  Ihre persönlichen Daten unter bestimmten Bedingungen zu löschen.
 
-**Das Recht auf Datenübertragbarkeit** - Sie haben das Recht zu verlangen, dass unser
-Unternehmen die von uns gesammelten Daten an eine andere Organisation oder
-direkt an Sie, unter bestimmten Bedingungen.
+  **Das Recht auf Einschränkung der Verarbeitung** - Sie haben das Recht zu verlangen, dass unser Unternehmen
+  Unternehmen die Verarbeitung Ihrer personenbezogenen Daten einschränkt, unter bestimmten
+  Bedingungen.
 
-Wenn Sie einen Antrag stellen, haben wir einen Monat Zeit, Ihnen zu antworten. Wenn Sie
-eines dieser Rechte ausüben möchten, kontaktieren Sie uns bitte über unsere E-Mail:
+  **Das Recht, der Verarbeitung zu widersprechen** - Sie haben das Recht, der Verarbeitung Ihrer personenbezogenen Daten durch unser Unternehmen zu widersprechen.
+  Verarbeitung Ihrer personenbezogenen Daten durch unser Unternehmen unter bestimmten Bedingungen zu widersprechen.
 
-Rufen Sie uns an:
+  **Das Recht auf Datenübertragbarkeit** - Sie haben das Recht zu verlangen, dass unser
+  Unternehmen die von uns gesammelten Daten an eine andere Organisation oder
+  direkt an Sie, unter bestimmten Bedingungen.
 
-Oder schreiben Sie uns:
+  Wenn Sie einen Antrag stellen, haben wir einen Monat Zeit, Ihnen zu antworten. Wenn Sie
+  eines dieser Rechte ausüben möchten, kontaktieren Sie uns bitte über unsere E-Mail:
 
-## Cookies
+  Rufen Sie uns an:
 
-Cookies sind Textdateien, die auf Ihrem Computer abgelegt werden, um Standard-Internetprotokolldaten
-und Informationen über das Besucherverhalten zu sammeln. Wenn Sie unsere Websites besuchen, können wir
-können wir über Cookies oder ähnliche Technologien automatisch Informationen über Sie sammeln
-Technologie
+  Oder schreiben Sie uns:
 
-Weitere Informationen finden Sie unter allaboutcookies.org.
+  ## Cookies
 
-## Wie verwenden wir Cookies?
+  Cookies sind Textdateien, die auf Ihrem Computer abgelegt werden, um Standard-Internetprotokolldaten
+  und Informationen über das Besucherverhalten zu sammeln. Wenn Sie unsere Websites besuchen, können wir
+  können wir über Cookies oder ähnliche Technologien automatisch Informationen über Sie sammeln
+  Technologie
 
-Unser Unternehmen verwendet Cookies auf verschiedene Weise, um Ihre Erfahrung auf unserer Website zu verbessern.
-Website zu verbessern, einschließlich:
+  Weitere Informationen finden Sie unter allaboutcookies.org.
 
-* Damit Sie eingeloggt bleiben
-* Verstehen, wie Sie unsere Website nutzen
-\[Fügen Sie alle Verwendungszwecke für Cookies in Ihrem Unternehmen hinzu]
+  ## Wie verwenden wir Cookies?
 
-## Welche Arten von Cookies verwenden wir?
+  Unser Unternehmen verwendet Cookies auf verschiedene Weise, um Ihre Erfahrung auf unserer Website zu verbessern.
+  Website zu verbessern, einschließlich:
 
-Es gibt eine Reihe von verschiedenen Arten von Cookies, aber unsere Website verwendet sie:
+  * Damit Sie eingeloggt bleiben
+  * Verstehen, wie Sie unsere Website nutzen
+  \[Fügen Sie alle Verwendungszwecke für Cookies in Ihrem Unternehmen hinzu]
 
-* Funktionalität - Unser Unternehmen verwendet diese Cookies, damit wir Sie auf unserer
-    unserer Website erkennen und sich an Ihre zuvor gewählten Einstellungen erinnern. Diese könnten
-    Dazu gehören die von Ihnen bevorzugte Sprache und der Ort, an dem Sie sich befinden. Es wird eine Mischung aus
-    Erstanbieter- und Drittanbieter-Cookies werden verwendet.
-* Werbung - Unser Unternehmen verwendet diese Cookies, um Informationen zu sammeln über
-    Ihren Besuch auf unserer Website, die Inhalte, die Sie angesehen haben, die Links, denen Sie gefolgt sind
-    und Informationen über Ihren Browser, Ihr Gerät und Ihre IP-Adresse. Unser
-    Unternehmen teilt manchmal einige begrenzte Aspekte dieser Daten mit Dritten
-    Dritten zu Werbezwecken weiter. Wir können auch durch Cookies gesammelte Online-Daten
-    Cookies gesammelten Online-Daten mit unseren Werbepartnern teilen. Das bedeutet, dass Sie beim Besuch
-    eine andere Website besuchen, kann Ihnen Werbung angezeigt werden, die auf Ihrem
-    Browsing-Muster auf unserer Website.
-* Fügen Sie alle anderen Arten von Cookies hinzu, die Ihr Unternehmen verwendet].
+  ## Welche Arten von Cookies verwenden wir?
 
-## Wie man Cookies verwaltet
+  Es gibt eine Reihe von verschiedenen Arten von Cookies, aber unsere Website verwendet sie:
 
-Sie können Ihren Browser so einstellen, dass er keine Cookies akzeptiert, und auf der oben genannten Website erfahren Sie
-wie Sie Cookies aus Ihrem Browser entfernen können. In einigen wenigen Fällen können jedoch einige Funktionen unserer
-Website-Funktionen möglicherweise nicht funktionieren.
+  * Funktionalität - Unser Unternehmen verwendet diese Cookies, damit wir Sie auf unserer
+      unserer Website erkennen und sich an Ihre zuvor gewählten Einstellungen erinnern. Diese könnten
+      Dazu gehören die von Ihnen bevorzugte Sprache und der Ort, an dem Sie sich befinden. Es wird eine Mischung aus
+      Erstanbieter- und Drittanbieter-Cookies werden verwendet.
+  * Werbung - Unser Unternehmen verwendet diese Cookies, um Informationen zu sammeln über
+      Ihren Besuch auf unserer Website, die Inhalte, die Sie angesehen haben, die Links, denen Sie gefolgt sind
+      und Informationen über Ihren Browser, Ihr Gerät und Ihre IP-Adresse. Unser
+      Unternehmen teilt manchmal einige begrenzte Aspekte dieser Daten mit Dritten
+      Dritten zu Werbezwecken weiter. Wir können auch durch Cookies gesammelte Online-Daten
+      Cookies gesammelten Online-Daten mit unseren Werbepartnern teilen. Das bedeutet, dass Sie beim Besuch
+      eine andere Website besuchen, kann Ihnen Werbung angezeigt werden, die auf Ihrem
+      Browsing-Muster auf unserer Website.
+  * Fügen Sie alle anderen Arten von Cookies hinzu, die Ihr Unternehmen verwendet].
 
-## Datenschutzrichtlinien anderer Websites
+  ## Wie man Cookies verwaltet
 
-Die Website unseres Unternehmens enthält Links zu anderen Websites. Unsere Datenschutzpolitik
-gilt nur für unsere Website. Wenn Sie also auf einen Link zu einer anderen Website klicken, sollten Sie
-sollten Sie deren Datenschutzrichtlinien lesen.
+  Sie können Ihren Browser so einstellen, dass er keine Cookies akzeptiert, und auf der oben genannten Website erfahren Sie
+  wie Sie Cookies aus Ihrem Browser entfernen können. In einigen wenigen Fällen können jedoch einige Funktionen unserer
+  Website-Funktionen möglicherweise nicht funktionieren.
 
-## Änderungen an unserer Datenschutzpolitik
+  ## Datenschutzrichtlinien anderer Websites
 
-Unser Unternehmen überprüft seine Datenschutzpolitik regelmäßig und veröffentlicht alle
-Aktualisierungen auf dieser Webseite. Diese Datenschutzrichtlinie wurde zuletzt am 9. Januar
-2019.
+  Die Website unseres Unternehmens enthält Links zu anderen Websites. Unsere Datenschutzpolitik
+  gilt nur für unsere Website. Wenn Sie also auf einen Link zu einer anderen Website klicken, sollten Sie
+  sollten Sie deren Datenschutzrichtlinien lesen.
 
-## Wie Sie uns kontaktieren können
+  ## Änderungen an unserer Datenschutzpolitik
 
-Wenn Sie Fragen zur Datenschutzrichtlinie unseres Unternehmens oder zu den von uns gespeicherten Daten haben
-die wir über Sie gespeichert haben, oder wenn Sie eines Ihrer Datenschutzrechte ausüben möchten,
-zögern Sie bitte nicht, uns zu kontaktieren.
+  Unser Unternehmen überprüft seine Datenschutzpolitik regelmäßig und veröffentlicht alle
+  Aktualisierungen auf dieser Webseite. Diese Datenschutzrichtlinie wurde zuletzt am 9. Januar
+  2019.
 
-Senden Sie uns eine E-Mail an:
+  ## Wie Sie uns kontaktieren können
 
-Rufen Sie uns an:
+  Wenn Sie Fragen zur Datenschutzrichtlinie unseres Unternehmens oder zu den von uns gespeicherten Daten haben
+  die wir über Sie gespeichert haben, oder wenn Sie eines Ihrer Datenschutzrechte ausüben möchten,
+  zögern Sie bitte nicht, uns zu kontaktieren.
 
-Oder schreiben Sie uns an:
+  Senden Sie uns eine E-Mail an:
 
-## Wie Sie die zuständigen Behörden kontaktieren können
+  Rufen Sie uns an:
 
-Sollten Sie eine Beschwerde vorbringen wollen oder das Gefühl haben, dass unser Unternehmen Ihr Anliegen nicht
-Ihr Anliegen nicht zufriedenstellend behandelt hat, können Sie sich an das
-Büro des Informationsbeauftragten.
+  Oder schreiben Sie uns an:
 
-E-Mail:
+  ## Wie Sie die zuständigen Behörden kontaktieren können
 
-Adresse:
+  Sollten Sie eine Beschwerde vorbringen wollen oder das Gefühl haben, dass unser Unternehmen Ihr Anliegen nicht
+  Ihr Anliegen nicht zufriedenstellend behandelt hat, können Sie sich an das
+  Büro des Informationsbeauftragten.
 
+  E-Mail:
 
+  Adresse:
+
+</TwoPaneContent>

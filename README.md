@@ -45,6 +45,7 @@ An Astro theme, focused on internationalization.
   - MDX support [(@astrojs/mdx)](https://docs.astro.build/en/guides/mdx/)
   - Interactive components with [Preact](https://preactjs.com/)
   - Release cycle including generating changelogs with [changesets](https://github.com/changesets/changesets)
+  - .editorconfig
 - Connectivity
   - RSS Feeds with i18n support [(@astrojs/rss)](https://docs.astro.build/en/guides/rss/)
   - Sitemaps with i18n support [(@astrojs/sitemap)](https://docs.astro.build/en/guides/integrations-guide/sitemap/)

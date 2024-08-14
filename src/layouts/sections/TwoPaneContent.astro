@@ -2,14 +2,19 @@
 ---
 <style>
   .two-pane {
-    padding-top: 2rem;
-    display: flex;
-    justify-content: center;
+    padding: 1.4rem 0;
+    display: grid;
+    grid-template-columns: 15rem 1fr 15rem;
+    gap: 1.4rem;
+  }
+
+  aside > :global(*) {
+    position: sticky;
+    top: 1.4rem;
   }
 
   section {
-    max-width: 50rem;
-    padding: 1rem;
+    justify-self: center;
   }
 
   section :global(h1) {

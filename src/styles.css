@@ -9,23 +9,27 @@
   --font-text: 'Dosis Variable', sans-serif;
   --font-monospace: 'Fira Code Variable', monospace;
   --font-size: 16px;
+  --page-horizontal-padding: 10%;
 }
 
 @media (max-width: 1280px) {
   :root {
     --font-size: 14px;
+    --page-horizontal-padding: 5%;
   }
 }
 
 @media (min-width: 1600px) {
   :root {
     --font-size: 16px;
+    --page-horizontal-padding: 10%;
   }
 }
 
 @media (min-width: 1920px) {
   :root {
     --font-size: 18px;
+    --page-horizontal-padding: 15%;
   }
 }
 
