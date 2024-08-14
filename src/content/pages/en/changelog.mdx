@@ -1,6 +1,13 @@
 ---
 path: changelog
 ---
-import { Content as Changelog } from '../../../../CHANGELOG.md';
+import { Content as Changelog, getHeadings } from '../../../../CHANGELOG.md';
+import TwoPaneContent from '../../../layouts/sections/TwoPaneContent.astro';
 
-<Changelog />
+<TwoPaneContent>
+  <Fragment slot="aside">
+    {JSON.stringify(getHeadings())}
+  </Fragment>
+  <Changelog />
+</TwoPaneContent>
+

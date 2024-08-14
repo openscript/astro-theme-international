@@ -55,6 +55,10 @@ An Astro theme, focused on internationalization.
   - 404 page
   - Favicons
   - Custom fonts
+  - Responsivness
+  - Markdown
+    - Autolink headings
+    - Table of Contents generation
 
 ### Content types
 
@@ -81,3 +85,5 @@ An Astro theme, focused on internationalization.
 
 - https://dominuskelvin.dev/blog/understanding-astro-components
 - https://simonhearne.com/2021/layout-shifts-webfonts/
+- https://github.com/remarkjs/remark/blob/main/doc/plugins.md
+- https://github.com/rehypejs/rehype/blob/main/doc/plugins.md

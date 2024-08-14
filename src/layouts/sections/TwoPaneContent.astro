@@ -1,6 +1,26 @@
 ---
 ---
+<style>
+  .two-pane {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
 
-<section class="two-pane">
-  <slot />
-</section>
+  section {
+    max-width: 50rem;
+    padding: 1rem;
+  }
+
+  section :global(h1) {
+    text-align: center;
+  }
+</style>
+<div class="two-pane">
+  <aside>
+    <slot name="aside" />
+  </aside>
+  <section>
+    <slot />
+  </section>
+</div>
