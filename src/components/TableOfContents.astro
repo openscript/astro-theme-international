@@ -24,6 +24,10 @@ const headings = Astro.props.headings.filter(heading => heading.depth > (Astro.p
     margin: 0.5rem 0;
   }
 
+  li.active {
+    font-weight: bold;
+  }
+
   a {
     text-decoration: none;
   }
@@ -58,3 +62,34 @@ const headings = Astro.props.headings.filter(heading => heading.depth > (Astro.p
     ))}
   </ul>
 </nav>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const parent = document.querySelector(`nav li a[href="#${id}"]`)?.parentElement
+        if (!parent) return;
+        if (entry.intersectionRatio > 0) {
+          parent.classList.add('active');
+        } else {
+          parent.classList.remove('active');
+        }
+      });
+    });
+
+    // Track all sections that have an `id` applied
+    document.querySelectorAll('.table-of-contents a').forEach((a) => {
+      const href = a.getAttribute('href');
+      if(!href) return;
+      if(!href.startsWith('#')) return;
+
+      const heading = document.getElementById(href.slice(1));
+      if(!heading) return;
+
+      observer.observe(heading);
+    });
+
+  });
+</script>
