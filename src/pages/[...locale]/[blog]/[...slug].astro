@@ -2,14 +2,20 @@
 import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { entryPaths } from '../../_paths';
+import ThreePaneContent from '../../../layouts/sections/ThreePaneContent.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
 
 export const getStaticPaths = entryPaths('blog', 'slug');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const page = Astro.props as Props;
 
-const { Content } = await page.render();
+const { Content, headings } = await page.render();
 ---
 <DefaultLayout translations={page.translations}>
-  <Content/>
+  <ThreePaneContent>
+    <Fragment slot="left"><TableOfContents headings={headings} /></Fragment>
+    <Content/>
+    <Fragment slot="right">hoi</Fragment>
+  </ThreePaneContent>
 </DefaultLayout>

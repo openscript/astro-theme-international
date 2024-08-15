@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import { getContentEntryPath } from "../../utils/i18n";
 import { resolvePath } from '../../utils/path';
 import slug from 'limax';
-import { getCollectionSlug } from '../../utils/slugs';
+import { getCollectionSlug, getLocaleSlug } from '../../utils/slugs';
 import { Image } from 'astro:assets';
 import defaultCover from "../../assets/default-cover.jpg";
 
@@ -19,6 +19,7 @@ const t = useTranslations(locale);
 
 const posts = (await getCollection('blog', (e) => e.slug.startsWith(locale))).reverse().slice(0, 3);
 const blogSlug = getCollectionSlug('blog', locale);
+const localeSlug = getLocaleSlug(locale);
 
 ---
 
@@ -57,7 +58,7 @@ const blogSlug = getCollectionSlug('blog', locale);
           </div>
           <div class="tags">
             {post.data.tags.map((tag) => (
-              <a href={resolvePath(locale, blogSlug, slug(tag))}>{tag}</a>
+              <a href={resolvePath(localeSlug, blogSlug, slug(tag))}>{tag}</a>
             ))}
           </div>
         </div>
