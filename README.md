@@ -81,6 +81,8 @@ An Astro theme, focused on internationalization.
 - Backgrounds: https://www.fffuel.co/
 - Favicon Generator: https://realfavicongenerator.net/
 - Data Protection: https://gdpr.eu/privacy-notice/
+- Images:
+  - https://unsplash.com/photos/desk-globe-on-table-nXt5HtLmlgE
 
 ### Articles
 
@@ -88,3 +90,4 @@ An Astro theme, focused on internationalization.
 - https://simonhearne.com/2021/layout-shifts-webfonts/
 - https://github.com/remarkjs/remark/blob/main/doc/plugins.md
 - https://github.com/rehypejs/rehype/blob/main/doc/plugins.md
+- https://danilafe.com/blog/blog_microfeatures/

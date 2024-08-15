@@ -1,0 +1,17 @@
+---
+---
+import { Image } from 'astro:assets';
+import Button from '../../../components/Button.astro';
+import SpotlightSection from '../../../layouts/sections/SpotlightSection.astro';
+import spotlightImage from '../spotlight.jpg';
+import { homepage } from '../../../../package.json';
+
+<SpotlightSection>
+  <Fragment slot="title">Funktionsreiche Vorlage, optimiert für Mehrsprachigkeit!</Fragment>
+  <Fragment slot="image"><Image src={spotlightImage} width={1280} alt="A rocketship in space." /></Fragment>
+
+  Passend für alle Arten von Websites, von Portfolio- bis hin zu Unternehmensseiten. Die Vorlage ist vollständig anpassbar und bietet eine Vielzahl von Funktionen, die auf Ihre Bedürfnisse zugeschnitten sind.
+
+  <Button href={homepage}>Vorlage benutzen</Button>
+
+</SpotlightSection>

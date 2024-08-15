@@ -2,6 +2,11 @@
   "name": "astro-theme-international",
   "type": "module",
   "version": "0.0.9",
+  "homepage": "https://github.com/openscript/astro-theme-international",
+  "bugs": {
+    "url": "https://github.com/openscript/astro-theme-international/issues"
+  },
+  "repository": "github:openscript/astro-theme-international",
   "scripts": {
     "dev": "astro dev --host",
     "start": "astro dev --host",
