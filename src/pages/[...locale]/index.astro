@@ -3,6 +3,7 @@ import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import type { InferGetStaticPropsType } from 'astro';
 import { indexPaths } from '../_paths';
 import { getEntry } from 'astro:content';
+import LatestBlogsSection from '../../layouts/sections/LatestBlogsSection.astro';
 
 export const getStaticPaths = indexPaths();
 
@@ -16,4 +17,5 @@ const { Content: SpotlightSection } = await (await getEntry('sections', `${local
 
 <DefaultLayout translations={translations}>
 	<SpotlightSection />
+	<LatestBlogsSection locale={locale} />
 </DefaultLayout>

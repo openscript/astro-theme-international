@@ -22,6 +22,7 @@ export const C = {
       'slugs.gallery': 'gallery',
       'slugs.projects': 'projects',
       'search.placeholder': 'Type to search...',
+      'sections.latestPosts': 'Latest posts',
     },
     'de': {
       'language': 'Deutsch',
@@ -40,6 +41,7 @@ export const C = {
       'slugs.gallery': 'galerie',
       'slugs.projects': 'projekte',
       'search.placeholder': 'Schreibe um zu suchen...',
+      'sections.latestPosts': 'Letzte Blogartikel',
     }
   } satisfies { [key: string]: {[key: string]: string }},
   // Various settings
