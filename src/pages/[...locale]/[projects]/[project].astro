@@ -9,7 +9,9 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const page = Astro.props as Props;
 
 const { Content } = await page.render();
+
 ---
+
 <DefaultLayout translations={page.translations}>
   <Content/>
 </DefaultLayout>

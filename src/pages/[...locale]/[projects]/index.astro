@@ -11,6 +11,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { translations } = Astro.props as Props;
 
 const projects = await getCollection('projects');
+
 ---
 
 <DefaultLayout translations={translations}>
