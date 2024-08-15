@@ -28,7 +28,7 @@
     "@fontsource-variable/dosis": "^5.0.20",
     "@fontsource-variable/fira-code": "^5.0.18",
     "@fontsource-variable/playfair-display": "^5.0.25",
-    "astro": "^4.13.4",
+    "astro": "^4.14.2",
     "fsevents": "^2.3.3",
     "limax": "^4.1.0",
     "pagefind": "^1.1.0",
