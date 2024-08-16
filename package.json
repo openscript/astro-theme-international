@@ -35,7 +35,7 @@
     "preact": "^10.23.2",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
-    "sharp": "^0.33.4",
+    "sharp": "^0.33.5",
     "typescript": "^5.5.4"
   },
   "packageManager": "pnpm@9.7.0",

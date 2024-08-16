@@ -191,7 +191,7 @@ a[href]:not(:where(
   [href^="mailto"],
   [href^="tel"],
   [href^="javascript:" i],
-  [href^="/"]:not([href^="//"]),
+  [href^="/"]:not([href^="//"])
 )):after {
   content: '↗️';
   padding-inline-start: 0.5rem;

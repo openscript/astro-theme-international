@@ -116,8 +116,6 @@ export async function makeMenu(
   }));
 }
 
-const t = useTranslations('en');
-
 export function useTranslations<L extends keyof typeof C.MESSAGES>(locale: L) {
   return function t(key: keyof typeof C.MESSAGES[L], substituions?: Record<string, string | number>) {
     if (substituions) {
