@@ -116,8 +116,19 @@ export async function makeMenu(
   }));
 }
 
-export function useTranslations(locale: keyof typeof C.MESSAGES) {
-  return function t(key: keyof typeof C.MESSAGES[typeof C.DEFAULT_LOCALE]) {
-    return C.MESSAGES[locale][key] || C.MESSAGES[C.DEFAULT_LOCALE][key];
+const t = useTranslations('en');
+
+export function useTranslations<L extends keyof typeof C.MESSAGES>(locale: L) {
+  return function t(key: keyof typeof C.MESSAGES[L], substituions?: Record<string, string | number>) {
+    if (substituions) {
+      let message = C.MESSAGES[locale][key] as string;
+      for (const key in substituions) {
+        const value = substituions[key];
+        if (!value) continue;
+        message = message.replace(`{${key}}`, String(value));
+      }
+      return message;
+    }
+    return C.MESSAGES[locale][key];
   }
 }

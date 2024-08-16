@@ -181,6 +181,22 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--dark-color);
 }
 
+.label {
+  display: block;
+  margin-top: 6rem;
+}
+
+a[href]:not(:where(
+  [href^="#"],
+  [href^="mailto"],
+  [href^="tel"],
+  [href^="javascript:" i],
+  [href^="/"]:not([href^="//"]),
+)):after {
+  content: '↗️';
+  padding-inline-start: 0.5rem;
+}
+
 :is(h1, h2, h3, h4, h5, h6) a {
   color: var(--dark-color);
   text-decoration: none;

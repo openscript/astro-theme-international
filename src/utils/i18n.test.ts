@@ -10,11 +10,13 @@ vi.mock("../configuration", () => ({
         'language': 'English',
         'slugs.docs': 'docs',
         'slugs.data': 'data',
+        'substitution': '{one} of {two}',
       },
       'de': {
         'language': 'Deutsch',
         'slugs.docs': 'docs',
         'slugs.data': 'daten',
+        'substitution': '{one} von {two}',
       }
     }
   }
@@ -229,5 +231,13 @@ describe("useTranslations", () => {
   it("should return the translations", () => {
     const t = useTranslations('en');
     expect(t('language')).toMatchInlineSnapshot(`"English"`);
+  });
+  it('should substitute placeholders', () => {
+    const t = useTranslations('en');
+    expect(t('substitution' as any, { one: 'one', two: 'two' })).toMatchInlineSnapshot(`"one of two"`);
+  });
+  it('should ignore missing placeholders', () => {
+    const t = useTranslations('en');
+    expect(t('substitution' as any, { one: 'one' })).toMatchInlineSnapshot(`"one of {two}"`);
   });
 })

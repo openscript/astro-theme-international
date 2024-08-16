@@ -1,23 +1,27 @@
 ---
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
 type Props = {
   fromDepth?: number;
   headings: { slug: string, text: string, depth: number }[];
 }
 
-const headings = Astro.props.headings.filter(heading => heading.depth > (Astro.props.fromDepth || 1));
+const { headings: headingsProp, fromDepth: fromDepthProp } = Astro.props;
+const fromDepth = fromDepthProp || 2;
+const headings = headingsProp.filter(heading => heading.depth >= fromDepth);
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 
 ---
 
-<style>
+<style define:vars={{ 'from-depth': fromDepth }}>
   .table-of-contents {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
   }
 
   ul {
     list-style: none;
     padding: 0;
+    margin-left: calc(-1rem * (var(--from-depth) - 1));
   }
 
   li {
@@ -54,7 +58,7 @@ const headings = Astro.props.headings.filter(heading => heading.depth > (Astro.p
 </style>
 
 <nav class="table-of-contents">
-  <span>Table of Contents</span>
+  <span class="label">{t('label.tableOfContents')}</span>
   <ul>
     {headings.map(heading => (
       <li class={`depth-${heading.depth}`}>

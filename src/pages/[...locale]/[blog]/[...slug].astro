@@ -10,13 +10,12 @@ import type { GitInfoFrontmatter } from '../../../remark/remark-git-info';
 export const getStaticPaths = entryPaths('blog', 'slug');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const page = Astro.props as Props;
+const { translations, render } = Astro.props as Props;
 
-const { Content, headings, remarkPluginFrontmatter } = await page.render();
-const git: GitInfoFrontmatter['git'] = remarkPluginFrontmatter.git
-console.log(remarkPluginFrontmatter);
+const { Content, headings, remarkPluginFrontmatter } = await render();
+const git: GitInfoFrontmatter['git'] = remarkPluginFrontmatter.git;
 ---
-<DefaultLayout translations={page.translations}>
+<DefaultLayout translations={translations}>
   <ThreePaneContent>
     <Fragment slot="left"><TableOfContents headings={headings} /></Fragment>
     <Content/>
