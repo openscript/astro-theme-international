@@ -54,6 +54,7 @@ const headings = Astro.props.headings.filter(heading => heading.depth > (Astro.p
 </style>
 
 <nav class="table-of-contents">
+  <span>Table of Contents</span>
   <ul>
     {headings.map(heading => (
       <li class={`depth-${heading.depth}`}>

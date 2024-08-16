@@ -46,8 +46,11 @@ export const C = {
   } satisfies { [key: string]: {[key: string]: string }},
   // Various settings
   SETTINGS: {
+    REMOTE: {
+      BASE_URL: 'https://github.com/openscript/astro-theme-international',
+    },
     BLOG: {
-      PAGE_SIZE: 20
+      PAGE_SIZE: 20,
     }
   },
 } as const;

@@ -1,0 +1,24 @@
+---
+import type { GitInfoFrontmatter } from '../remark/remark-git-info'
+
+type Props = GitInfoFrontmatter;
+
+const git = Astro.props.git;
+
+---
+
+<div>
+  <span>Meta</span>
+  <dl>
+    <dt>Author</dt>
+    <dd>{git.lastCommit.author_name}</dd>
+    <dt>Last update</dt>
+    <dd>{git.lastCommit.date}</dd>
+    <dt>Links</dt>
+    <dd>
+      <a href={git.remoteViewUrl}>View</a>
+      <a href={git.remoteHistoryUrl}>History</a>
+      <a href={git.remoteEditUrl}>Edit</a>
+    </dd>
+  </dl>
+</div>

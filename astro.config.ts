@@ -6,6 +6,7 @@ import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
+import { remarkGitInfo } from './src/remark/remark-git-info';
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +19,7 @@ export default defineConfig({
     locales: Object.keys(C.LOCALES)
   },
   markdown: {
+    remarkPlugins: [[remarkGitInfo, { remoteUrlBase: C.SETTINGS.REMOTE.BASE_URL }]],
     rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]]
   },
   integrations: [

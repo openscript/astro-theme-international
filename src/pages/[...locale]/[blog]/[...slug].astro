@@ -4,18 +4,22 @@ import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { entryPaths } from '../../_paths';
 import ThreePaneContent from '../../../layouts/sections/ThreePaneContent.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
+import GitInfo from '../../../components/GitInfo.astro';
+import type { GitInfoFrontmatter } from '../../../remark/remark-git-info';
 
 export const getStaticPaths = entryPaths('blog', 'slug');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const page = Astro.props as Props;
 
-const { Content, headings } = await page.render();
+const { Content, headings, remarkPluginFrontmatter } = await page.render();
+const git: GitInfoFrontmatter['git'] = remarkPluginFrontmatter.git
+console.log(remarkPluginFrontmatter);
 ---
 <DefaultLayout translations={page.translations}>
   <ThreePaneContent>
     <Fragment slot="left"><TableOfContents headings={headings} /></Fragment>
     <Content/>
-    <Fragment slot="right">hoi</Fragment>
+    <Fragment slot="right"><GitInfo git={git} /></Fragment>
   </ThreePaneContent>
 </DefaultLayout>

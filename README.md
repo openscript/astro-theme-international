@@ -50,6 +50,7 @@ An Astro theme, focused on internationalization.
   - RSS Feeds with i18n support [(@astrojs/rss)](https://docs.astro.build/en/guides/rss/)
   - Sitemaps with i18n support [(@astrojs/sitemap)](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
   - Static search using [Pagefind](https://pagefind.app/)
+  - Inject infos from Git into frontmatter via custom remark plugin
 - Userfacing features
   - Dark mode
   - Pagination
