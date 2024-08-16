@@ -66,12 +66,14 @@ header {
 header .title {
   font-size: 1.5rem;
   text-decoration: none;
+  font-weight: 500;
 }
 
 header .title span {
-  font-size: 1rem;
-  line-height: 1rem;
   display: block;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1rem;
 }
 
 header .title:visited {
@@ -179,6 +181,12 @@ h6 {
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--dark-color);
+}
+
+h1 + .subtitle {
+  display: block;
+  text-align: center;
+  margin-top: -1rem;
 }
 
 .label {

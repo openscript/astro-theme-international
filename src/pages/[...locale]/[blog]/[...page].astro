@@ -4,13 +4,11 @@ import type {
   InferGetStaticPropsType,
 } from "astro";
 import DefaultLayout from "../../../layouts/DefaultLayout.astro";
-import { getRelativePath, resolvePath } from "../../../utils/path";
-import { getContentEntryPath, useTranslations } from "../../../utils/i18n";
-import Image from "astro/components/Image.astro";
-import defaultCover from "../../../assets/default-cover.jpg";
-import slug from "limax";
+import { getRelativePath } from "../../../utils/path";
+import { useTranslations } from "../../../utils/i18n";
 import { blogPagePaths } from '../../_paths';
 import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
+import PostCard from '../../../components/PostCard.astro';
 
 export const getStaticPaths = blogPagePaths;
 
@@ -26,10 +24,10 @@ const t = useTranslations(locale);
 ---
 
 <style>
-  img {
-    width: 600px;
-    height: 320px;
-    object-fit: cover;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 </style>
 
@@ -41,20 +39,7 @@ const t = useTranslations(locale);
       {
         page.data.map(async (post) => (
           <li>
-            <a href={await getContentEntryPath("blog", post.slug)}>
-              <Image
-                src={post.data.cover?.src || defaultCover}
-                alt={post.data.cover?.alt || post.data.title}
-                widths={[720]}
-              />
-              {post.data.title}
-              {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
-            </a>
-            <div>
-              {post.data.tags.map((tag) => (
-                <a href={resolvePath(localeSlug, blogSlug, slug(tag))}>{tag}</a>
-              ))}
-            </div>
+            <PostCard post={post} locale={locale} localeSlug={localeSlug} blogSlug={blogSlug} />
           </li>
         ))
       }

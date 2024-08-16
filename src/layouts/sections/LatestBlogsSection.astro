@@ -2,12 +2,8 @@
 import type { Locale } from '../../configuration'
 import { useTranslations } from '../../utils/i18n';
 import { getCollection } from 'astro:content';
-import { getContentEntryPath } from "../../utils/i18n";
-import { resolvePath } from '../../utils/path';
-import slug from 'limax';
 import { getCollectionSlug, getLocaleSlug } from '../../utils/slugs';
-import { Image } from 'astro:assets';
-import defaultCover from "../../assets/default-cover.jpg";
+import PostCard from '../../components/PostCard.astro';
 
 
 type Props = {
@@ -31,37 +27,14 @@ const localeSlug = getLocaleSlug(locale);
     padding: 0;
     gap: 1rem;
   }
-
-  img {
-    max-width: 100%;
-    max-height: 20rem;
-    object-fit: cover;
-  }
 </style>
 
 <section>
   <h2>{t('sections.latestPosts')}</h2>
-  <ul>
+  <ul >
     {posts.map(async (post) => (
       <li>
-        <a href={await getContentEntryPath("blog", post.slug)}>
-          <h3>{post.data.title}</h3>
-          <Image
-              src={post.data.cover?.src || defaultCover}
-              alt={post.data.cover?.alt || post.data.title}
-              widths={[720]}
-            />
-        </a>
-        <div class="meta">
-          <div class="date">
-            {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
-          </div>
-          <div class="tags">
-            {post.data.tags.map((tag) => (
-              <a href={resolvePath(localeSlug, blogSlug, slug(tag))}>{tag}</a>
-            ))}
-          </div>
-        </div>
+        <PostCard post={post} locale={locale} localeSlug={localeSlug} blogSlug={blogSlug} />
       </li>
     ))}
   </ul>
