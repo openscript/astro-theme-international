@@ -1,0 +1,22 @@
+---
+import type { Page } from 'astro'
+import { getRelativePath } from '../utils/path';
+
+type Props = {
+  page: Page;
+}
+
+const { page } = Astro.props as Props;
+
+---
+
+{
+  page.url.prev ? (
+    <a href={getRelativePath(page.url.prev)}>Vorherige Seite</a>
+  ) : null
+}
+{
+  page.url.next ? (
+    <a href={getRelativePath(page.url.next)}>Nächste Seite</a>
+  ) : null
+}
