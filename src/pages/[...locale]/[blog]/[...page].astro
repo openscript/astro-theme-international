@@ -20,10 +20,11 @@ const t = useTranslations(locale);
 ---
 
 <style>
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  :global(.vertical) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin: 1.4rem 0 !important;
   }
 </style>
 
@@ -31,14 +32,12 @@ const t = useTranslations(locale);
   <SinglePaneContent>
     <h1>{t('pages.blog')}</h1>
     <span class="subtitle">{t('pagination.pageOf', {'current': page.currentPage, 'total': page.lastPage})}</span>
-    <CardList>
-      {
-        page.data.map(async (post) => (
-          <li>
-            <PostCard post={post} locale={locale} />
-          </li>
-        ))
-      }
+    <CardList classNames='vertical'>
+      {page.data.map(async (post) => (
+        <li>
+          <PostCard post={post} locale={locale} />
+        </li>
+      ))}
     </CardList>
     {
       page.url.prev ? (

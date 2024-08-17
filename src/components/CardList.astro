@@ -1,4 +1,11 @@
 ---
+
+type Props = {
+  classNames?: string;
+}
+
+const { classNames } = Astro.props as Props;
+
 ---
 
 <style>
@@ -9,6 +16,6 @@
   }
 </style>
 
-<ul>
+<ul class={classNames}>
   <slot />
 </ul>

@@ -18,7 +18,7 @@ const posts = (await getCollection('blog', (e) => e.slug.startsWith(locale))).re
 ---
 
 <style>
-  :global(ul) {
+  section :global(ul) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
