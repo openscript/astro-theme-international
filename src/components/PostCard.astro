@@ -3,43 +3,51 @@ import type { CollectionEntry } from 'astro:content'
 import { getContentEntryPath } from "../utils/i18n";
 import defaultCover from "../assets/default-cover.jpg";
 import { Image } from 'astro:assets';
-import slug from "limax";
-import { resolvePath } from '../utils/path';
 import type { Locale } from '../configuration';
 
 type Props = {
   post: CollectionEntry<'blog'>;
   locale: Locale;
-  localeSlug?: string;
-  blogSlug: string;
 }
 
-const { post, locale, localeSlug, blogSlug } = Astro.props;
+const { post, locale } = Astro.props;
 
 ---
 
 <style>
-  img {
+  div {
+    position: relative;
+  }
+  a {
+    display: block;
+    position: relative;
     width: 100%;
-    height: auto;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 20rem;
+    object-fit: cover;
+  }
+
+  a > div {
+    position: absolute;
+    z-index: 1;
   }
 </style>
 
-<a href={await getContentEntryPath("blog", post.slug)}>
-  <h3>{post.data.title}</h3>
-  <Image
+<div>
+  <a href={await getContentEntryPath("blog", post.slug)}>
+    <Image
       src={post.data.cover?.src || defaultCover}
       alt={post.data.cover?.alt || post.data.title}
       widths={[720]}
     />
-  <div class="meta">
-    <div class="date">
-      {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
+    <div>
+      <h3>{post.data.title}</h3>
+      <div class="date">
+        {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
+      </div>
     </div>
-    <div class="tags">
-      {post.data.tags.map((tag) => (
-        <a href={resolvePath(localeSlug, blogSlug, slug(tag))}>{tag}</a>
-      ))}
-    </div>
-  </div>
-</a>
+  </a>
+</div>

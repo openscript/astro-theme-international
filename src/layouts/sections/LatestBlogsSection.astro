@@ -2,8 +2,8 @@
 import type { Locale } from '../../configuration'
 import { useTranslations } from '../../utils/i18n';
 import { getCollection } from 'astro:content';
-import { getCollectionSlug, getLocaleSlug } from '../../utils/slugs';
 import PostCard from '../../components/PostCard.astro';
+import CardList from '../../components/CardList.astro';
 
 
 type Props = {
@@ -14,28 +14,24 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 
 const posts = (await getCollection('blog', (e) => e.slug.startsWith(locale))).reverse().slice(0, 3);
-const blogSlug = getCollectionSlug('blog', locale);
-const localeSlug = getLocaleSlug(locale);
 
 ---
 
 <style>
-  ul {
+  :global(ul) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    list-style: none;
-    padding: 0;
     gap: 1rem;
   }
 </style>
 
 <section>
   <h2>{t('sections.latestPosts')}</h2>
-  <ul >
+  <CardList>
     {posts.map(async (post) => (
       <li>
-        <PostCard post={post} locale={locale} localeSlug={localeSlug} blogSlug={blogSlug} />
+        <PostCard post={post} locale={locale} />
       </li>
     ))}
-  </ul>
+  </CardList>
 </section>
