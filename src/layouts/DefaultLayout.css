@@ -247,6 +247,7 @@ a[href]:not(:where(
   [href^="mailto"],
   [href^="tel"],
   [href^="javascript:" i],
+  [href^="./"],
   [href^="/"]:not([href^="//"])
 )):after {
   content: '↗️';
