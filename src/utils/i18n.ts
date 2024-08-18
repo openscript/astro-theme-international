@@ -40,6 +40,10 @@ export function parseLocale(locale?: string) {
   return locale && locale in C.LOCALES ? locale as keyof typeof C.LOCALES : C.DEFAULT_LOCALE;
 }
 
+export function getFullLocale(locale?: string) {
+  return C.LOCALES[parseLocale(locale)];
+}
+
 export function getMessage(key: string, locale: Locale) {
   if (!(locale in C.MESSAGES)) throw new Error(`Invalid locale: ${locale}`);
   if (!(key in C.MESSAGES[locale])) throw new Error(`Invalid message key: ${key}`);
@@ -112,8 +116,17 @@ export async function makeMenu(
   }));
 }
 
-export function useTranslations(locale: keyof typeof C.MESSAGES) {
-  return function t(key: keyof typeof C.MESSAGES[typeof C.DEFAULT_LOCALE]) {
-    return C.MESSAGES[locale][key] || C.MESSAGES[C.DEFAULT_LOCALE][key];
+export function useTranslations<L extends keyof typeof C.MESSAGES>(locale: L) {
+  return function t(key: keyof typeof C.MESSAGES[L], substituions?: Record<string, string | number>) {
+    if (substituions) {
+      let message = C.MESSAGES[locale][key] as string;
+      for (const key in substituions) {
+        const value = substituions[key];
+        if (!value) continue;
+        message = message.replace(`{${key}}`, String(value));
+      }
+      return message;
+    }
+    return C.MESSAGES[locale][key];
   }
 }

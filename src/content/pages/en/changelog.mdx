@@ -1,7 +1,14 @@
 ---
 path: changelog
 ---
+import { Content as Changelog, getHeadings as getChangelogHeadings } from '../../../../CHANGELOG.md';
+import TwoPaneContent from '../../../layouts/sections/TwoPaneContent.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
 
-import { Content as Changelog } from '../../../../CHANGELOG.md';
+<TwoPaneContent>
+  <Fragment slot="aside">
+    <TableOfContents headings={getChangelogHeadings()} />
+  </Fragment>
+  <Changelog />
+</TwoPaneContent>
 
-<Changelog />

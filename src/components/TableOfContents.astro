@@ -1,0 +1,100 @@
+---
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
+type Props = {
+  fromDepth?: number;
+  headings: { slug: string, text: string, depth: number }[];
+}
+
+const { headings: headingsProp, fromDepth: fromDepthProp } = Astro.props;
+const fromDepth = fromDepthProp || 2;
+const headings = headingsProp.filter(heading => heading.depth >= fromDepth);
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+---
+
+<style define:vars={{ 'from-depth': fromDepth }}>
+  .table-of-contents {
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-left: calc(-1rem * (var(--from-depth) - 1));
+  }
+
+  li {
+    margin: 0.5rem 0;
+  }
+
+  li.active {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .depth-2 {
+    margin-left: 1rem;
+  }
+
+  .depth-3 {
+    margin-left: 2rem;
+  }
+
+  .depth-4 {
+    margin-left: 3rem;
+  }
+
+  .depth-5 {
+    margin-left: 4rem;
+  }
+
+  .depth-6 {
+    margin-left: 5rem;
+  }
+</style>
+
+<nav class="table-of-contents">
+  <span class="label">{t('label.tableOfContents')}</span>
+  <ul>
+    {headings.map(heading => (
+      <li class={`depth-${heading.depth}`}>
+        <a href={`#${heading.slug}`}>{heading.text}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const parent = document.querySelector(`nav li a[href="#${id}"]`)?.parentElement
+        if (!parent) return;
+        if (entry.intersectionRatio > 0) {
+          parent.classList.add('active');
+        } else {
+          parent.classList.remove('active');
+        }
+      });
+    });
+
+    // Track all sections that have an `id` applied
+    document.querySelectorAll('.table-of-contents a').forEach((a) => {
+      const href = a.getAttribute('href');
+      if(!href) return;
+      if(!href.startsWith('#')) return;
+
+      const heading = document.getElementById(href.slice(1));
+      if(!heading) return;
+
+      observer.observe(heading);
+    });
+
+  });
+</script>

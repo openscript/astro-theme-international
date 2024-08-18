@@ -1,25 +1,61 @@
 :root {
-  --white-color: #EEEEEE;
-  --gray-color: #686D76;
-  --dark-color: #373A40;
-  --primary-color: #DC5F00;
-  --secondary-color: #f7bf94;
+  --white-color: #F8EDED;
+  --background-color: #F8EDED;
+  --text-color: #071212;
+  --gray-color: #CFC6C6;
+  --dark-color: #173B45;
+  --dark-alternate-color: #245d6d;
+  --primary-color: #FF8225;
+  --secondary-color: #B43F3F;
   --font-heading: 'Playfair Display Variable', serif;
   --font-text: 'Dosis Variable', sans-serif;
   --font-monospace: 'Fira Code Variable', monospace;
-  --font-size: 14px;
+  --font-size: 16px;
+  --page-horizontal-padding: 10%;
 }
 
 html.dark:root {
-  --white-color: #373A40;
-  --gray-color: #686D76;
-  --dark-color: #EEEEEE;
-  --primary-color: #DC5F00;
-  --secondary-color: #f7bf94;
+  --background-color: #071212;
+  --text-color: #F8EDED;
+}
+
+@media (max-width: 1080px) {
+  :root {
+    --font-size: 14px;
+    --page-horizontal-padding: 1rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --font-size: 14px;
+    --page-horizontal-padding: 5%;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --font-size: 16px;
+    --page-horizontal-padding: 10%;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --font-size: 18px;
+    --page-horizontal-padding: 15%;
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --font-size: 20px;
+  }
 }
 
 html {
   height: 100%;
+  font-size: var(--font-size);
 }
 
 body {

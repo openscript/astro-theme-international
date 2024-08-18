@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { getContentEntryPath, getDataEntryPath, getLocaleFromUrl, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
+import { getContentEntryPath, getDataEntryPath, getFullLocale, getLocaleFromUrl, getMessage, getNameFromLocale, makeMenu, parseLocale, parseLocaleTagFromPath, splitLocaleAndPath, useTranslations } from "../utils/i18n";
 
 vi.mock("../configuration", () => ({
   C: {
@@ -10,11 +10,13 @@ vi.mock("../configuration", () => ({
         'language': 'English',
         'slugs.docs': 'docs',
         'slugs.data': 'data',
+        'substitution': '{one} of {two}',
       },
       'de': {
         'language': 'Deutsch',
         'slugs.docs': 'docs',
         'slugs.data': 'daten',
+        'substitution': '{one} von {two}',
       }
     }
   }
@@ -148,6 +150,13 @@ describe("parseLocale", () => {
   });
 });
 
+describe("getFullLocale", () => {
+  it("should return the full locale", () => {
+    expect(getFullLocale()).toBe("en-US");
+    expect(getFullLocale("de")).toBe("de-CH");
+  });
+});
+
 describe("getMessage", () => {
  it("should throw an error if locale is invalid", () => {
    expect(() => getMessage("language", "es" as any)).toThrow("Invalid locale: es");
@@ -222,5 +231,13 @@ describe("useTranslations", () => {
   it("should return the translations", () => {
     const t = useTranslations('en');
     expect(t('language')).toMatchInlineSnapshot(`"English"`);
+  });
+  it('should substitute placeholders', () => {
+    const t = useTranslations('en');
+    expect(t('substitution' as any, { one: 'one', two: 'two' })).toMatchInlineSnapshot(`"one of two"`);
+  });
+  it('should ignore missing placeholders', () => {
+    const t = useTranslations('en');
+    expect(t('substitution' as any, { one: 'one' })).toMatchInlineSnapshot(`"one of {two}"`);
   });
 })

@@ -1,0 +1,11 @@
+---
+import Icon from '../../components/Icon.astro';
+import { getLocaleFromUrl, useTranslations } from '../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<div id="top-bar" class="padded">
+  <a href={`mailto:${t('contact.email.value')}`}><Icon name="email" />{t('contact.email.display')}</a>
+  <a href={`tel:${t('contact.phone.value')}`}><Icon name="phone" />{t('contact.phone.display')}</a>
+</div>

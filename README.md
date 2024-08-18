@@ -45,16 +45,23 @@ An Astro theme, focused on internationalization.
   - MDX support [(@astrojs/mdx)](https://docs.astro.build/en/guides/mdx/)
   - Interactive components with [Preact](https://preactjs.com/)
   - Release cycle including generating changelogs with [changesets](https://github.com/changesets/changesets)
+  - .editorconfig
 - Connectivity
   - RSS Feeds with i18n support [(@astrojs/rss)](https://docs.astro.build/en/guides/rss/)
   - Sitemaps with i18n support [(@astrojs/sitemap)](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
   - Static search using [Pagefind](https://pagefind.app/)
+  - Inject infos from Git into frontmatter via custom remark plugin
 - Userfacing features
   - Dark mode
   - Pagination
   - 404 page
   - Favicons
   - Custom fonts
+  - Responsivness
+  - Burger menu
+  - Markdown
+    - Autolink headings
+    - Table of Contents generation
 
 ### Content types
 
@@ -71,11 +78,18 @@ An Astro theme, focused on internationalization.
 ## Resources
 
 - Fonts: https://fontsource.org/
-- Colors: https://colorhunt.co/palette/eeeeee686d76373a40dc5f00
+- Colors: https://colorhunt.co/palette/f8ededff8225b43f3f173b45
 - Icons: https://tabler.io/icons
+- Backgrounds: https://www.fffuel.co/
 - Favicon Generator: https://realfavicongenerator.net/
+- Data Protection: https://gdpr.eu/privacy-notice/
+- Images:
+  - https://unsplash.com/photos/desk-globe-on-table-nXt5HtLmlgE
 
 ### Articles
 
 - https://dominuskelvin.dev/blog/understanding-astro-components
 - https://simonhearne.com/2021/layout-shifts-webfonts/
+- https://github.com/remarkjs/remark/blob/main/doc/plugins.md
+- https://github.com/rehypejs/rehype/blob/main/doc/plugins.md
+- https://danilafe.com/blog/blog_microfeatures/

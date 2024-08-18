@@ -1,0 +1,17 @@
+---
+---
+import { Image } from 'astro:assets';
+import Button from '../../../components/Button.astro';
+import SpotlightSection from '../../../layouts/sections/SpotlightSection.astro';
+import spotlightImage from '../spotlight.jpg';
+import { homepage } from '../../../../package.json';
+
+<SpotlightSection>
+  <Fragment slot="title">Feature packed theme, optimized for internationalization!</Fragment>
+  <Fragment slot="image"><Image src={spotlightImage} width={1280} alt="A rocketship in space." /></Fragment>
+
+  Suitable for all kinds of websites, from portfolio to corporate pages. The theme is fully customizable and offers a variety of features tailored to your needs.
+
+  <Button href={homepage}>Use theme</Button>
+
+</SpotlightSection>

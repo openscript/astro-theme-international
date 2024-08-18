@@ -65,7 +65,7 @@ Markdown macht es einfach, Links und Bilder einzufügen.
 
 ## Zitate
 
-Um Zitate hervorzuheben, kannst du das Größer-als-Zeichen (>) verwenden:
+Um Zitate hervorzuheben, kannst du das Grösser-als-Zeichen (>) verwenden:
 
 > Dies ist ein Zitat. Es sieht toll aus und lenkt die Aufmerksamkeit auf wichtige Punkte.
 

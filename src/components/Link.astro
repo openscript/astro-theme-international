@@ -1,0 +1,37 @@
+---
+// inspired by https://gist.github.com/jacobdalamb/6951a5bc07c9937f2f3991614b3685bc
+
+import type { HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"a"> & {
+	href: string | { pathname: string; query?: Record<string, string> };
+};
+const { href: rawHref, style, ...attrs } = Astro.props as Props;
+const href = (() => {
+	if (typeof rawHref === "string") {
+		return rawHref;
+	}
+	const { pathname, query } = rawHref;
+	const searchParams = new URLSearchParams(query);
+	return `${pathname}?${searchParams.toString()}`;
+})();
+const { pathname } = Astro.url;
+function isActiveLink(url: string) {
+	return pathname.startsWith(url) || url === "." || url === "./";
+}
+function isExternalLink(url: string) {
+	return URL.canParse(url);
+}
+const isExternal = isExternalLink(href);
+const isActive = isActiveLink(href);
+let relAttribute = {};
+let targetAttribute = {};
+if (isExternal) {
+  relAttribute = { rel: "external noreferrer" };
+  // rel 'nooppener' is implict with target '_blank' - https://www.stefanjudis.com/today-i-learned/target-blank-implies-rel-noopener/
+  targetAttribute = { target: "_blank" }
+}
+---
+
+<a class:list={[{ active: isActive, external: isExternal }]} href={href} {...relAttribute} {...attrs} {...targetAttribute}>
+  <slot />
+</a>

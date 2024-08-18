@@ -1,0 +1,14 @@
+---
+import Link from '../../components/Link.astro';
+import { N } from '../../navigation';
+import { getLocaleFromUrl } from '../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+---
+<footer>
+  <nav class="rounded">
+    <ul>
+      {N.footer[locale].map((i) => <li><Link href={i.path}>{i.title}</Link></li>)}
+    </ul>
+  </nav>
+</footer>

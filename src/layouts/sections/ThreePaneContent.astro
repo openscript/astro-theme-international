@@ -1,0 +1,35 @@
+---
+---
+<style>
+  .three-pane {
+    padding: 1.4rem 0;
+    display: grid;
+    grid-template-columns: 15rem 1fr 15rem;
+    gap: 1.4rem;
+  }
+
+  aside > :global(*) {
+    position: sticky;
+    top: 1.4rem;
+  }
+
+  section {
+    justify-self: center;
+    max-width: 50rem;
+  }
+
+  section :global(h1) {
+    text-align: center;
+  }
+</style>
+<div class="three-pane">
+  <aside>
+    <slot name="left" />
+  </aside>
+  <section>
+    <slot />
+  </section>
+  <aside>
+    <slot name="right" />
+  </aside>
+</div>

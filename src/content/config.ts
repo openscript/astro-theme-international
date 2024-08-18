@@ -36,7 +36,7 @@ const galleryCollection = defineCollection({
 });
 const pagesCollection = defineCollection({
   schema: z.object({
-    path: z.string()
+    path: z.string(),
   })
 });
 const projectsCollection = defineCollection({

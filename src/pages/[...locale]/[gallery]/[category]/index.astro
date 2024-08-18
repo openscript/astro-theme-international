@@ -5,6 +5,8 @@ import { C } from "../../../../configuration";
 import { resolvePath } from "../../../../utils/path";
 import { Image } from "astro:assets";
 import { galleryCategoryPaths } from '../../../_paths';
+import SinglePaneContent from '../../../../layouts/sections/SinglePaneContent.astro';
+import CardList from '../../../../components/CardList.astro';
 
 export const getStaticPaths = galleryCategoryPaths
 
@@ -14,17 +16,27 @@ type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 const { locale: localeSlug, gallery: gallerySlug, category: categorySlug } = Astro.params as Params;
 ---
 
-<DefaultLayout translations={translations} currentLocale={locale}>
-	<h1>{page.title[locale] ?? page.title[C.DEFAULT_LOCALE]}</h1>
-  <ul>
-    {
-      page.images.map((image, index) => (
-        <li>
-          <a href={resolvePath(localeSlug, gallerySlug, categorySlug, index.toString())}>
-            <Image src={image.src} alt={`Photo: ${image.title ? image.title[locale] : ''}`} width={320} />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+<style>
+  :global(.grid) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+</style>
+
+<DefaultLayout translations={translations}>
+  <SinglePaneContent>
+    <h1>{page.title[locale] ?? page.title[C.DEFAULT_LOCALE]}</h1>
+    <CardList classNames='grid'>
+      {
+        page.images.map((image, index) => (
+          <li>
+            <a href={resolvePath(localeSlug, gallerySlug, categorySlug, index.toString())}>
+              <Image src={image.src} alt={`Photo: ${image.title ? image.title[locale] : ''}`} width={320} />
+            </a>
+          </li>
+        ))
+      }
+    </CardList>
+  </SinglePaneContent>
 </DefaultLayout>

@@ -2,6 +2,8 @@
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import type { InferGetStaticPropsType } from 'astro';
 import { indexPaths } from '../_paths';
+import { getEntry } from 'astro:content';
+import LatestBlogsSection from '../../layouts/sections/LatestBlogsSection.astro';
 
 export const getStaticPaths = indexPaths();
 
@@ -9,8 +11,11 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { translations, locale } = Astro.props as Props;
 
+const { Content: SpotlightSection } = await (await getEntry('sections', `${locale}/spotlight`)).render();
+
 ---
 
-<DefaultLayout translations={translations} currentLocale={locale}>
-	<h1>Start</h1>
+<DefaultLayout translations={translations}>
+	<SpotlightSection />
+	<LatestBlogsSection locale={locale} />
 </DefaultLayout>

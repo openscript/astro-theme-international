@@ -1,0 +1,10 @@
+---
+import { getLocaleFromUrl, useTranslations } from '../../utils/i18n';
+import { version } from '../../../package.json';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<div id="bottom-bar" class="padded">
+  <span>{t('site.author')} &middot; Version {version} </span>
+</div>

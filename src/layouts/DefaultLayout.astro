@@ -1,76 +1,29 @@
 ---
 import './layouts';
 import './DefaultLayout.css';
-import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-import { getLocaleFromUrl, parseLocale, useTranslations } from '../utils/i18n.ts';
-import { C } from '../configuration';
-import { N } from '../navigation';
-import { getRelativePath } from '../utils/path.ts';
-import Search from '../components/Search.tsx';
-import ThemeSwitcher from '../components/ThemeSwitcher.astro';
-import { version } from '../../package.json';
-import { ViewTransitions } from 'astro:transitions';
-
+import { getLocaleFromUrl } from '../utils/i18n.ts';
+import Head from './groups/Head.astro';
+import TopBar from './groups/TopBar.astro';
+import Footer from './groups/Footer.astro';
+import Header from './groups/Header.astro';
+import BottomBar from './groups/BottomBar.astro';
 
 type Props = {
   translations?: Record<string, string>;
-  currentLocale?: string;
 }
 
 const locale = getLocaleFromUrl(Astro.url);
-const t = useTranslations(locale);
-const { translations, currentLocale } = Astro.props;
-const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pagefind/pagefind.js`;
+const { translations } = Astro.props;
 ---
 <html lang={locale}>
-  <head>
-    <title>{t('head.title')}</title>
-    <meta charset="utf-8">
-    {!import.meta.env.DEV && import.meta.env.SITE && import.meta.env.BASE_URL && <base href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/`} />}
-    <link rel="alternate" hreflang="x-default" href={new URL(import.meta.env.SITE_URL || '/', Astro.url.href).href} />
-    <link rel="alternate" hreflang={C.LOCALES[locale]} href={Astro.url.href} />
-    <meta property="og:locale" content={C.LOCALES[locale].replace(`-`, `_`)} />
-    {Object.entries(translations || {}).filter(([locale]) => locale === C.DEFAULT_LOCALE).map(([locale, path]) => (
-          <link rel="alternate" hreflang={C.LOCALES[parseLocale(locale)]} href={new URL(path, Astro.url).href} />
-          <meta property="og:locale:alternate" content={C.LOCALES[parseLocale(locale)].replace(`-`, `_`)} />
-    ))}
-    <link rel="alternate" type="application/rss+xml" title={C.MESSAGES[locale]['site.feed.title']} href={getRelativePath('/rss.xml')} />
-    {Object.keys(C.LOCALES).map((l) => {
-      const currentLocale = parseLocale(l);
-      return <link rel="alternate" type="application/rss+xml" title={C.MESSAGES[currentLocale]['site.feed.language']} href={getRelativePath(`/rss-${l}.xml`)} />
-    })}
-    <link rel="sitemap" href={getRelativePath('/sitemap-index.xml')} />
-    <link rel="apple-touch-icon" sizes="180x180" href={getRelativePath('/apple-touch-icon.png')}>
-    <link rel="icon" type="image/png" sizes="32x32" href={getRelativePath('/favicon-32x32.png')}>
-    <link rel="icon" type="image/png" sizes="16x16" href={getRelativePath('/favicon-16x16.png')}>
-    <link rel="manifest" href={getRelativePath('/site.webmanifest')}>
-    <link rel="mask-icon" href={getRelativePath('/safari-pinned-tab.svg')} color="#DC5F00">
-    <meta name="msapplication-TileColor" content="#DC5F00">
-    <meta name="theme-color" content="#DC5F00">
-    <ViewTransitions />
-  </head>
+  <Head translations={translations} />
   <body>
-    <header>
-      <a href={getRelativePath(`/${locale === C.DEFAULT_LOCALE ? '' : locale}`)} class="title" set:html={t('site.title')}></a>
-      <nav>
-        <ul>
-          {N.main[locale].map((i) => <li><a href={i.path}>{i.title}</a></li>)}
-        </ul>
-      </nav>
-      <Search path={pagefindPath} placeholder={t('search.placeholder')} client:load />
-      <ThemeSwitcher />
-      <LanguageSwitcher translations={translations} currentLocale={currentLocale || C.DEFAULT_LOCALE} />
-    </header>
+    <TopBar />
+    <Header translations={translations} />
     <main data-pagefind-body transition:animate="fade">
       <slot />
     </main>
-    <footer transition:persist>
-      <span>Version {version} </span>
-      <nav>
-        <ul>
-          {N.footer[locale].map((i) => <li><a href={i.path}>{i.title}</a></li>)}
-        </ul>
-      </nav>
-    </footer>
+    <Footer />
+    <BottomBar />
   </body>
 </html>

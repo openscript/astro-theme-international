@@ -1,0 +1,30 @@
+---
+import type { Page } from 'astro'
+import { getRelativePath } from '../utils/path';
+import Button from './Button.astro';
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
+type Props = {
+  page: Page;
+}
+
+const { page } = Astro.props as Props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+---
+
+<style>
+  div {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+</style>
+
+<div>
+  {page.url.prev ? <Button href={getRelativePath(page.url.prev)}>{t('pagination.previous')}</Button> : null}
+  <span>{t('pagination.pageOf', {'current': page.currentPage, 'total': page.lastPage})}</span>
+  {page.url.next ? <Button href={getRelativePath(page.url.next)}>{t('pagination.next')}</Button> : null}
+</div>

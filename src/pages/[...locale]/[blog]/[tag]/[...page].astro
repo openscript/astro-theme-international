@@ -2,49 +2,41 @@
 import type { InferGetStaticPropsType } from "astro";
 import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
 import { getRelativePath } from "../../../../utils/path";
-import { getContentEntryPath } from "../../../../utils/i18n";
-import Image from "astro/components/Image.astro";
-import defaultCover from "../../../../assets/default-cover.jpg";
 import { blogTagPagePaths } from '../../../_paths';
+import SinglePaneContent from '../../../../layouts/sections/SinglePaneContent.astro';
+import PostCard from '../../../../components/PostCard.astro';
+import CardList from '../../../../components/CardList.astro';
+import { useTranslations } from '../../../../utils/i18n';
 
 export const getStaticPaths = blogTagPagePaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, locale, translations, tag } = Astro.props as Props;
+const t = useTranslations(locale);
 
 ---
 
-<style>
-  img {
-    width: 600px;
-    height: 320px;
-    object-fit: cover;
-  }
-</style>
-
-<DefaultLayout translations={translations} currentLocale={locale}>
-  <h1>Tag {tag}</h1>
-  <ul>
+<DefaultLayout translations={translations}>
+  <SinglePaneContent>
+    <h1>{t('pages.blog.tag', { tag })}</h1>
+    <CardList>
+      {
+        page.data.map(async (post) => (
+          <li>
+            <PostCard post={post} locale={locale} />
+          </li>
+        ))
+      }
+    </CardList>
     {
-      page.data.map(async (post) => (
-        <li>
-          <a href={await getContentEntryPath("blog", post.slug)}>
-            <Image src={post.data.cover?.src || defaultCover} alt={post.data.cover?.alt || post.data.title} widths={[720]} />
-            {post.data.title}
-            {`${new Date(post.data.publishedAt).toLocaleDateString(locale)} ${new Date(post.data.publishedAt).toLocaleTimeString(locale)}`}
-          </a>
-        </li>
-      ))
+      page.url.prev ? (
+        <a href={getRelativePath(page.url.prev)}>Vorherige Seite</a>
+      ) : null
     }
-  </ul>
-  {
-    page.url.prev ? (
-      <a href={getRelativePath(page.url.prev)}>Vorherige Seite</a>
-    ) : null
-  }
-  {
-    page.url.next ? (
-      <a href={getRelativePath(page.url.next)}>Nächste Seite</a>
-    ) : null
-  }
+    {
+      page.url.next ? (
+        <a href={getRelativePath(page.url.next)}>Nächste Seite</a>
+      ) : null
+    }
+  </SinglePaneContent>
 </DefaultLayout>

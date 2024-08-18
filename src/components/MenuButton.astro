@@ -1,0 +1,57 @@
+---
+---
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  div div {
+    height: 3px;
+    background-color: var(--white-color);
+    width: 2rem;
+    transition: 0.5s;
+  }
+
+  div:hover div {
+    background-color: var(--primary-color);
+  }
+
+  div.active div {
+    transform: translate(1rem);
+  }
+
+  div.active div:nth-child(2) {
+    opacity: 0;
+  }
+
+  div.active div:nth-child(1) {
+    transform: rotate(45deg) translate(0, 1rem);
+  }
+
+  div.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(0, -1rem);
+  }
+</style>
+
+<script is:inline>
+  function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu?.classList.toggle('active');
+    document.body.classList.toggle('menu-active');
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    const menu = document.querySelector('.menu');
+    menu?.addEventListener('click', toggleMenu);
+  });
+</script>
+
+<div class="menu">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
