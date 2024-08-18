@@ -1,13 +1,9 @@
 ---
 import Link from '../../components/Link.astro';
-import type { Locale } from '../../configuration';
 import { N } from '../../navigation';
+import { getLocaleFromUrl } from '../../utils/i18n';
 
-type Props = {
-  locale: Locale;
-};
-
-const { locale } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
 ---
 <footer>
   <nav class="rounded">

@@ -58,6 +58,7 @@ An Astro theme, focused on internationalization.
   - Favicons
   - Custom fonts
   - Responsivness
+  - Burger menu
   - Markdown
     - Autolink headings
     - Table of Contents generation

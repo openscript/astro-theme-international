@@ -8,7 +8,6 @@ import Footer from './groups/Footer.astro';
 import Header from './groups/Header.astro';
 import BottomBar from './groups/BottomBar.astro';
 
-
 type Props = {
   translations?: Record<string, string>;
 }
@@ -17,14 +16,14 @@ const locale = getLocaleFromUrl(Astro.url);
 const { translations } = Astro.props;
 ---
 <html lang={locale}>
-  <Head translations={translations} locale={locale} />
+  <Head translations={translations} />
   <body>
-    <TopBar locale={locale} />
-    <Header locale={locale} translations={translations} />
+    <TopBar />
+    <Header translations={translations} />
     <main data-pagefind-body transition:animate="fade">
       <slot />
     </main>
-    <Footer locale={locale} />
-    <BottomBar locale={locale} />
+    <Footer />
+    <BottomBar />
   </body>
 </html>

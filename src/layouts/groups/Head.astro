@@ -1,16 +1,16 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import { C, localeSlugs, type Locale } from '../../configuration';
-import { getFullLocale, useTranslations } from '../../utils/i18n';
+import { C, localeSlugs } from '../../configuration';
+import { getFullLocale, getLocaleFromUrl, useTranslations } from '../../utils/i18n';
 import { getRelativePath } from '../../utils/path';
 import { getMessage } from '../../utils/i18n';
 
 type Props = {
   translations?: Record<string, string>;
-  locale: Locale;
 }
 
-const { translations, locale } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const { translations } = Astro.props;
 const t = useTranslations(locale);
 ---
 <head>

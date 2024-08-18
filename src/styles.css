@@ -1,5 +1,7 @@
 :root {
   --white-color: #F8EDED;
+  --background-color: #F8EDED;
+  --text-color: #071212;
   --gray-color: #CFC6C6;
   --dark-color: #173B45;
   --dark-alternate-color: #245d6d;
@@ -11,6 +13,12 @@
   --font-size: 16px;
   --page-horizontal-padding: 10%;
 }
+
+html.dark:root {
+  --background-color: #071212;
+  --text-color: #F8EDED;
+}
+
 @media (max-width: 1080px) {
   :root {
     --font-size: 14px;
@@ -18,7 +26,7 @@
   }
 }
 
-@media (min-width: 1280px) {
+@media (max-width: 1280px) {
   :root {
     --font-size: 14px;
     --page-horizontal-padding: 5%;
@@ -43,14 +51,6 @@
   :root {
     --font-size: 20px;
   }
-}
-
-html.dark:root {
-  --white-color: #373A40;
-  --gray-color: #686D76;
-  --dark-color: #EEEEEE;
-  --primary-color: #DC5F00;
-  --secondary-color: #f7bf94;
 }
 
 html {
