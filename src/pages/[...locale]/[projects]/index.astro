@@ -1,32 +1,36 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import { getContentEntryPath } from '../../../utils/i18n';
+import { getContentEntryPath, getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
 import { getCollection } from 'astro:content';
 import { indexPaths } from '../../_paths';
+import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
 
 export const getStaticPaths = indexPaths('projects');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { translations } = Astro.props as Props;
-
 const projects = await getCollection('projects');
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 
 ---
 
 <DefaultLayout translations={translations}>
-	<h1>Projekte</h1>
-  <ul>
-    {
-      projects.map(async (project) => {
-        const p = project.data;
-        if (!p) return undefined;
-        return <li>
-          <a href={await getContentEntryPath('projects', project.slug)}>
-            {p.title}
-          </a>
-        </li>
-      }).filter(Boolean)
-    }
-  </ul>
+  <SinglePaneContent>
+    <h1>{t('pages.projects')}</h1>
+    <ul>
+      {
+        projects.map(async (project) => {
+          const p = project.data;
+          if (!p) return undefined;
+          return <li>
+            <a href={await getContentEntryPath('projects', project.slug)}>
+              {p.title}
+            </a>
+          </li>
+        }).filter(Boolean)
+      }
+    </ul>
+  </SinglePaneContent>
 </DefaultLayout>

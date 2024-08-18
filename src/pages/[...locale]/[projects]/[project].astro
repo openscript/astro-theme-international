@@ -2,6 +2,7 @@
 import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { entryPaths } from '../../_paths';
+import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
 
 export const getStaticPaths = entryPaths('projects', 'project');
 
@@ -13,5 +14,7 @@ const { Content } = await page.render();
 ---
 
 <DefaultLayout translations={page.translations}>
-  <Content/>
+  <SinglePaneContent>
+    <Content/>
+  </SinglePaneContent>
 </DefaultLayout>
