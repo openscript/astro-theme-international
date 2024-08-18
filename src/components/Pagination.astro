@@ -24,7 +24,7 @@ const t = useTranslations(locale);
 </style>
 
 <div>
-  {page.url.prev ? <Button href={getRelativePath(page.url.prev)}>Vorherige Seite</Button> : null}
+  {page.url.prev ? <Button href={getRelativePath(page.url.prev)}>{t('pagination.previous')}</Button> : null}
   <span>{t('pagination.pageOf', {'current': page.currentPage, 'total': page.lastPage})}</span>
-  {page.url.next ? <Button href={getRelativePath(page.url.next)}>Nächste Seite</Button> : null}
+  {page.url.next ? <Button href={getRelativePath(page.url.next)}>{t('pagination.next')}</Button> : null}
 </div>

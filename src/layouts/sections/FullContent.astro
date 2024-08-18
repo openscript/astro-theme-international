@@ -1,0 +1,31 @@
+---
+---
+
+<style>
+  .single-pane {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  section {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  section :global(h1) {
+    text-align: center;
+  }
+
+  section :global(img) {
+    max-width: 100%;
+    max-height: calc(100vh - 25rem);
+    object-fit: contain;
+  }
+</style>
+
+<div class="full">
+  <section>
+    <slot />
+  </section>
+</div>

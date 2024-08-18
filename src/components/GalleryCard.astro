@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getDataEntryPath } from "../utils/i18n";
+import { Image } from 'astro:assets';
+import type { Locale } from '../configuration';
+
+type Props = {
+  category: CollectionEntry<'gallery'>;
+  locale: Locale;
+}
+
+const { category, locale } = Astro.props;
+
+---
+
+<style>
+  div {
+    position: relative;
+  }
+  a {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 20rem;
+    object-fit: cover;
+  }
+
+  a > div {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    color: var(--white-color);
+  }
+
+  a > div > div {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: solid 3px var(--dark-color);
+    padding: 1rem 2.5rem;
+    border-radius: 5rem;
+    text-align: center;
+    transition: 0.4s;
+  }
+
+  a:hover > div > div {
+    padding: 1.5rem 3rem;
+  }
+
+  h3 {
+    color: var(--white-color);
+    margin: 0;
+  }
+</style>
+
+<div>
+  <a href={await getDataEntryPath("gallery", category.id, locale)}>
+    <Image src={category.data.cover} alt={`Cover: ${category.data.title[locale]}`} width={320} />
+    <div>
+      <div>
+        <h3>{category.data.title[locale]}</h3>
+      </div>
+    </div>
+  </a>
+</div>

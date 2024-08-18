@@ -7,6 +7,8 @@ import DefaultLayout from "../../../../layouts/DefaultLayout.astro";
 import { resolvePath } from "../../../../utils/path";
 import { Image } from "astro:assets";
 import { galleryCategoryItemPaths } from '../../../_paths';
+import { getLocaleFromUrl, useTranslations } from '../../../../utils/i18n';
+import FullContent from '../../../../layouts/sections/FullContent.astro';
 
 export const getStaticPaths = galleryCategoryItemPaths;
 
@@ -18,19 +20,26 @@ const {
   gallery: gallerySlug,
   category: categorySlug,
 } = Astro.params as Params;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 ---
 
+<style>
+  div {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+</style>
+
 <DefaultLayout translations={translations}>
-  <h1>Bild</h1>
-  <Image src={page.src} alt={`Photo: ${page.title}`} width={1920} />
-  {
-    prev && (
-      <a href={resolvePath(localeSlug, gallerySlug, categorySlug, prev)}>Previous</a>
-    )
-  }
-  {
-    next && (
-      <a href={resolvePath(localeSlug, gallerySlug, categorySlug, next)}>Next</a>
-    )
-  }
+  <FullContent>
+    <h1>Bild</h1>
+    <Image src={page.src} alt={`Photo: ${page.title}`} width={1920} />
+    <div>
+      { prev && <a href={resolvePath(localeSlug, gallerySlug, categorySlug, prev)}>{t('pagination.previous')}</a> }
+      { next && <a href={resolvePath(localeSlug, gallerySlug, categorySlug, next)}>{t('pagination.next')}</a> }
+    </div>
+  </FullContent>
 </DefaultLayout>

@@ -1,35 +1,30 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import { getDataEntryPath } from '../../../utils/i18n';
+import { useTranslations } from '../../../utils/i18n';
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import { indexPaths } from '../../_paths';
+import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
+import GalleryCard from '../../../components/GalleryCard.astro';
+import CardList from '../../../components/CardList.astro';
 
 export const getStaticPaths = indexPaths('gallery');
-
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 const { translations, locale } = Astro.props as Props;
-
 const gallery = await getCollection('gallery');
+const t = useTranslations(locale);
 
 ---
 
 <DefaultLayout translations={translations}>
-	<h1>Gallery</h1>
-  <ul>
-    {
-      gallery.map(async (category) => {
-        const c = category.data;
-        if (!c) return undefined;
-        return <li>
-          <a href={await getDataEntryPath('gallery', category.id, locale)}>
-            <Image src={c.cover} alt={`Cover: ${c.title[locale]}`} width={320} />
-            {c.title[locale]}
-          </a>
-        </li>
-      }).filter(Boolean)
-    }
-  </ul>
+  <SinglePaneContent>
+    <h1>{t('pages.gallery')}</h1>
+    <CardList>
+      {
+        gallery.map(async (category) => {
+          return <GalleryCard category={category} locale={locale} />;
+        }).filter(Boolean)
+      }
+    </CardList>
+  </SinglePaneContent>
 </DefaultLayout>
