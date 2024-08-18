@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.0.11
+
+### Patch Changes
+
+- a9c566d: Fix external links
+
 ## 0.0.10
 
 ### Patch Changes
