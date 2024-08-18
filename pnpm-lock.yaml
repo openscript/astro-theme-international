@@ -25,13 +25,13 @@ importers:
         version: 3.1.6
       '@fontsource-variable/dosis':
         specifier: ^5.0.20
-        version: 5.0.20
+        version: 5.0.21
       '@fontsource-variable/fira-code':
         specifier: ^5.0.18
-        version: 5.0.18
+        version: 5.0.19
       '@fontsource-variable/playfair-display':
         specifier: ^5.0.25
-        version: 5.0.25
+        version: 5.0.26
       astro:
         specifier: ^4.13.2
         version: 4.13.3(@types/node@22.2.0)(typescript@5.5.4)
@@ -450,14 +450,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource-variable/dosis@5.0.20':
-    resolution: {integrity: sha512-lx0Tuv+euHoD1IaaNIt7Pc3pL6YSrlRrNrIa3khBpUVCOMWykj1UuFvwO7hYOBvfBHl+5IARCw0e4qGHjY9+4w==}
+  '@fontsource-variable/dosis@5.0.21':
+    resolution: {integrity: sha512-eo4C3C72mdjJTg5MddazB9fWzJjG7Ek2d6atpgeE3MTXxODT9WEtIVd9WkUa2JAqNc/qdxk227ugA4JHIZpkLQ==}
 
-  '@fontsource-variable/fira-code@5.0.18':
-    resolution: {integrity: sha512-Pmbnf4HukX4y928RY9g47hWyVECQglwV7HLv5taaDQwI3UBXyoLUnyRsjJxeviCPhdwJY5qyLT4GaCMlgC9oCQ==}
+  '@fontsource-variable/fira-code@5.0.19':
+    resolution: {integrity: sha512-M50JJm+1q7h5P648P3q78Qt38nr58DvmeY6Dx9fFbnbHza7V9rrmQ5V2r5nwMcHmqjGsXXjVWGPvGDZ6lQ2PQg==}
 
-  '@fontsource-variable/playfair-display@5.0.25':
-    resolution: {integrity: sha512-q8tzLiURtXycJQ27YoppTNCEe0W2ZRXIeZ25nH9KoM6fsbWYZAm9ItY0aRoL/jn/GllsEcTSm8H2UKa7l4AxDw==}
+  '@fontsource-variable/playfair-display@5.0.26':
+    resolution: {integrity: sha512-RupbW2PqBbsLbwcRBIX9fzzWr9jcovB+szNZGMRxU8V+l2VsaVhv9rm0NN/Z0gi15NtR+ipvB8apAeJJoBT1oQ==}
 
   '@img/sharp-darwin-arm64@0.33.4':
     resolution: {integrity: sha512-p0suNqXufJs9t3RqLBO6vvrgr5OhgbWp76s5gTRvdmxmuv9E1rcaqGUsl3l4mKVmXPkTkTErXediAui4x+8PSA==}
@@ -3238,11 +3238,11 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@fontsource-variable/dosis@5.0.20': {}
+  '@fontsource-variable/dosis@5.0.21': {}
 
-  '@fontsource-variable/fira-code@5.0.18': {}
+  '@fontsource-variable/fira-code@5.0.19': {}
 
-  '@fontsource-variable/playfair-display@5.0.25': {}
+  '@fontsource-variable/playfair-display@5.0.26': {}
 
   '@img/sharp-darwin-arm64@0.33.4':
     optionalDependencies:
