@@ -1,5 +1,15 @@
 # astro-theme-international
 
+## 0.0.10
+
+### Patch Changes
+
+- bf79b6b: Autolink content headings
+- 3026b53: Add spotlight
+- bdd69aa: Add latest blog post section
+- 8666f72: Clean up code
+- f05b1cc: Add git info
+
 ## 0.0.9
 
 ### Patch Changes
