@@ -31,7 +31,7 @@ const t = useTranslations(locale);
 <DefaultLayout translations={pagedTranslations}>
   <SinglePaneContent>
     <h1>{t('pages.blog')}</h1>
-    <span class="subtitle">{t('pagination.pageOf', {'current': page.currentPage, 'total': page.lastPage})}</span>
+    <Pagination page={page} />
     <CardList classNames='vertical'>
       {page.data.map(async (post) => (
         <li>
