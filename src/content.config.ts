@@ -1,3 +1,4 @@
+import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
 const localizedString = z.object({
@@ -6,28 +7,25 @@ const localizedString = z.object({
 });
 
 const blogCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({entry}) => entry }),
   schema: ({ image }) => z.object({
     title: z.string(),
     publishedAt: z.date(),
     tags: z.array(z.string()),
     cover: z.object({
-      src: image().refine((img) => img.width >= 800, {
-        message: "Cover image must be at least 800 pixels wide!",
-      }),
+      src: image(),
       alt: z.string().optional(),
     }).optional(),
   })
 });
 const galleryCollection = defineCollection({
-  type: 'data',
+  loader: glob({ pattern: "**/[^_]*.yml", base: "./src/content/gallery" }),
   schema: ({ image }) => z.object({
     title: localizedString,
     cover: image(),
     images: z.array(
       z.object({
-        src: image().refine((img) => img.width >= 800, {
-          message: "Image must be at least 800 pixels wide!",
-        }),
+        src: image(),
         title: localizedString.optional(),
         description: localizedString.optional(),
       })
@@ -35,17 +33,17 @@ const galleryCollection = defineCollection({
   }),
 });
 const pagesCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),
   schema: z.object({
     path: z.string(),
   })
 });
 const projectsCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),
   schema: ({ image }) => z.object({
     title: z.string(),
     cover: z.object({
-      src: image().refine((img) => img.width >= 800, {
-        message: "Cover image must be at least 800 pixels wide!",
-      }),
+      src: image(),
       alt: z.string().optional(),
     }).optional(),
   })
