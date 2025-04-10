@@ -1,0 +1,17 @@
+{
+  "name": "astro-theme-international",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "astro-build.astro-vscode",
+        "unifiedjs.vscode-mdx",
+        "vitest.explorer"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install -g pnpm@10.8.0",
+  "forwardPorts": [
+    4321
+  ]
+}
