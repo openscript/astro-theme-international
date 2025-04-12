@@ -20,7 +20,7 @@ export default function search(): AstroIntegration {
           outDir = fileURLToPath(new URL(".vercel/output/static/", config.root));
         } else if (config.adapter?.name === "@astrojs/cloudflare") {
           outDir = fileURLToPath(new URL(config.base?.replace(/^\//, ""), config.outDir));
-        } else if (config.adapter?.name === "@astrojs/node" && config.output === "hybrid") {
+        } else if (config.adapter?.name === "@astrojs/node" && config.output === "static") {
           outDir = fileURLToPath(config.build.client!);
         } else {
           outDir = fileURLToPath(config.outDir);

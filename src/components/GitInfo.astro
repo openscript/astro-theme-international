@@ -15,10 +15,12 @@ const t = useTranslations(locale);
   <span class="label">{t('label.gitInfo')}</span>
   <dl>
     <slot name="before" />
-    <dt>{t('label.author')}</dt>
-    <dd>{git.lastCommit.author_name}</dd>
-    <dt>{t('label.lastUpdated')}</dt>
-    <dd>{git.lastCommit.date}</dd>
+    {git?.lastCommit && (
+      <dt>{t('label.author')}</dt>
+      <dd>{git.lastCommit.authorName}</dd>
+      <dt>{t('label.lastUpdated')}</dt>
+      <dd>{git.lastCommit.date}</dd>
+    )}
     <dt>{t('label.links')}</dt>
     <dd>
       <Button href={git.remoteViewUrl}>{t('label.source')}</Button>

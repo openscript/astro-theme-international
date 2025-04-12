@@ -2,7 +2,7 @@
 import { C } from '../../configuration';
 import { getLocaleFromUrl, useTranslations } from '../../utils/i18n';
 import { getRelativePath } from '../../utils/path';
-import Search from '../../components/Search';
+import Search from '../../components/Search.astro';
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro';
 import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
 import Burger from '../../components/MenuButton.astro';
@@ -16,7 +16,6 @@ type Props = {
 const { translations } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
-const pagefindPath = `${import.meta.env.DEV ? '' : import.meta.env.BASE_URL}/pagefind/pagefind.js`;
 const navigation = (await getEntry("navigation", "main"))!.data;
 
 ---
@@ -26,7 +25,7 @@ const navigation = (await getEntry("navigation", "main"))!.data;
   <Burger />
   <Navigation items={navigation} locale={locale} />
   <div id="tools">
-    <Search path={pagefindPath} placeholder={t('search.placeholder')} client:load />
+    <Search />
     <ThemeSwitcher />
     <LanguageSwitcher translations={translations} currentLocale={locale} />
   </div>

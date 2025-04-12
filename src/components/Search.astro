@@ -1,0 +1,103 @@
+---
+import { getLocaleFromUrl, useTranslations } from "../utils/i18n";
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const bundle = `/pagefind/pagefind.js`;
+---
+
+<script>
+  async function initializeSearch(bundle: string) {
+    if (globalThis.pagefind) return;
+    globalThis.pagefind = await import(/* @vite-ignore */ bundle);
+    globalThis.pagefind?.init();
+  }
+
+  function render(results: PagefindSearchFragment[]) {
+    const resultsList = document.querySelector(".results") as HTMLUListElement;
+    resultsList.innerHTML = "";
+    results.forEach((result) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.innerHTML = `<strong>${result.meta.title}: </strong>${result.excerpt}`;
+      a.href = result.url;
+      li.appendChild(a);
+      resultsList.appendChild(li);
+    });
+  }
+
+  async function search(query: string) {
+    if (!globalThis.pagefind) return;
+    const records = await globalThis.pagefind.debouncedSearch(query);
+
+    if (records?.results) {
+      render(
+        await Promise.all(records.results.slice(0, 5).map((r) => r.data())),
+      );
+    } else {
+      render([]);
+    }
+  }
+
+  async function initialize() {
+    const searchWrapper = document.querySelector(
+      "[data-search-ui]",
+    ) as HTMLDivElement;
+    const searchInput = document.querySelector(
+      "input[type=search]",
+    ) as HTMLInputElement;
+    if (!searchInput || !searchWrapper || !searchWrapper.dataset.searchBundle)
+      return;
+
+    initializeSearch(searchWrapper.dataset.searchBundle);
+
+    searchInput.addEventListener("input", async () => {
+      search(searchInput.value);
+    });
+
+    searchWrapper.addEventListener("focusin", () => {
+      document.body.classList.add("search-active");
+    });
+
+    searchWrapper.addEventListener("focusout", () => {
+      document.body.classList.remove("search-active");
+    });
+  }
+
+  document.addEventListener("astro:page-load", initialize);
+  document.addEventListener("DOMContentLoaded", initialize);
+</script>
+
+<style>
+  .search {
+    position: relative;
+  }
+
+  .search ul {
+    list-style: none;
+    display: none;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .search:focus-within ul {
+    display: block;
+    visibility: visible;
+  }
+
+  .search ul a {
+    text-decoration: none;
+  }
+
+  .search ul p {
+    margin: 0;
+  }
+</style>
+
+<div class="search" data-search-ui data-search-bundle={bundle}>
+  <input type="search" placeholder={t("search.placeholder")} />
+  <ul class="results"></ul>
+</div>

@@ -25,7 +25,7 @@ const t = useTranslations(locale);
           const p = project.data;
           if (!p) return undefined;
           return <li>
-            <a href={await getContentEntryPath(await getEntry('projects', project.id))}>
+            <a href={getContentEntryPath(await getEntry('projects', project.id))}>
               {p.title}
             </a>
           </li>
