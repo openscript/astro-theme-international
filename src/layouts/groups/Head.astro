@@ -1,9 +1,9 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
 import { C, localeSlugs } from '../../configuration';
 import { getFullLocale, getLocaleFromUrl, useTranslations } from '../../utils/i18n';
-import { getRelativePath } from '../../utils/path';
 import { getMessage } from '../../utils/i18n';
+import { getRelativePath } from '../../utils/path';
 
 type Props = {
   translations?: Record<string, string>;
@@ -38,5 +38,5 @@ const t = useTranslations(locale);
   <link rel="mask-icon" href={getRelativePath('/safari-pinned-tab.svg')} color="#DC5F00">
   <meta name="msapplication-TileColor" content="#DC5F00">
   <meta name="theme-color" content="#DC5F00">
-  <ViewTransitions />
+  <ClientRouter />
 </head>

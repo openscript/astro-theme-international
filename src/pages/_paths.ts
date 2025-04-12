@@ -1,8 +1,8 @@
 import type { GetStaticPaths } from 'astro';
 import { C, localeSlugs, type Locale } from '../configuration';
-import { getMessage, parseLocale, splitLocaleAndPath } from '../utils/i18n';
+import { parseLocale, splitLocaleAndPath } from '../utils/i18n';
 import { resolvePath } from '../utils/path';
-import { getCollection, type CollectionEntry, type ContentEntryMap } from 'astro:content';
+import { getCollection, type CollectionEntry, type CollectionKey } from 'astro:content';
 import { getCollectionSlug, getEntrySlug, getLocaleSlug } from '../utils/slugs';
 import slug from 'limax';
 
@@ -13,50 +13,80 @@ export const rssXmlPaths = (async () => {
 
 export const indexPaths = (kind?: string) => {
   return (async () => {
-    const translations = localeSlugs.reduce((acc, curr) => {
-      const collectionSlug = kind ? getMessage(`slugs.${kind}`, curr) : undefined;
-      const localeSlug = getLocaleSlug(curr);
-      acc[curr] = resolvePath(localeSlug, collectionSlug);
-      return acc;
-    }, {} as Record<Locale, string>);
+    const translations = localeSlugs.reduce(
+      (acc, curr) => {
+        const collectionSlug = kind ? getCollectionSlug(kind, curr) : undefined;
+        const localeSlug = getLocaleSlug(curr);
+        acc[curr] = resolvePath(localeSlug, collectionSlug);
+        return acc;
+      },
+      {} as Record<Locale, string>,
+    );
     return localeSlugs.map((l) => {
       const localeSlug = getLocaleSlug(l);
-      const path = { params: { locale: localeSlug }, props: { locale: l, translations } };
-      return kind ? { ...path, params: { ...path.params, [kind]: getMessage(`slugs.${kind}`, l) } } : path;
+      const path = {
+        params: { locale: localeSlug },
+        props: { locale: l, translations },
+      };
+      return kind
+        ? {
+          ...path,
+          params: { ...path.params, [kind]: getCollectionSlug(kind, l) },
+        }
+        : path;
     });
   }) satisfies GetStaticPaths;
 };
 
-export const entryPaths = <C extends keyof ContentEntryMap>(collection: C, slugName?: string) => {
+export const entryPaths = <C extends CollectionKey>(
+  collection: C,
+  slugName?: string,
+) => {
   return (async () => {
     const entries = await getCollection(collection);
     return entries.map((entry) => {
-      const split = splitLocaleAndPath(entry.slug);
-      if (!split) throw new Error(`Invalid entry slug: ${entry.slug}`);
+      const split = splitLocaleAndPath(entry.id);
+      if (!split) throw new Error(`Invalid entry id: ${entry.id}`);
 
-      const translations = entries.reduce((acc, curr) => {
-        const s = splitLocaleAndPath(curr.slug);
-        if (!s) throw new Error(`Invalid entry slug: ${curr.slug}`);
+      const translations = entries.reduce(
+        (acc, curr) => {
+          const s = splitLocaleAndPath(curr.id);
+          if (!s) throw new Error(`Invalid entry id: ${curr.id}`);
 
-        const l = parseLocale(s.locale);
-        const localeSlug = getLocaleSlug(l);
-        const pageSlug = getEntrySlug(curr);
-        const collectionSlug = collection === 'pages' ? undefined : getMessage(`slugs.${collection}`, l);
+          const l = parseLocale(s.locale);
+          const localeSlug = getLocaleSlug(l);
+          const pageSlug = getEntrySlug(curr);
+          const collectionSlug =
+            collection === "pages"
+              ? undefined
+              : getCollectionSlug(collection, l);
 
-        if (s.path === split.path) acc[l] = resolvePath(localeSlug, collectionSlug, pageSlug);
+          if (s.path === split.path)
+            acc[l] = resolvePath(localeSlug, collectionSlug, pageSlug);
 
-        return acc;
-      }, {} as Record<Locale, string>);
+          return acc;
+        },
+        {} as Record<Locale, string>,
+      );
 
       const locale = parseLocale(split.locale);
       const localeSlug = getLocaleSlug(locale);
       const pageSlug = getEntrySlug(entry);
 
-      if (slugName && collection !== 'pages') {
-        const collectionSlug = getMessage(`slugs.${collection}`, locale);
-        return { params: { locale: localeSlug, [collection]: collectionSlug, [slugName]: pageSlug }, props: { ...entry, locale, translations } };
+      const props = { ...entry, locale, translations };
+      const defaultParams = { locale: localeSlug };
+
+      if (collection !== "pages") {
+        const collectionSlug = getCollectionSlug(collection, locale);
+        const params = slugName
+          ? { ...defaultParams, [collection]: collectionSlug, [slugName]: pageSlug }
+          : { ...defaultParams, [collection]: collectionSlug };
+        return {params, props};
       } else {
-        return { params: { locale: localeSlug, pages: pageSlug }, props: { ...entry, locale, translations } };
+        return {
+          params: { ...defaultParams, pages: pageSlug },
+          props,
+        };
       }
     });
   }) satisfies GetStaticPaths;
@@ -152,8 +182,10 @@ export const galleryCategoryItemPaths = (async () => {
 
 export const blogPagePaths = (async ({ paginate }) => {
   const pages = (await getCollection("blog")).reverse();
-  const groupedPageSlug = pages.reduce<Record<string, CollectionEntry<"blog">[]>>((acc, page) => {
-    const split = splitLocaleAndPath(page.slug);
+  const groupedPageSlug = pages.reduce<
+    Record<string, CollectionEntry<"blog">[]>
+  >((acc, page) => {
+    const split = splitLocaleAndPath(page.id);
     if (split) {
       const locales = acc[split.path] || [];
       locales.push(page);
@@ -170,17 +202,19 @@ export const blogPagePaths = (async ({ paginate }) => {
   }, {});
 
   return localeSlugs.flatMap((l) => {
-    const filteredPages = Object.entries(groupedPageSlug).reduce<CollectionEntry<"blog">[]>((acc, [, pages]) => {
+    const filteredPages = Object.entries(groupedPageSlug).reduce<
+      CollectionEntry<"blog">[]
+    >((acc, [, pages]) => {
       if (pages.length === 1) {
         acc.push(...pages);
       } else {
         let page = pages.find((p) => {
-          const split = splitLocaleAndPath(p.slug);
+          const split = splitLocaleAndPath(p.id);
           return split && split.locale === l;
         });
         if (!page) {
           page = pages.find((p) => {
-            const split = splitLocaleAndPath(p.slug);
+            const split = splitLocaleAndPath(p.id);
             return split && split.locale === C.DEFAULT_LOCALE;
           });
         }

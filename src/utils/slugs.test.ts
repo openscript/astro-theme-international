@@ -1,25 +1,25 @@
-import { describe, expect, it, vi } from 'vitest';
-import { getCollectionSlug, getEntrySlug, getLocaleSlug } from './slugs';
-import { getEntry } from 'astro:content';
+import { describe, expect, it, vi } from "vitest";
+import { getCollectionSlug, getEntrySlug, getLocaleSlug } from "./slugs";
+import { getEntry } from "astro:content";
 
 vi.mock("../configuration", () => ({
   C: {
-    LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
-    DEFAULT_LOCALE: 'en' as const,
+    LOCALES: { en: "en-US", de: "de-CH" },
+    DEFAULT_LOCALE: "en" as const,
     MESSAGES: {
-      'en': {
-        'language': 'English',
-        'slugs.docs': 'docs',
-        'slugs.data': 'data',
+      en: {
+        language: "English",
+        "slugs.docs": "docs",
+        "slugs.data": "data",
       },
-      'de': {
-        'language': 'Deutsch',
-        'slugs.docs': 'doku',
-        'slugs.data': 'daten',
-      }
-    }
+      de: {
+        language: "Deutsch",
+        "slugs.docs": "doku",
+        "slugs.data": "daten",
+      },
+    },
   },
-  localeSlugs: ['en', 'de']
+  localeSlugs: ["en", "de"],
 }));
 
 vi.mock("astro:content", () => ({
@@ -31,7 +31,7 @@ vi.mock("astro:content", () => ({
         collection: "docs",
         data: {
           title: "This is my first article",
-        }
+        },
       };
     }
     if (collection === "docs" && entrySlug === "with-path") {
@@ -41,7 +41,7 @@ vi.mock("astro:content", () => ({
         collection: "docs",
         data: {
           path: "this/is/the/path",
-        }
+        },
       };
     }
     if (collection === "docs" && entrySlug === "without-data") {
@@ -62,7 +62,7 @@ vi.mock("astro:content", () => ({
       };
     }
     return undefined;
-  }
+  },
 }));
 
 describe("getLocaleSlug", () => {
@@ -70,24 +70,41 @@ describe("getLocaleSlug", () => {
     expect(getLocaleSlug("en")).toBe(undefined);
     expect(getLocaleSlug("de")).toBe("de");
   });
-})
+});
 
-describe('getCollectionSlug', () => {
-  it('should return the collection slug', () => {
-    expect(getCollectionSlug('docs', 'de')).toMatchInlineSnapshot(`"doku"`);
-    expect(getCollectionSlug('data', 'en')).toMatchInlineSnapshot(`"data"`);
+describe("getCollectionSlug", () => {
+  it("should return the collection slug", () => {
+    expect(getCollectionSlug("docs", "de")).toMatchInlineSnapshot(`"doku"`);
+    expect(getCollectionSlug("data", "en")).toMatchInlineSnapshot(`"data"`);
   });
 });
 
 describe("getEntrySlug", () => {
   it("should return the entry slug", async () => {
-    const entryWithTitle = await getEntry('docs' as any, 'with-title') as { slug: string };
-    expect(getEntrySlug(entryWithTitle)).toMatchInlineSnapshot(`"2020/09/11/this-is-my-first-article"`);
-    const entryWithPath = await getEntry('docs' as any, 'with-path') as { slug: string };
-    expect(getEntrySlug(entryWithPath)).toMatchInlineSnapshot(`"this/is/the/path"`);
-    const entryWithoutData = await getEntry('docs' as any, 'without-data') as { slug: string };
-    expect(getEntrySlug(entryWithoutData)).toMatchInlineSnapshot(`"2020/09/11/test-article"`);
-    const entryAtRoot = await getEntry('docs' as any, 'at-root') as { slug: string };
-    expect(getEntrySlug(entryAtRoot)).toMatchInlineSnapshot(`"this-is-my-first-article"`);
+    const entryWithTitle = (await getEntry("docs" as any, "with-title")) as {
+      id: string;
+    };
+    expect(getEntrySlug(entryWithTitle)).toMatchInlineSnapshot(
+      `"2020/09/11/this-is-my-first-article"`,
+    );
+    const entryWithPath = (await getEntry("docs" as any, "with-path")) as {
+      id: string;
+    };
+    expect(getEntrySlug(entryWithPath)).toMatchInlineSnapshot(
+      `"this/is/the/path"`,
+    );
+    const entryWithoutData = (await getEntry(
+      "docs" as any,
+      "without-data",
+    )) as { id: string };
+    expect(getEntrySlug(entryWithoutData)).toMatchInlineSnapshot(
+      `"2020/09/11/test-article.md"`,
+    );
+    const entryAtRoot = (await getEntry("docs" as any, "at-root")) as {
+      id: string;
+    };
+    expect(getEntrySlug(entryAtRoot)).toMatchInlineSnapshot(
+      `"this-is-my-first-article"`,
+    );
   });
-})
+});

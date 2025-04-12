@@ -13,7 +13,7 @@ type Props = {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const posts = (await getCollection('blog', (e) => e.slug.startsWith(locale))).reverse().slice(0, 3);
+const posts = (await getCollection('blog')).reverse().slice(0, 3);
 
 ---
 

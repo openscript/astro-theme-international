@@ -2,7 +2,7 @@
 import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
 import { getContentEntryPath, getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
-import { getCollection } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 import { indexPaths } from '../../_paths';
 import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
 
@@ -25,7 +25,7 @@ const t = useTranslations(locale);
           const p = project.data;
           if (!p) return undefined;
           return <li>
-            <a href={await getContentEntryPath('projects', project.slug)}>
+            <a href={getContentEntryPath(await getEntry('projects', project.id))}>
               {p.title}
             </a>
           </li>

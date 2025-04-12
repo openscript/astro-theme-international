@@ -1,8 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import { getDataEntryPath } from "../utils/i18n";
+import { getContentEntryPath } from "../utils/i18n";
 import { Image } from 'astro:assets';
 import type { Locale } from '../configuration';
+import { getEntry } from 'astro:content';
 
 type Props = {
   category: CollectionEntry<'gallery'>;
@@ -63,7 +64,7 @@ const { category, locale } = Astro.props;
 </style>
 
 <div>
-  <a href={await getDataEntryPath("gallery", category.id, locale)}>
+  <a href={getContentEntryPath(await getEntry("gallery", category.id), locale)}>
     <Image src={category.data.cover} alt={`Cover: ${category.data.title[locale]}`} width={320} />
     <div>
       <div>

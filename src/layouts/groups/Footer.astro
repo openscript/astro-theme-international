@@ -1,14 +1,11 @@
 ---
-import Link from '../../components/Link.astro';
-import { N } from '../../navigation';
+import { getEntry } from 'astro:content';
+import Navigation from '../../components/Navigation.astro';
 import { getLocaleFromUrl } from '../../utils/i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
+const navigation = (await getEntry("navigation", "footer"))!.data;
 ---
 <footer>
-  <nav class="rounded">
-    <ul>
-      {N.footer[locale].map((i) => <li><Link href={i.path}>{i.title}</Link></li>)}
-    </ul>
-  </nav>
+  <Navigation items={navigation} locale={locale} />
 </footer>
