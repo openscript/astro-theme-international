@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import type { Locale } from "../configuration";
+import Link from "./Link.astro";
+import type { InferEntrySchema } from "astro:content";
+import {
+  PROTOCOL_DELIMITER,
+  splitCollectionAndSlug,
+  getContentEntryPath,
+} from "../utils/i18n";
+import { getEntry } from "astro:content";
+
+type Props = {
+  locale: Locale;
+  items: InferEntrySchema<"navigation">;
+};
+
+async function processPath(path: string) {
+  if (path.includes(PROTOCOL_DELIMITER) && !path.startsWith("http")) {
+    const split = splitCollectionAndSlug(path);
+    const entry = await getEntry(split.collection as any, split.slug);
+    path = getContentEntryPath(entry);
+  }
+  return path;
+}
+
+const { items, locale } = Astro.props;
+const preparedItems = await Promise.all(
+  items[locale].map(async (i) => ({ ...i, path: await processPath(i.path) })),
+);
+---
+
+<style>
+  nav ul, nav ul li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>
+
+<nav class="rounded">
+  <ul>
+    {
+      preparedItems.map((item) => (
+        <li>
+          <Link href={item.path}>
+            {item.icon ? (
+              <Image src={item.icon} alt={`${item.title} Icon`} width="16" />
+            ) : null}
+            {item.title}
+          </Link>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

@@ -1,0 +1,18 @@
+de:
+  - path: /de/blog
+    title: Blog
+  - path: /de/projekte
+    title: Projekte
+  - path: /de/galerie
+    title: Galerie
+  - path: pages://de/about-us
+    title: Über mich
+en:
+  - path: /blog
+    title: Blog
+  - path: /projects
+    title: Projects
+  - path: /gallery
+    title: Gallery
+  - path: pages://en/about-us
+    title: About me

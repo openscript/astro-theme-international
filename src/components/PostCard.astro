@@ -4,6 +4,7 @@ import { getContentEntryPath } from "../utils/i18n";
 import defaultCover from "../assets/default-cover.jpg";
 import { Image } from 'astro:assets';
 import type { Locale } from '../configuration';
+import { getEntry } from "astro:content";
 
 type Props = {
   post: CollectionEntry<'blog'>;
@@ -64,7 +65,7 @@ const { post, locale } = Astro.props;
 </style>
 
 <div>
-  <a href={await getContentEntryPath("blog", post.slug)}>
+  <a href={await getContentEntryPath(await getEntry("blog", post.id))}>
     <Image
       src={post.data.cover?.src || defaultCover}
       alt={post.data.cover?.alt || post.data.title}

@@ -1,10 +1,17 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
+import { localeSlugs, type Locale } from './configuration';
 
-const localizedString = z.object({
-  en: z.string(),
-  de: z.string().optional(),
-});
+const localized = <T extends z.ZodTypeAny>(schema: T) =>
+  z.object(
+    localeSlugs.reduce(
+      (acc, key) => {
+        acc[key] = schema;
+        return acc;
+      },
+      {} as Record<Locale, T>,
+    ),
+  );
 
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({entry}) => entry }),
@@ -21,13 +28,13 @@ const blogCollection = defineCollection({
 const galleryCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.yml", base: "./src/content/gallery" }),
   schema: ({ image }) => z.object({
-    title: localizedString,
+    title: localized(z.string()),
     cover: image(),
     images: z.array(
       z.object({
         src: image(),
-        title: localizedString.optional(),
-        description: localizedString.optional(),
+        title: localized(z.string().optional()).optional(),
+        description: localized(z.string().optional()).optional(),
       })
     ),
   }),
@@ -48,10 +55,29 @@ const projectsCollection = defineCollection({
     }).optional(),
   })
 });
+const navigationCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.yml", base: "./src/content/navigation" }),
+  schema: ({ image }) =>
+    localized(
+      z.array(
+        z.object({
+          title: z.string(),
+          path: z.string().url().or(z.string()),
+          icon: image().optional(),
+        }),
+      ),
+    ),
+});
+const sectionsCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/sections" }),
+  schema: z.object({}),
+})
 
 export const collections = {
-  'blog': blogCollection,
-  'gallery': galleryCollection,
-  'pages': pagesCollection,
-  'projects': projectsCollection,
+  blog: blogCollection,
+  gallery: galleryCollection,
+  pages: pagesCollection,
+  projects: projectsCollection,
+  navigation: navigationCollection,
+  sections: sectionsCollection,
 };

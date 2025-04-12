@@ -2,13 +2,14 @@
 import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import { entryPaths } from '../_paths';
+import { render } from 'astro:content';
 
 export const getStaticPaths = entryPaths('pages');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const page = Astro.props as Props;
 
-const { Content } = await page.render();
+const { Content } = await render(page);
 ---
 <DefaultLayout translations={page.translations}>
   <Content/>

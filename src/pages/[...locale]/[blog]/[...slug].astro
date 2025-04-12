@@ -9,13 +9,14 @@ import type { GitInfoFrontmatter } from '../../../remark/remark-git-info';
 import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
 import { resolvePath } from '../../../utils/path';
 import slug from 'limax';
+import { render } from 'astro:content';
 
 export const getStaticPaths = entryPaths('blog', 'slug');
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { translations, render, data } = Astro.props as Props;
+const { translations, data } = Astro.props as Props;
 
-const { Content, headings, remarkPluginFrontmatter } = await render();
+const { Content, headings, remarkPluginFrontmatter } = await render(Astro.props);
 const git: GitInfoFrontmatter['git'] = remarkPluginFrontmatter.git;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);

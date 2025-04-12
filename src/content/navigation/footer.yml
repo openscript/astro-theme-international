@@ -1,0 +1,22 @@
+de:
+  - path: pages://de/license
+    title: Lizenz
+  - path: pages://de/changelog
+    title: Änderungsverlauf
+  - path: pages://de/data-protection
+    title: Datenschutz
+  - path: pages://de/terms
+    title: AGBs
+  - path: pages://de/imprint
+    title: Impressum
+en:
+  - path: pages://en/license
+    title: Licence
+  - path: pages://en/changelog
+    title: Changelog
+  - path: pages://en/data-protection
+    title: Data protection
+  - path: pages://en/terms
+    title: Terms and Conditions
+  - path: pages://en/imprint
+    title: Imprint

@@ -4,23 +4,23 @@ export function getRelativePath(path: string) {
 }
 
 export function joinPath(...paths: Array<string | number | undefined>) {
-  return paths.filter(Boolean).join('/');
+  return paths.filter(Boolean).join("/");
 }
 
 export function resolvePath(...paths: Array<string | number | undefined>) {
-  return getRelativePath(`/${joinPath(...paths)}`);
+  return `/${joinPath(...paths)}`;
 }
 
 export function dirname(path: string) {
-  if (!path.includes('/')) return '';
+  if (!path.includes("/")) return "";
 
-  return path.replace(/\/[^\/]*$/, '');
+  return path.replace(/\/[^\/]*$/, "");
 }
 
 export function trimExtension(path: string) {
-  return path.replace(/\.[^\/.]+$/, '');
+  return path.replace(/\.[^\/.]+$/, "");
 }
 
 export function addTrailingSlash(path: string) {
-  return path.endsWith('/') ? path : `${path}/`;
+  return path.endsWith("/") ? path : `${path}/`;
 }
