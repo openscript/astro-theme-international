@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.1.0
+
+### Minor Changes
+
+- bfb58d0: Migrate to Astro 5
+
 ## 0.0.11
 
 ### Patch Changes
