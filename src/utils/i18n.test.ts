@@ -21,19 +21,20 @@ vi.mock("../configuration", () => ({
     MESSAGES: {
       en: {
         language: "English",
-        docsSlug: "docs",
-        dataSlug: "data",
+        "slugs.docs": "docs",
+        "slugs.data": "data",
         substitution: "{one} of {two}",
       },
       de: {
         language: "Deutsch",
-        docsSlug: "docs",
-        dataSlug: "daten",
+        "slugs.docs": "doku",
+        "slugs.data": "daten",
         substitution: "{one} von {two}",
       },
     },
   },
 }));
+
 
 vi.mock("astro:content", () => ({
   getEntry: async (collection: string, entrySlug: string) => {
@@ -252,12 +253,12 @@ describe("getContentEntryPath", () => {
   it("should return the content entry path", async () => {
     const entry = await getEntry("docs" as any, "getting-started")
     const path = getContentEntryPath(entry);
-    expect(path).toMatchInlineSnapshot(`"/de/docs/2020/09/11/test-article"`);
+    expect(path).toMatchInlineSnapshot(`"/de/doku/2020/09/11/test-article"`);
   });
   it("should return the content entry path without double slug", async () => {
     const entry = await getEntry("docs" as any, "root");
     const path = getContentEntryPath(entry);
-    expect(path).toMatchInlineSnapshot(`"/de/docs/test-article"`);
+    expect(path).toMatchInlineSnapshot(`"/de/doku/test-article"`);
   });
 });
 
@@ -275,7 +276,7 @@ describe("makeMenu", () => {
     expect(menu).toMatchInlineSnapshot(`
       [
         {
-          "path": "/de/docs/2020/09/11/test-article",
+          "path": "/de/doku/2020/09/11/test-article",
           "title": "License",
         },
         {

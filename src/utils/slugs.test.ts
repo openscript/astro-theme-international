@@ -9,13 +9,13 @@ vi.mock("../configuration", () => ({
     MESSAGES: {
       en: {
         language: "English",
-        docsSlug: "docs",
-        dataSlug: "data",
+        "slugs.docs": "docs",
+        "slugs.data": "data",
       },
       de: {
         language: "Deutsch",
-        docsSlug: "doku",
-        dataSlug: "daten",
+        "slugs.docs": "doku",
+        "slugs.data": "daten",
       },
     },
   },
