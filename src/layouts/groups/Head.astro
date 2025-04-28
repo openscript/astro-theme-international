@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import { C, localeSlugs } from '../../configuration';
+import { localeSlugs } from '../../configuration';
 import { getFullLocale, getLocaleFromUrl, useTranslations } from '../../utils/i18n';
 import { getMessage } from '../../utils/i18n';
 import { getRelativePath } from '../../utils/path';
@@ -12,6 +12,7 @@ type Props = {
 const locale = getLocaleFromUrl(Astro.url);
 const { translations } = Astro.props;
 const t = useTranslations(locale);
+console.log(translations);
 ---
 <head>
   <title>{t('head.title')}</title>
@@ -22,7 +23,7 @@ const t = useTranslations(locale);
   <link rel="alternate" hreflang="x-default" href={new URL(import.meta.env.SITE_URL || '/', Astro.url.href).href} />
   <link rel="alternate" hreflang={getFullLocale(locale)} href={Astro.url.href} />
   <meta property="og:locale" content={getFullLocale(locale).replace(`-`, `_`)} />
-  {Object.entries(translations || {}).filter(([locale]) => locale === C.DEFAULT_LOCALE).map(([locale, path]) => (
+  {Object.entries(translations || {}).filter(([l]) => l !== locale).map(([locale, path]) => (
     <link rel="alternate" hreflang={getFullLocale(locale)} href={new URL(path, Astro.url).href} />
     <meta property="og:locale:alternate" content={getFullLocale(locale).replace(`-`, `_`)} />
   ))}
