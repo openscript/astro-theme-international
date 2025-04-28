@@ -3,7 +3,7 @@ import { getLocaleFromUrl, useTranslations } from "../utils/i18n";
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
-const bundle = `${import.meta.env.BASE_URL}/pagefind/pagefind.js`;
+const bundle = `${import.meta.env.DEV ? "" : import.meta.env.BASE_URL}/pagefind/pagefind.js`;
 ---
 
 <script>
