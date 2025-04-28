@@ -116,7 +116,7 @@ function getTranslatedPath(
   const collectionSlug =
     collection === "pages" ? undefined : getCollectionSlug(collection, locale);
 
-  return `/${[localeSlug, collectionSlug, pageSlug].filter(Boolean).join("/")}`;
+  return [localeSlug, collectionSlug, pageSlug].filter(Boolean).join("/");
 }
 
 export async function makeMenu(
