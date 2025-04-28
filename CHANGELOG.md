@@ -1,5 +1,12 @@
 # astro-theme-international
 
+## 0.1.1
+
+### Patch Changes
+
+- 9e7dbea: Upgrade dependencies
+- d482678: Fix links
+
 ## 0.1.0
 
 ### Minor Changes
