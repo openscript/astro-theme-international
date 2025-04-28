@@ -6,7 +6,7 @@
   "bugs": {
     "url": "https://github.com/openscript/astro-theme-international/issues"
   },
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.10.0",
   "repository": "github:openscript/astro-theme-international",
   "scripts": {
     "dev": "astro dev --host",
@@ -28,7 +28,7 @@
     "@fontsource-variable/dosis": "^5.2.5",
     "@fontsource-variable/fira-code": "^5.2.5",
     "@fontsource-variable/playfair-display": "^5.2.5",
-    "astro": "^5.7.6",
+    "astro": "^5.7.7",
     "fsevents": "^2.3.3",
     "limax": "^4.1.0",
     "pagefind": "^1.3.0",
