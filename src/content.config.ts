@@ -1,20 +1,9 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
-import { localeSlugs, type Locale } from './configuration';
+import { localeSlugs } from './configuration';
 import { localizedSchema } from 'astro-loader-i18n';
 
-const l = localizedSchema()
-
-const localized = <T extends z.ZodTypeAny>(schema: T) =>
-  z.object(
-    localeSlugs.reduce(
-      (acc, key) => {
-        acc[key] = schema;
-        return acc;
-      },
-      {} as Record<Locale, T>,
-    ),
-  );
+const localized = <T extends z.ZodTypeAny>(schema: T) => localizedSchema(schema, localeSlugs);
 
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({entry}) => entry }),
