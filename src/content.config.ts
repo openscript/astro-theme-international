@@ -1,12 +1,12 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 import { localeSlugs } from './configuration';
-import { localizedSchema } from 'astro-loader-i18n';
+import { extendI18nLoaderSchema, i18nLoader, localizedSchema } from 'astro-loader-i18n';
 
 const localized = <T extends z.ZodTypeAny>(schema: T) => localizedSchema(schema, localeSlugs);
 
 const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({entry}) => entry }),
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({ entry }) => entry }),
   schema: ({ image }) => z.object({
     title: z.string(),
     publishedAt: z.date(),
@@ -38,14 +38,16 @@ const pagesCollection = defineCollection({
   })
 });
 const projectsCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    cover: z.object({
-      src: image(),
-      alt: z.string().optional(),
-    }).optional(),
-  })
+  loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),
+  schema: ({ image }) => extendI18nLoaderSchema(
+    z.object({
+      title: z.string(),
+      cover: z.object({
+        src: image(),
+        alt: z.string().optional(),
+      }).optional(),
+    })
+  ),
 });
 const navigationCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.yml", base: "./src/content/navigation" }),

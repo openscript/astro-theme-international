@@ -3,6 +3,15 @@ export const C = {
   LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
   // Default locale referencing one of the keys in LOCALES
   DEFAULT_LOCALE: 'en' as const,
+  // Path segment translations
+  SEGMENT_TRANSLATIONS: {
+    'en': {
+      'projects': 'projects',
+    },
+    'de': {
+      'projects': 'projekte',
+    }
+  },
   // Static messages for each locale
   MESSAGES: {
     'en': {
@@ -89,4 +98,4 @@ export const C = {
 
 // Configuration helpers
 export type Locale = keyof typeof C.LOCALES;
-export const localeSlugs = Object.keys(C.LOCALES) as Locale[];
+export const localeSlugs = Object.keys(C.LOCALES);

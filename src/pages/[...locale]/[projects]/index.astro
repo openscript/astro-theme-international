@@ -1,18 +1,25 @@
 ---
-import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import { getContentEntryPath, getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+import { getContentEntryPath, parseLocale, useTranslations } from '../../../utils/i18n';
 import { getEntry, getCollection } from 'astro:content';
-import { indexPaths } from '../../_paths';
 import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
+import { createI18nCollection, i18nPropsAndParams } from 'astro-loader-i18n';
+import { C, localeSlugs } from '../../../configuration';
 
-export const getStaticPaths = indexPaths('projects');
+export const getStaticPaths = async () => {
+  const routePattern = "[...locale]/[projects]";
+  const collection = createI18nCollection({ locales: localeSlugs, routePattern });
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { translations } = Astro.props as Props;
+  return i18nPropsAndParams(collection, {
+    defaultLocale: C.DEFAULT_LOCALE,
+    routePattern,
+    segmentTranslations: C.SEGMENT_TRANSLATIONS,
+  });
+};
+
+const { translations, data: { locale } } = Astro.props;
 const projects = await getCollection('projects');
-const locale = getLocaleFromUrl(Astro.url);
-const t = useTranslations(locale);
+const t = useTranslations(parseLocale(locale));
 
 ---
 
