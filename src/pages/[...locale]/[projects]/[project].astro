@@ -1,9 +1,9 @@
 ---
-import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
-import { render, getCollection } from 'astro:content';
-import { i18nPropsAndParams } from 'astro-loader-i18n';
-import { C } from '../../../configuration';
+import DefaultLayout from "../../../layouts/DefaultLayout.astro";
+import SinglePaneContent from "../../../layouts/sections/SinglePaneContent.astro";
+import { render, getCollection } from "astro:content";
+import { i18nPropsAndParams } from "astro-loader-i18n";
+import { C } from "../../../configuration";
 
 export const getStaticPaths = async () => {
   const routePattern = "[...locale]/[projects]/[project]";
@@ -21,11 +21,10 @@ export const getStaticPaths = async () => {
 
 const page = Astro.props;
 const { Content } = await render(page);
-
 ---
 
 <DefaultLayout translations={page.translations}>
   <SinglePaneContent>
-    <Content/>
+    <Content />
   </SinglePaneContent>
 </DefaultLayout>

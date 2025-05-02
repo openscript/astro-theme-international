@@ -1,19 +1,19 @@
 ---
-import DefaultLayout from '../../layouts/DefaultLayout.astro';
-import type { InferGetStaticPropsType } from 'astro';
-import { indexPaths } from '../_paths';
-import { getEntry } from 'astro:content';
-import LatestBlogsSection from '../../layouts/sections/LatestBlogsSection.astro';
-import { render } from 'astro:content';
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import { getEntry } from "astro:content";
+import LatestBlogsSection from "../../layouts/sections/LatestBlogsSection.astro";
+import { render } from "astro:content";
+import { generateGetStaticIndexPaths } from "../../utils/paths";
 
-export const getStaticPaths = indexPaths();
+export const getStaticPaths = generateGetStaticIndexPaths("[...locale]");
+const {
+  translations,
+  data: { locale },
+} = Astro.props;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
-const { translations, locale } = Astro.props as Props;
-
-const { Content: SpotlightSection } = await render(await getEntry('sections', `${locale}/spotlight`)!);
-
+const { Content: SpotlightSection } = await render(
+  await getEntry("sections", `${locale}/spotlight`)!,
+);
 ---
 
 <DefaultLayout translations={translations}>

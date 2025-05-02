@@ -45,7 +45,6 @@ export const C = {
       'site.license': 'MIT License',
       'slugs.blog': 'blog',
       'slugs.gallery': 'gallery',
-      'slugs.projects': 'projects',
       'search.placeholder': 'Type to search...',
       'sections.latestPosts': 'Latest posts',
     },
@@ -80,7 +79,6 @@ export const C = {
       'site.license': 'MIT Lizenz',
       'slugs.blog': 'blog',
       'slugs.gallery': 'galerie',
-      'slugs.projects': 'projekte',
       'search.placeholder': 'Schreibe um zu suchen...',
       'sections.latestPosts': 'Letzte Blogartikel',
     }
@@ -98,4 +96,4 @@ export const C = {
 
 // Configuration helpers
 export type Locale = keyof typeof C.LOCALES;
-export const localeSlugs = Object.keys(C.LOCALES);
+export const localeSlugs = Object.keys(C.LOCALES) as Locale[];
