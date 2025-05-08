@@ -6,9 +6,11 @@ export const C = {
   // Path segment translations
   SEGMENT_TRANSLATIONS: {
     'en': {
+      'gallery': 'gallery',
       'projects': 'projects',
     },
     'de': {
+      'gallery': 'galerie',
       'projects': 'projekte',
     }
   },
