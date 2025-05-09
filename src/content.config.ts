@@ -32,10 +32,12 @@ const galleryCollection = defineCollection({
   })),
 });
 const pagesCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),
-  schema: z.object({
-    path: z.string(),
-  })
+  loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),
+  schema: extendI18nLoaderSchema(
+    z.object({
+      path: z.string(),
+    }
+  )),
 });
 const projectsCollection = defineCollection({
   loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),

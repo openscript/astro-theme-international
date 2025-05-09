@@ -11,33 +11,6 @@ export const rssXmlPaths = (async () => {
   return versions.map((l) => ({ params: { locale: l ? `-${l}` : undefined }, props: { locale: l } }));
 }) satisfies GetStaticPaths;
 
-export const indexPaths = (kind?: string) => {
-  return (async () => {
-    const translations = localeSlugs.reduce(
-      (acc, curr) => {
-        const collectionSlug = kind ? getCollectionSlug(kind, curr) : undefined;
-        const localeSlug = getLocaleSlug(curr);
-        acc[curr] = resolvePath(localeSlug, collectionSlug);
-        return acc;
-      },
-      {} as Record<Locale, string>,
-    );
-    return localeSlugs.map((l) => {
-      const localeSlug = getLocaleSlug(l);
-      const path = {
-        params: { locale: localeSlug },
-        props: { locale: l, translations },
-      };
-      return kind
-        ? {
-          ...path,
-          params: { ...path.params, [kind]: getCollectionSlug(kind, l) },
-        }
-        : path;
-    });
-  }) satisfies GetStaticPaths;
-};
-
 export const entryPaths = <C extends CollectionKey>(
   collection: C,
   slugName?: string,

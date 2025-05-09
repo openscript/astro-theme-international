@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { blogPagePaths, blogTagPagePaths, entryPaths, indexPaths, rssXmlPaths } from './_paths';
+import { blogPagePaths, blogTagPagePaths, entryPaths, rssXmlPaths } from './_paths';
 
 vi.mock("../configuration", () => ({
   C: {
@@ -177,12 +177,6 @@ vi.mock("astro:content", () => ({
 describe('paths', () => {
   it('generates rssXmlPaths', async () => {
     expect(await rssXmlPaths()).toMatchSnapshot();
-  });
-  it('generates indexPaths', async () => {
-    expect(await indexPaths()()).toMatchSnapshot();
-  });
-  it('generates indexPaths with kind', async () => {
-    expect(await indexPaths('docs')()).toMatchSnapshot();
   });
   it('generates entryPaths', async () => {
     expect(await entryPaths('pages' as any, 'pages')()).toMatchSnapshot();
