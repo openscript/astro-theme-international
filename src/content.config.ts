@@ -1,7 +1,7 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 import { localeSlugs } from './configuration';
-import { extendI18nLoaderSchema, i18nLoader, localized as localizedSchema } from 'astro-loader-i18n';
+import { extendI18nLoaderSchema, i18nContentLoader, i18nLoader, localized as localizedSchema } from 'astro-loader-i18n';
 
 const localized = <T extends z.ZodTypeAny>(schema: T) => localizedSchema(schema, localeSlugs);
 
@@ -18,8 +18,8 @@ const blogCollection = defineCollection({
   })
 });
 const galleryCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.yml", base: "./src/content/gallery" }),
-  schema: ({ image }) => z.object({
+  loader: i18nContentLoader({ pattern: "**/[^_]*.yml", base: "./src/content/gallery" }),
+  schema: ({ image }) => extendI18nLoaderSchema(z.object({
     title: localized(z.string()),
     cover: image(),
     images: z.array(
@@ -29,7 +29,7 @@ const galleryCollection = defineCollection({
         description: localized(z.string().optional()).optional(),
       })
     ),
-  }),
+  })),
 });
 const pagesCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),

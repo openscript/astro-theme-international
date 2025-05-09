@@ -13,7 +13,7 @@ export const getStaticPaths = generateGetStaticIndexPaths(
 const { translations } = Astro.props;
 
 const locale = parseLocale(Astro.props.data.locale);
-const collection = await getCollection("gallery");
+const collection = await getCollection("gallery", (category) => category.data.locale === locale);
 const t = useTranslations(locale);
 ---
 

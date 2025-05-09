@@ -3,20 +3,17 @@ import DefaultLayout from "../../../layouts/DefaultLayout.astro";
 import SinglePaneContent from "../../../layouts/sections/SinglePaneContent.astro";
 import { render, getCollection } from "astro:content";
 import { i18nPropsAndParams } from "astro-loader-i18n";
-import { C } from "../../../configuration";
+import { defaultPropsAndParamsOptions } from "../../../utils/paths";
 
 export const getStaticPaths = async () => {
   const routePattern = "[...locale]/[projects]/[project]";
   const collection = await getCollection("projects");
 
-  const propsAndParams = i18nPropsAndParams(collection, {
-    defaultLocale: C.DEFAULT_LOCALE,
+  return i18nPropsAndParams(collection, {
+    ...defaultPropsAndParamsOptions,
     routePattern,
-    segmentTranslations: C.SEGMENT_TRANSLATIONS,
     slugParamName: "project",
   });
-
-  return propsAndParams;
 };
 
 const page = Astro.props;

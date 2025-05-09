@@ -1,17 +1,25 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import { getContentEntryPath } from "../utils/i18n";
-import { Image } from 'astro:assets';
-import type { Locale } from '../configuration';
-import { getEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import type { Locale } from "../configuration";
+import slug from "limax";
 
 type Props = {
-  category: CollectionEntry<'gallery'>;
+  category: CollectionEntry<"gallery">;
   locale: Locale;
+};
+
+const {
+  category: {
+    data: { title, cover },
+  }
+} = Astro.props;
+
+if (typeof title !== "string") {
+  throw new Error("Title is not defined");
 }
 
-const { category, locale } = Astro.props;
-
+const url = new URL(slug(title), `${Astro.url.href}/`).pathname;
 ---
 
 <style>
@@ -64,11 +72,15 @@ const { category, locale } = Astro.props;
 </style>
 
 <div>
-  <a href={getContentEntryPath(await getEntry("gallery", category.id), locale)}>
-    <Image src={category.data.cover} alt={`Cover: ${category.data.title[locale]}`} width={320} />
+  <a href={url}>
+    <Image
+      src={cover}
+      alt={`Cover: ${title}`}
+      width={320}
+    />
     <div>
       <div>
-        <h3>{category.data.title[locale]}</h3>
+        <h3>{title}</h3>
       </div>
     </div>
   </a>

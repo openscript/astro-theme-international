@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { blogPagePaths, blogTagPagePaths, entryPaths, galleryCategoryItemPaths, galleryCategoryPaths, indexPaths, rssXmlPaths } from './_paths';
+import { blogPagePaths, blogTagPagePaths, entryPaths, indexPaths, rssXmlPaths } from './_paths';
 
 vi.mock("../configuration", () => ({
   C: {
@@ -187,12 +187,6 @@ describe('paths', () => {
   it('generates entryPaths', async () => {
     expect(await entryPaths('pages' as any, 'pages')()).toMatchSnapshot();
     expect(await entryPaths('docs' as any, 'slug')()).toMatchSnapshot();
-  });
-  it('generates galleryCategoryPaths', async () => {
-    expect(await galleryCategoryPaths()).toMatchSnapshot();
-  });
-  it('generates galleryCategoryItemPaths', async () => {
-    expect(await galleryCategoryItemPaths()).toMatchSnapshot();
   });
   it('generates blogPagePaths', async () => {
     const paginate = vi.fn()
