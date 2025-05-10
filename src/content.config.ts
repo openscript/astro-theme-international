@@ -6,16 +6,18 @@ import { extendI18nLoaderSchema, i18nContentLoader, i18nLoader, localized as loc
 const localized = <T extends z.ZodTypeAny>(schema: T) => localizedSchema(schema, localeSlugs);
 
 const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({ entry }) => entry }),
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    publishedAt: z.date(),
-    tags: z.array(z.string()),
-    cover: z.object({
-      src: image(),
-      alt: z.string().optional(),
-    }).optional(),
-  })
+  loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({ entry }) => entry }),
+  schema: ({ image }) => extendI18nLoaderSchema(
+    z.object({
+      title: z.string(),
+      publishedAt: z.date(),
+      tags: z.array(z.string()),
+      cover: z.object({
+        src: image(),
+        alt: z.string().optional(),
+      }).optional(),
+    })
+  ),
 });
 const galleryCollection = defineCollection({
   loader: i18nContentLoader({ pattern: "**/[^_]*.yml", base: "./src/content/gallery" }),

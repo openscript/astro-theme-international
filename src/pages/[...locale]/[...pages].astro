@@ -1,5 +1,4 @@
 ---
-import type { InferGetStaticPropsType } from 'astro';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import { i18nPropsAndParams } from "astro-loader-i18n";
 import { getCollection, render } from 'astro:content';
@@ -17,8 +16,7 @@ export const getStaticPaths = async () => {
   });
 };
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const page = Astro.props as Props;
+const page = Astro.props;
 
 const { Content } = await render(page);
 ---

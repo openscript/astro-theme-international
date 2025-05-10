@@ -8,10 +8,12 @@ export const C = {
     'en': {
       'gallery': 'gallery',
       'projects': 'projects',
+      'blog': 'blog',
     },
     'de': {
       'gallery': 'galerie',
       'projects': 'projekte',
+      'blog': 'blog',
     }
   },
   // Static messages for each locale
@@ -45,7 +47,6 @@ export const C = {
       'site.description': 'A humble Astronauts guide to the international space station.',
       'site.author': 'Example Ltd.',
       'site.license': 'MIT License',
-      'slugs.blog': 'blog',
       'slugs.gallery': 'gallery',
       'search.placeholder': 'Type to search...',
       'sections.latestPosts': 'Latest posts',
@@ -79,7 +80,6 @@ export const C = {
       'site.description': 'Ein bescheidener Astronautenführer zur internationalen Raumstation.',
       'site.author': 'Beispiel GmbH',
       'site.license': 'MIT Lizenz',
-      'slugs.blog': 'blog',
       'slugs.gallery': 'galerie',
       'search.placeholder': 'Schreibe um zu suchen...',
       'sections.latestPosts': 'Letzte Blogartikel',
