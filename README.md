@@ -43,7 +43,6 @@ An Astro theme, focused on internationalization.
   - Compatible with [Github Pages](https://pages.github.com/)
   - Works on a subpath (e.g. `http://example.com/my-cool-astro-site/`)
   - MDX support [(@astrojs/mdx)](https://docs.astro.build/en/guides/mdx/)
-  - Interactive components with [Preact](https://preactjs.com/)
   - Release cycle including generating changelogs with [changesets](https://github.com/changesets/changesets)
   - .editorconfig
 - Connectivity
