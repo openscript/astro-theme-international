@@ -10,6 +10,7 @@ import slug from "limax";
 import { getCollection, render } from "astro:content";
 import { defaultPropsAndParamsOptions } from "../../../utils/paths";
 import { resolvePath } from "../../../utils/path";
+import { C } from "../../../configuration";
 
 export const getStaticPaths = async () => {
   const routePattern = "[...locale]/[blog]/[...slug]";
@@ -34,6 +35,7 @@ const { locale: paramsLocale, blog: paramsBlog } = Astro.params as {
   locale: string;
   blog: string;
 };
+
 const git: GitInfoFrontmatter["git"] = remarkPluginFrontmatter.git;
 const t = useTranslations(parseLocale(locale));
 ---
@@ -49,7 +51,7 @@ const t = useTranslations(parseLocale(locale));
           <dd>
             {
               tags.map((tag) => (
-                <a href={resolvePath(paramsLocale, paramsBlog, slug(tag))}>{tag}</a>
+                <a href={resolvePath(paramsLocale, Astro.currentLocale === C.DEFAULT_LOCALE ? undefined : paramsBlog, slug(tag))}>{tag}</a>
               ))
             }
           </dd>

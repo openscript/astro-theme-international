@@ -46,8 +46,8 @@ export const getStaticPaths = (async ({ paginate }) => {
       }));
       const blog = items[0]?.params.blog;
       const translations = Object.entries(locales).reduce(
-        (acc, [locale, slug]) => {
-          acc[locale] = resolvePath(slug, blog);
+        (acc, [locale, localeSlug]) => {
+          acc[locale] = resolvePath(localeSlug, blog, slug(tag));
           return acc;
         },
         {} as Record<string, string>,
