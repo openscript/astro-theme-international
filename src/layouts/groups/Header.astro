@@ -7,7 +7,7 @@ import ThemeSwitcher from '../../components/ThemeSwitcher.astro';
 import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
 import Burger from '../../components/MenuButton.astro';
 import Navigation from "../../components/Navigation.astro";
-import { getEntry } from 'astro:content';
+import { prepareNavigation } from '../../utils/paths';
 
 type Props = {
   translations?: Record<string, string>;
@@ -16,14 +16,14 @@ type Props = {
 const { translations } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
-const navigation = (await getEntry("navigation", "main"))!.data;
+const navigation = await prepareNavigation(`main/${locale}`);
 
 ---
 
 <header>
   <a href={getRelativePath(`/${locale === C.DEFAULT_LOCALE ? '' : locale}`)} class="title" set:html={t('site.title')}></a>
   <Burger />
-  <Navigation items={navigation} locale={locale} />
+  <Navigation items={navigation} />
   <div id="tools">
     <Search />
     <ThemeSwitcher />

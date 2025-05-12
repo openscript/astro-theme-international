@@ -6,7 +6,7 @@ import { extendI18nLoaderSchema, i18nContentLoader, i18nLoader, localized as loc
 const localized = <T extends z.ZodTypeAny>(schema: T) => localizedSchema(schema, localeSlugs);
 
 const blogCollection = defineCollection({
-  loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog", generateId: ({ entry }) => entry }),
+  loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
   schema: ({ image }) => extendI18nLoaderSchema(
     z.object({
       title: z.string(),
@@ -39,7 +39,7 @@ const pagesCollection = defineCollection({
     z.object({
       path: z.string(),
     }
-  )),
+    )),
 });
 const projectsCollection = defineCollection({
   loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),
@@ -54,17 +54,19 @@ const projectsCollection = defineCollection({
   ),
 });
 const navigationCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.yml", base: "./src/content/navigation" }),
-  schema: ({ image }) =>
-    localized(
-      z.array(
-        z.object({
-          title: z.string(),
-          path: z.string().url().or(z.string()),
-          icon: image().optional(),
-        }),
+  loader: i18nContentLoader({ pattern: "**/[^_]*.yml", base: "./src/content/navigation" }),
+  schema: ({ image }) => extendI18nLoaderSchema(z.object({
+    entries:
+      localized(
+        z.array(
+          z.object({
+            title: z.string(),
+            path: z.string().url().or(z.string()),
+            icon: image().optional(),
+          }),
+        ),
       ),
-    ),
+  })),
 });
 const sectionsCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/sections" }),
