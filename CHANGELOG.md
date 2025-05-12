@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.0
+
+### Minor Changes
+
+- c1ce2f7: Refactor to use astro-loader-i18n
+
 ## 0.1.1
 
 ### Patch Changes
