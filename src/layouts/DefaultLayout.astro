@@ -1,18 +1,18 @@
 ---
 import './layouts';
 import './DefaultLayout.css';
-import { getLocaleFromUrl } from '../utils/i18n.ts';
 import Head from './groups/Head.astro';
 import TopBar from './groups/TopBar.astro';
 import Footer from './groups/Footer.astro';
 import Header from './groups/Header.astro';
 import BottomBar from './groups/BottomBar.astro';
+import { parseLocale } from '../utils/i18n';
 
 type Props = {
   translations?: Record<string, string>;
 }
 
-const locale = getLocaleFromUrl(Astro.url);
+const locale = parseLocale(Astro.currentLocale);
 const { translations } = Astro.props;
 ---
 <html lang={locale}>

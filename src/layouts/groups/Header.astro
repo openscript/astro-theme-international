@@ -1,6 +1,6 @@
 ---
 import { C } from '../../configuration';
-import { getLocaleFromUrl, useTranslations } from '../../utils/i18n';
+import { parseLocale, useTranslations } from '../../utils/i18n';
 import { getRelativePath } from '../../utils/path';
 import Search from '../../components/Search.astro';
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro';
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const { translations } = Astro.props;
-const locale = getLocaleFromUrl(Astro.url);
+const locale = parseLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const navigation = await prepareNavigation(`main/${locale}`);
 

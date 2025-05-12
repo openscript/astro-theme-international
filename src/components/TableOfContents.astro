@@ -1,5 +1,5 @@
 ---
-import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+import { parseLocale, useTranslations } from '../utils/i18n';
 
 type Props = {
   fromDepth?: number;
@@ -9,8 +9,7 @@ type Props = {
 const { headings: headingsProp, fromDepth: fromDepthProp } = Astro.props;
 const fromDepth = fromDepthProp || 2;
 const headings = headingsProp.filter(heading => heading.depth >= fromDepth);
-const locale = getLocaleFromUrl(Astro.url);
-const t = useTranslations(locale);
+const t = useTranslations(parseLocale(Astro.currentLocale));
 
 ---
 
