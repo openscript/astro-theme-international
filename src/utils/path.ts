@@ -10,17 +10,3 @@ export function joinPath(...paths: Array<string | number | undefined>) {
 export function resolvePath(...paths: Array<string | number | undefined>) {
   return `/${joinPath(...paths)}`;
 }
-
-export function dirname(path: string) {
-  if (!path.includes("/")) return "";
-
-  return path.replace(/\/[^\/]*$/, "");
-}
-
-export function trimExtension(path: string) {
-  return path.replace(/\.[^\/.]+$/, "");
-}
-
-export function addTrailingSlash(path: string) {
-  return path.endsWith("/") ? path : `${path}/`;
-}

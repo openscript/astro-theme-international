@@ -1,20 +1,23 @@
 ---
-import type { Locale } from '../../configuration'
-import { useTranslations } from '../../utils/i18n';
-import { getCollection } from 'astro:content';
-import PostCard from '../../components/PostCard.astro';
-import CardList from '../../components/CardList.astro';
-
+import { parseLocale, useTranslations } from "../../utils/i18n";
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro";
+import CardList from "../../components/CardList.astro";
+import { i18nPropsAndParams } from "astro-loader-i18n";
+import { defaultPropsAndParamsOptions } from "../../utils/paths";
 
 type Props = {
-  locale: Locale;
-}
+  locale: string;
+};
 
-const { locale } = Astro.props;
+const locale = parseLocale(Astro.props.locale);
 const t = useTranslations(locale);
-
-const posts = (await getCollection('blog')).reverse().slice(0, 3);
-
+const collection = await getCollection("blog");
+const posts = i18nPropsAndParams(collection, {
+  ...defaultPropsAndParamsOptions,
+  routePattern: `[...locale]/[blog]/[...slug]`,
+});
+const filteredPosts = posts.reverse().slice(0, 3);
 ---
 
 <style>
@@ -26,12 +29,20 @@ const posts = (await getCollection('blog')).reverse().slice(0, 3);
 </style>
 
 <section>
-  <h2>{t('sections.latestPosts')}</h2>
+  <h2>{t("sections.latestPosts")}</h2>
   <CardList>
-    {posts.map(async (post) => (
-      <li>
-        <PostCard post={post} locale={locale} />
-      </li>
-    ))}
+    {
+      filteredPosts.map(({ props: post }) => (
+        <li>
+          <PostCard
+            title={post.data.title}
+            cover={post.data.cover}
+            publishedAt={post.data.publishedAt}
+            locale={post.data.locale}
+            translatedPath={post.translatedPath}
+          />
+        </li>
+      ))
+    }
   </CardList>
 </section>

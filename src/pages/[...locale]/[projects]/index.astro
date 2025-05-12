@@ -1,35 +1,47 @@
 ---
-import type { InferGetStaticPropsType } from 'astro';
-import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import { getContentEntryPath, getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
-import { getEntry, getCollection } from 'astro:content';
-import { indexPaths } from '../../_paths';
-import SinglePaneContent from '../../../layouts/sections/SinglePaneContent.astro';
+import DefaultLayout from "../../../layouts/DefaultLayout.astro";
+import { parseLocale, useTranslations } from "../../../utils/i18n";
+import { getCollection } from "astro:content";
+import SinglePaneContent from "../../../layouts/sections/SinglePaneContent.astro";
+import {
+  generateGetStaticIndexPaths,
+  defaultPropsAndParamsOptions,
+} from "../../../utils/paths";
+import { i18nPropsAndParams } from "astro-loader-i18n";
 
-export const getStaticPaths = indexPaths('projects');
+export const getStaticPaths = generateGetStaticIndexPaths(
+  "[...locale]/[projects]",
+);
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { translations } = Astro.props as Props;
-const projects = await getCollection('projects');
-const locale = getLocaleFromUrl(Astro.url);
-const t = useTranslations(locale);
-
+const {
+  translations,
+  data: { locale },
+} = Astro.props;
+const collection = await getCollection("projects");
+const projects = i18nPropsAndParams(collection, {
+  ...defaultPropsAndParamsOptions,
+  slugParamName: "project",
+  routePattern: `${Astro.routePattern}/[project]`,
+});
+const t = useTranslations(parseLocale(locale));
 ---
 
 <DefaultLayout translations={translations}>
   <SinglePaneContent>
-    <h1>{t('pages.projects')}</h1>
+    <h1>{t("pages.projects")}</h1>
     <ul>
       {
-        projects.map(async (project) => {
-          const p = project.data;
-          if (!p) return undefined;
-          return <li>
-            <a href={getContentEntryPath(await getEntry('projects', project.id))}>
-              {p.title}
-            </a>
-          </li>
-        }).filter(Boolean)
+        projects
+          .map(({ props }) => {
+            return (
+              <li>
+                <a href={props.translatedPath}>
+                  {props.data.title}
+                </a>
+              </li>
+            );
+          })
+          .filter(Boolean)
       }
     </ul>
   </SinglePaneContent>

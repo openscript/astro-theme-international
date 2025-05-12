@@ -5,7 +5,15 @@
       "command": "./node_modules/.bin/astro dev --host",
       "name": "Development server",
       "request": "launch",
-      "type": "node-terminal"
+      "type": "node-terminal",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/node_modules/**"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
     }
   ]
 }

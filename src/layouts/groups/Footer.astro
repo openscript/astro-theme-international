@@ -1,11 +1,11 @@
 ---
-import { getEntry } from 'astro:content';
 import Navigation from '../../components/Navigation.astro';
-import { getLocaleFromUrl } from '../../utils/i18n';
+import { parseLocale } from '../../utils/i18n';
+import { prepareNavigation } from '../../utils/paths';
 
-const locale = getLocaleFromUrl(Astro.url);
-const navigation = (await getEntry("navigation", "footer"))!.data;
+const locale = parseLocale(Astro.currentLocale);
+const navigation = await prepareNavigation(`footer/${locale}`);
 ---
 <footer>
-  <Navigation items={navigation} locale={locale} />
+  <Navigation items={navigation} />
 </footer>

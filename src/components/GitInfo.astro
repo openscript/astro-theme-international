@@ -1,13 +1,12 @@
 ---
 import type { GitInfoFrontmatter } from '../remark/remark-git-info'
-import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+import { useTranslations, parseLocale } from '../utils/i18n';
 import Button from './Button.astro';
 
 type Props = GitInfoFrontmatter;
 
 const { git } = Astro.props;
-const locale = getLocaleFromUrl(Astro.url);
-const t = useTranslations(locale);
+const t = useTranslations(parseLocale(Astro.currentLocale));
 
 ---
 

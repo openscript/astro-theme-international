@@ -1,43 +1,59 @@
 ---
-import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
-import DefaultLayout from '../../../layouts/DefaultLayout.astro';
-import { entryPaths } from '../../_paths';
-import ThreePaneContent from '../../../layouts/sections/ThreePaneContent.astro';
-import TableOfContents from '../../../components/TableOfContents.astro';
-import GitInfo from '../../../components/GitInfo.astro';
-import type { GitInfoFrontmatter } from '../../../remark/remark-git-info';
-import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
-import { resolvePath } from '../../../utils/path';
-import slug from 'limax';
-import { render } from 'astro:content';
+import DefaultLayout from "../../../layouts/DefaultLayout.astro";
+import ThreePaneContent from "../../../layouts/sections/ThreePaneContent.astro";
+import TableOfContents from "../../../components/TableOfContents.astro";
+import GitInfo from "../../../components/GitInfo.astro";
+import type { GitInfoFrontmatter } from "../../../remark/remark-git-info";
+import { parseLocale, useTranslations } from "../../../utils/i18n";
+import { i18nPropsAndParams } from "astro-loader-i18n";
+import slug from "limax";
+import { getCollection, render } from "astro:content";
+import { defaultPropsAndParamsOptions } from "../../../utils/paths";
+import { resolvePath } from "../../../utils/path";
+import { C } from "../../../configuration";
 
-export const getStaticPaths = entryPaths('blog', 'slug');
+export const getStaticPaths = async () => {
+  const routePattern = "[...locale]/[blog]/[...slug]";
+  const collection = await getCollection("blog");
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { translations, data } = Astro.props as Props;
+  return i18nPropsAndParams(collection, {
+    ...defaultPropsAndParamsOptions,
+    routePattern,
+  });
+};
 
-const { Content, headings, remarkPluginFrontmatter } = await render(Astro.props);
-const git: GitInfoFrontmatter['git'] = remarkPluginFrontmatter.git;
-const locale = getLocaleFromUrl(Astro.url);
-const t = useTranslations(locale);
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
-const { locale: localeSlug } = Astro.params as Params;
-const blogSlug = 'blog' in Astro.params ? Astro.params.blog as string : '';
+const {
+  translations,
+  data: { tags, locale },
+} = Astro.props;
 
+const { Content, headings, remarkPluginFrontmatter } = await render(
+  Astro.props,
+);
+
+const { locale: paramsLocale, blog: paramsBlog } = Astro.params as {
+  locale: string;
+  blog: string;
+};
+
+const git: GitInfoFrontmatter["git"] = remarkPluginFrontmatter.git;
+const t = useTranslations(parseLocale(locale));
 ---
 
 <DefaultLayout translations={translations}>
   <ThreePaneContent>
     <Fragment slot="left"><TableOfContents headings={headings} /></Fragment>
-    <Content/>
+    <Content />
     <Fragment slot="right">
       <GitInfo git={git}>
         <Fragment slot="after">
-          <dt>{t('label.tags')}</dt>
+          <dt>{t("label.tags")}</dt>
           <dd>
-            {data.tags.map((tag) => (
-              <a href={resolvePath(localeSlug, blogSlug, slug(tag))}>{tag}</a>
-            ))}
+            {
+              tags.map((tag) => (
+                <a href={resolvePath(paramsLocale, Astro.currentLocale === C.DEFAULT_LOCALE ? undefined : paramsBlog, slug(tag))}>{tag}</a>
+              ))
+            }
           </dd>
         </Fragment>
       </GitInfo>

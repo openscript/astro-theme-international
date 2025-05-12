@@ -3,6 +3,19 @@ export const C = {
   LOCALES: { 'en': 'en-US', 'de': 'de-CH' },
   // Default locale referencing one of the keys in LOCALES
   DEFAULT_LOCALE: 'en' as const,
+  // Path segment translations
+  SEGMENT_TRANSLATIONS: {
+    'en': {
+      'gallery': 'gallery',
+      'projects': 'projects',
+      'blog': 'blog',
+    },
+    'de': {
+      'gallery': 'galerie',
+      'projects': 'projekte',
+      'blog': 'blog',
+    }
+  },
   // Static messages for each locale
   MESSAGES: {
     'en': {
@@ -34,9 +47,7 @@ export const C = {
       'site.description': 'A humble Astronauts guide to the international space station.',
       'site.author': 'Example Ltd.',
       'site.license': 'MIT License',
-      'slugs.blog': 'blog',
       'slugs.gallery': 'gallery',
-      'slugs.projects': 'projects',
       'search.placeholder': 'Type to search...',
       'sections.latestPosts': 'Latest posts',
     },
@@ -69,9 +80,7 @@ export const C = {
       'site.description': 'Ein bescheidener Astronautenführer zur internationalen Raumstation.',
       'site.author': 'Beispiel GmbH',
       'site.license': 'MIT Lizenz',
-      'slugs.blog': 'blog',
       'slugs.gallery': 'galerie',
-      'slugs.projects': 'projekte',
       'search.placeholder': 'Schreibe um zu suchen...',
       'sections.latestPosts': 'Letzte Blogartikel',
     }

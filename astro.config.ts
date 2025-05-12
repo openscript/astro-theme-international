@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
-import { C } from './src/configuration';
+import { C, localeSlugs } from './src/configuration';
 import search from './src/integrations/search';
 import sitemap from "@astrojs/sitemap";
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -15,7 +15,7 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: C.DEFAULT_LOCALE,
-    locales: Object.keys(C.LOCALES)
+    locales: localeSlugs
   },
   markdown: {
     remarkPlugins: [[remarkGitInfo, { remoteUrlBase: C.SETTINGS.REMOTE.BASE_URL }]],
