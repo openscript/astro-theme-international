@@ -12,7 +12,7 @@ type Props = {
 const locale = parseLocale(Astro.currentLocale);
 const { translations } = Astro.props;
 const t = useTranslations(locale);
-const base = `${import.meta.env.SITE ? import.meta.env.SITE : ''}${import.meta.env.BASE_URL === '//' ? import.meta.env.BASE_URL : '/'}`;
+const base = `${import.meta.env.SITE ? import.meta.env.SITE : ''}${import.meta.env.BASE_URL ? import.meta.env.BASE_URL : '/'}`;
 ---
 <head>
   <title>{t('head.title')}</title>
@@ -20,7 +20,7 @@ const base = `${import.meta.env.SITE ? import.meta.env.SITE : ''}${import.meta.e
   <meta name="viewport" content="width=device-width">
   <meta name="author" content={t('site.author')}>
   <base href={base} />
-  <link rel="alternate" hreflang="x-default" href={new URL(import.meta.env.SITE_URL || '/', Astro.url.href).href} />
+  <link rel="alternate" hreflang="x-default" href={base} />
   <link rel="alternate" hreflang={getFullLocale(locale)} href={Astro.url.href} />
   <meta property="og:locale" content={getFullLocale(locale).replace(`-`, `_`)} />
   {Object.entries(translations || {}).filter(([l]) => l !== locale).map(([locale, path]) => (
