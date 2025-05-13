@@ -6,7 +6,7 @@
   "bugs": {
     "url": "https://github.com/openscript/astro-theme-international/issues"
   },
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.11.0",
   "repository": "github:openscript/astro-theme-international",
   "scripts": {
     "dev": "astro dev --host",
