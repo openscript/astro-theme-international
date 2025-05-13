@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.1
+
+### Patch Changes
+
+- 4a91e78: Tune base url handling
+
 ## 0.2.0
 
 ### Minor Changes
