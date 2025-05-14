@@ -6,10 +6,9 @@ import SinglePaneContent from "../../../layouts/sections/SinglePaneContent.astro
 import CardList from "../../../components/CardList.astro";
 import Pagination from "../../../components/Pagination.astro";
 import { getCollection } from "astro:content";
-import { i18nPropsAndParams } from "astro-loader-i18n";
+import { i18nPropsAndParams, resolvePath } from "astro-loader-i18n";
 import { defaultPropsAndParamsOptions } from "../../../utils/paths";
 import { C } from "../../../configuration";
-import { resolvePath } from "../../../utils/path";
 import PostCard from "../../../components/PostCard.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {

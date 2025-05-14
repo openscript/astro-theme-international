@@ -248,6 +248,7 @@ a[href]:not(:where(
   [href^="tel"],
   [href^="javascript:" i],
   [href^="./"],
+  [href^="../"],
   [href^="/"]:not([href^="//"])
 )):after {
   content: '↗️';

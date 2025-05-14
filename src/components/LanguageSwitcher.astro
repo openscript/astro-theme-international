@@ -1,6 +1,5 @@
 ---
 import {getNameFromLocale} from '../utils/i18n';
-import { getRelativePath } from '../utils/path';
 import Dropdown from './Dropdown.astro';
 import Icon from './Icon.astro';
 
@@ -18,7 +17,7 @@ const { translations, currentLocale } = Astro.props;
     <Fragment slot="button"><Icon name="language" />{getNameFromLocale(currentLocale)}</Fragment>
     {Object.entries(translations || {}).map(([locale, path]) => (
       <li class:list={[{active: locale === currentLocale}]}>
-        <a href={getRelativePath(path)} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
+        <a href={path} lang={locale} hreflang={locale}>{getNameFromLocale(locale)}</a>
       </li>
     ))}
   </Dropdown>

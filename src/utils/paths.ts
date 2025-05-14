@@ -1,7 +1,6 @@
-import { createI18nCollection, i18nPropsAndParams } from "astro-loader-i18n";
+import { createI18nCollection, i18nPropsAndParams, resolvePath } from "astro-loader-i18n";
 import { C, localeSlugs } from "../configuration";
 import { getEntry, type CollectionKey, type DataEntryMap } from "astro:content";
-import { resolvePath } from "./path";
 
 const PROTOCOL_DELIMITER = "://";
 

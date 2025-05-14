@@ -1,13 +1,13 @@
 ---
 import { C } from '../../configuration';
 import { parseLocale, useTranslations } from '../../utils/i18n';
-import { getRelativePath } from '../../utils/path';
 import Search from '../../components/Search.astro';
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro';
 import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
 import Burger from '../../components/MenuButton.astro';
 import Navigation from "../../components/Navigation.astro";
 import { prepareNavigation } from '../../utils/paths';
+import { resolvePath } from "astro-loader-i18n";
 
 type Props = {
   translations?: Record<string, string>;
@@ -21,7 +21,7 @@ const navigation = await prepareNavigation(`main/${locale}`);
 ---
 
 <header>
-  <a href={getRelativePath(`/${locale === C.DEFAULT_LOCALE ? '' : locale}`)} class="title" set:html={t('site.title')}></a>
+  <a href={resolvePath(`${locale === C.DEFAULT_LOCALE ? '' : locale}`)} class="title" set:html={t('site.title')}></a>
   <Burger />
   <Navigation items={navigation} />
   <div id="tools">

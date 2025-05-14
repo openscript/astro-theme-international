@@ -6,11 +6,11 @@ import PostCard from "../../../../components/PostCard.astro";
 import CardList from "../../../../components/CardList.astro";
 import { parseLocale, useTranslations } from "../../../../utils/i18n";
 import { getCollection } from "astro:content";
-import { i18nPropsAndParams } from "astro-loader-i18n";
+import { i18nPropsAndParams, resolvePath } from "astro-loader-i18n";
 import { defaultPropsAndParamsOptions } from "../../../../utils/paths";
-import { resolvePath } from "../../../../utils/path";
 import { C } from "../../../../configuration";
 import slug from "limax";
+import Pagination from "../../../../components/Pagination.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const routePattern = "[...locale]/[blog]/[...slug]";
@@ -91,7 +91,6 @@ const t = useTranslations(parseLocale(locale));
         ))
       }
     </CardList>
-    {page.url.prev ? <a href={page.url.prev}>Vorherige Seite</a> : null}
-    {page.url.next ? <a href={page.url.next}>Nächste Seite</a> : null}
+    <Pagination page={page} />
   </SinglePaneContent>
 </DefaultLayout>

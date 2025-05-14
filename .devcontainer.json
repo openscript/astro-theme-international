@@ -10,7 +10,7 @@
       ]
     }
   },
-  "postCreateCommand": "npm install -g pnpm@10.10.0",
+  "postCreateCommand": "npm install -g pnpm@10.11.0",
   "forwardPorts": [
     4321
   ]
