@@ -1,5 +1,12 @@
 # astro-theme-international
 
+## 0.2.2
+
+### Patch Changes
+
+- 7714a70: Improve resolving paths
+- 7714a70: Tune base url handling further
+
 ## 0.2.1
 
 ### Patch Changes
