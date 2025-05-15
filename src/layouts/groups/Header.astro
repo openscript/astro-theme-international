@@ -6,8 +6,7 @@ import ThemeSwitcher from '../../components/ThemeSwitcher.astro';
 import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
 import Burger from '../../components/MenuButton.astro';
 import Navigation from "../../components/Navigation.astro";
-import { prepareNavigation } from '../../utils/paths';
-import { resolvePath } from "astro-loader-i18n";
+import { prepareNavigation, resolvePath } from '../../utils/paths';
 
 type Props = {
   translations?: Record<string, string>;

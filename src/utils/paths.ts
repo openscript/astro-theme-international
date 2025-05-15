@@ -1,4 +1,4 @@
-import { createI18nCollection, i18nPropsAndParams, resolvePath } from "astro-loader-i18n";
+import { createI18nCollection, i18nPropsAndParams, resolvePath as originalResolvePath } from "astro-loader-i18n";
 import { C, localeSlugs } from "../configuration";
 import { getEntry, type CollectionKey, type DataEntryMap } from "astro:content";
 
@@ -7,6 +7,10 @@ const PROTOCOL_DELIMITER = "://";
 export const defaultPropsAndParamsOptions = {
   defaultLocale: C.DEFAULT_LOCALE,
   segmentTranslations: C.SEGMENT_TRANSLATIONS,
+}
+
+export const resolvePath = (...path: Array<string | number | undefined>) => {
+  return originalResolvePath(import.meta.env.BASE_URL ,...path);
 }
 
 export const generateGetStaticIndexPaths = (routePattern: string) => {
@@ -53,6 +57,5 @@ export const convertReferenceToPath = async (path: string) => {
 
   const localeSlug = entry.data.locale === C.DEFAULT_LOCALE ? undefined : entry.data.locale;
 
-  return resolvePath(localeSlug, entry.data.contentPath, entry.data.path);
-
+  return originalResolvePath(localeSlug, entry.data.contentPath, entry.data.path);
 }

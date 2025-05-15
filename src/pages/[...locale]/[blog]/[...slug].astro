@@ -5,10 +5,10 @@ import TableOfContents from "../../../components/TableOfContents.astro";
 import GitInfo from "../../../components/GitInfo.astro";
 import type { GitInfoFrontmatter } from "../../../remark/remark-git-info";
 import { parseLocale, useTranslations } from "../../../utils/i18n";
-import { i18nPropsAndParams, resolvePath } from "astro-loader-i18n";
+import { i18nPropsAndParams } from "astro-loader-i18n";
 import slug from "limax";
 import { getCollection, render } from "astro:content";
-import { defaultPropsAndParamsOptions } from "../../../utils/paths";
+import { defaultPropsAndParamsOptions, resolvePath } from "../../../utils/paths";
 import { C } from "../../../configuration";
 
 export const getStaticPaths = async () => {

@@ -1,8 +1,9 @@
 ---
-import { resolvePath } from "astro-loader-i18n";
 // inspired by https://gist.github.com/jacobdalamb/6951a5bc07c9937f2f3991614b3685bc
 
 import type { HTMLAttributes } from "astro/types";
+import { resolvePath } from "../utils/paths";
+
 type Props = HTMLAttributes<"a"> & {
   href: string | { pathname: string; query?: Record<string, string> };
 };
