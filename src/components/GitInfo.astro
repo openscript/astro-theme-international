@@ -6,7 +6,7 @@ import Button from './Button.astro';
 type Props = GitInfoFrontmatter;
 
 const { git } = Astro.props;
-const t = useTranslations(parseLocale(Astro.currentLocale));
+const t = useTranslations(parseLocale(Astro.params.locale));
 
 ---
 

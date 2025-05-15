@@ -3,7 +3,7 @@ import Navigation from '../../components/Navigation.astro';
 import { parseLocale } from '../../utils/i18n';
 import { prepareNavigation } from '../../utils/paths';
 
-const locale = parseLocale(Astro.currentLocale);
+const locale = parseLocale(Astro.params.locale);
 const navigation = await prepareNavigation(`footer/${locale}`);
 ---
 <footer>

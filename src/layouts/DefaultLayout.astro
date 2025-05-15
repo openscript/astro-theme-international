@@ -12,7 +12,7 @@ type Props = {
   translations?: Record<string, string>;
 }
 
-const locale = parseLocale(Astro.currentLocale);
+const locale = parseLocale(Astro.params.locale);
 const { translations } = Astro.props;
 ---
 <html lang={locale}>

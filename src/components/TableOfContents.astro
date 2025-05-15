@@ -9,7 +9,7 @@ type Props = {
 const { headings: headingsProp, fromDepth: fromDepthProp } = Astro.props;
 const fromDepth = fromDepthProp || 2;
 const headings = headingsProp.filter(heading => heading.depth >= fromDepth);
-const t = useTranslations(parseLocale(Astro.currentLocale));
+const t = useTranslations(parseLocale(Astro.params.locale));
 
 ---
 

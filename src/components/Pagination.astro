@@ -8,7 +8,7 @@ type Props = {
 }
 
 const { page } = Astro.props;
-const t = useTranslations(parseLocale(Astro.currentLocale));
+const t = useTranslations(parseLocale(Astro.params.locale));
 
 ---
 

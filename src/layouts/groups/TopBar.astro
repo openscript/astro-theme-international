@@ -2,8 +2,7 @@
 import Icon from '../../components/Icon.astro';
 import { parseLocale, useTranslations } from '../../utils/i18n';
 
-
-const t = useTranslations(parseLocale(Astro.currentLocale));
+const t = useTranslations(parseLocale(Astro.params.locale));
 ---
 <div id="top-bar" class="padded">
   <a href={`mailto:${t('contact.email.value')}`}><Icon name="email" />{t('contact.email.display')}</a>

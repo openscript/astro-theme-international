@@ -2,7 +2,7 @@
 import { parseLocale, useTranslations } from '../../utils/i18n';
 import { version } from '../../../package.json';
 
-const t = useTranslations(parseLocale(Astro.currentLocale));
+const t = useTranslations(parseLocale(Astro.params.locale));
 ---
 <div id="bottom-bar" class="padded">
   <span>{t('site.author')} &middot; Version {version} </span>

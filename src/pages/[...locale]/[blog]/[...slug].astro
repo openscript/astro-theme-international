@@ -50,7 +50,7 @@ const t = useTranslations(parseLocale(locale));
           <dd>
             {
               tags.map((tag) => (
-                <a href={resolvePath(paramsLocale, Astro.currentLocale === C.DEFAULT_LOCALE ? undefined : paramsBlog, slug(tag))}>{tag}</a>
+                <a href={resolvePath(paramsLocale, Astro.params.locale === C.DEFAULT_LOCALE ? undefined : paramsBlog, slug(tag))}>{tag}</a>
               ))
             }
           </dd>

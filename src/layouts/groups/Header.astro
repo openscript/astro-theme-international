@@ -13,7 +13,7 @@ type Props = {
 };
 
 const { translations } = Astro.props;
-const locale = parseLocale(Astro.currentLocale);
+const locale = parseLocale(Astro.params.locale);
 const t = useTranslations(locale);
 const navigation = await prepareNavigation(`main/${locale}`);
 
