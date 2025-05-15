@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.4
+
+### Patch Changes
+
+- 6efaad7: Prefix index translations paths with base path
+
 ## 0.2.3
 
 ### Patch Changes
