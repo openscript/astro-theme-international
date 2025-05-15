@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.3
+
+### Patch Changes
+
+- 4137751: Another try to fix the paths with base path
+
 ## 0.2.2
 
 ### Patch Changes
