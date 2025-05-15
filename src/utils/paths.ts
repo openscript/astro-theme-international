@@ -15,7 +15,7 @@ export const resolvePath = (...path: Array<string | number | undefined>) => {
 
 export const generateGetStaticIndexPaths = (routePattern: string) => {
   return async () => {
-    const collection = createI18nCollection({ locales: localeSlugs, routePattern });
+    const collection = createI18nCollection({ locales: localeSlugs, routePattern, basePath: import.meta.env.BASE_URL });
     return i18nPropsAndParams(collection, {
       ...defaultPropsAndParamsOptions,
       routePattern
