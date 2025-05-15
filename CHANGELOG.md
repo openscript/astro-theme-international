@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.5
+
+### Patch Changes
+
+- 99687ba: Fix index page locale detection
+
 ## 0.2.4
 
 ### Patch Changes
