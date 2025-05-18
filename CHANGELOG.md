@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.7
+
+### Patch Changes
+
+- 1728f89: Fix gallery images link
+
 ## 0.2.6
 
 ### Patch Changes
