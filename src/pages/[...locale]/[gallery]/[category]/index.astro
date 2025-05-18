@@ -5,7 +5,7 @@ import SinglePaneContent from "../../../../layouts/sections/SinglePaneContent.as
 import CardList from "../../../../components/CardList.astro";
 import { getCollection } from "astro:content";
 import { i18nPropsAndParams } from "astro-loader-i18n";
-import { defaultPropsAndParamsOptions } from "../../../../utils/paths";
+import { defaultPropsAndParamsOptions, resolvePath } from "../../../../utils/paths";
 
 export const getStaticPaths = async () => {
   const routePattern = "[...locale]/[gallery]/[category]";
@@ -20,6 +20,7 @@ export const getStaticPaths = async () => {
 
 const {
   translations,
+  translatedPath,
   data: { title, images },
 } = Astro.props;
 ---
@@ -40,7 +41,7 @@ const {
         images.map((image, index) => (
           <li>
             <a
-              href={`${new URL(index.toString(), `${Astro.url}/`).pathname}`}
+              href={resolvePath(translatedPath, index.toString())}
             >
               <Image
                 src={image.src}
