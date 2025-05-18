@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.6
+
+### Patch Changes
+
+- ed3f214: Fix gallery linking
+
 ## 0.2.5
 
 ### Patch Changes
