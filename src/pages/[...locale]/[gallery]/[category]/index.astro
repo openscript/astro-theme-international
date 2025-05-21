@@ -6,6 +6,7 @@ import CardList from "../../../../components/CardList.astro";
 import { getCollection } from "astro:content";
 import { i18nPropsAndParams } from "astro-loader-i18n";
 import { defaultPropsAndParamsOptions } from "../../../../utils/paths";
+import sluggify from "limax";
 
 export const getStaticPaths = async () => {
   const routePattern = "[...locale]/[gallery]/[category]";
@@ -14,7 +15,10 @@ export const getStaticPaths = async () => {
   return i18nPropsAndParams(collection, {
     ...defaultPropsAndParamsOptions,
     routePattern,
-    slugParamName: "category",
+    generateSegments: (entry) => {
+      const title = typeof entry.data.title === "string" ? entry.data.title : "";
+      return { category: sluggify(title) };
+    }
   });
 };
 

@@ -8,6 +8,7 @@ import {
   defaultPropsAndParamsOptions,
 } from "../../../utils/paths";
 import { i18nPropsAndParams } from "astro-loader-i18n";
+import sluggify from "limax";
 
 export const getStaticPaths = generateGetStaticIndexPaths(
   "[...locale]/[projects]",
@@ -20,8 +21,8 @@ const {
 const collection = await getCollection("projects");
 const projects = i18nPropsAndParams(collection, {
   ...defaultPropsAndParamsOptions,
-  slugParamName: "project",
   routePattern: `${Astro.routePattern}/[project]`,
+  generateSegments: (entry) => ({ project: sluggify(entry.data.title) }),
 });
 const t = useTranslations(parseLocale(locale));
 ---

@@ -4,6 +4,7 @@ import SinglePaneContent from "../../../layouts/sections/SinglePaneContent.astro
 import { render, getCollection } from "astro:content";
 import { i18nPropsAndParams } from "astro-loader-i18n";
 import { defaultPropsAndParamsOptions } from "../../../utils/paths";
+import sluggify from "limax";
 
 export const getStaticPaths = async () => {
   const routePattern = "[...locale]/[projects]/[project]";
@@ -12,7 +13,7 @@ export const getStaticPaths = async () => {
   return i18nPropsAndParams(collection, {
     ...defaultPropsAndParamsOptions,
     routePattern,
-    slugParamName: "project",
+    generateSegments: (entry) => ({ project: sluggify(entry.data.title) }),
   });
 };
 

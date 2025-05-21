@@ -1,8 +1,8 @@
 ---
-import DefaultLayout from '../../layouts/DefaultLayout.astro';
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import { i18nPropsAndParams } from "astro-loader-i18n";
-import { getCollection, render } from 'astro:content';
-import { defaultPropsAndParamsOptions } from '../../utils/paths';
+import { getCollection, render } from "astro:content";
+import { defaultPropsAndParamsOptions } from "../../utils/paths";
 
 export const getStaticPaths = async () => {
   const routePattern = "[...locale]/[...pages]";
@@ -11,8 +11,7 @@ export const getStaticPaths = async () => {
   return i18nPropsAndParams(collection, {
     ...defaultPropsAndParamsOptions,
     routePattern,
-    titleDataKey: "path",
-    slugParamName: "pages",
+    generateSegments: (entry) => ({ pages: entry.data.path }),
   });
 };
 
@@ -20,6 +19,7 @@ const page = Astro.props;
 
 const { Content } = await render(page);
 ---
+
 <DefaultLayout translations={page.translations}>
-  <Content/>
+  <Content />
 </DefaultLayout>
