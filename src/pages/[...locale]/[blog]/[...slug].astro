@@ -8,7 +8,10 @@ import { parseLocale, useTranslations } from "../../../utils/i18n";
 import { i18nPropsAndParams } from "astro-loader-i18n";
 import slug from "limax";
 import { getCollection, render } from "astro:content";
-import { defaultPropsAndParamsOptions, resolvePath } from "../../../utils/paths";
+import {
+  defaultPropsAndParamsOptions,
+  resolvePath,
+} from "../../../utils/paths";
 import { C } from "../../../configuration";
 import sluggify from "limax";
 
@@ -32,10 +35,12 @@ const { Content, headings, remarkPluginFrontmatter } = await render(
   Astro.props,
 );
 
-const { locale: paramsLocale, blog: paramsBlog } = Astro.params as {
-  locale: string;
-  blog: string;
-};
+const paramsBlog = C.SEGMENT_TRANSLATIONS[parseLocale(locale)].blog;
+
+const blogPath =
+  locale === C.DEFAULT_LOCALE
+    ? resolvePath(paramsBlog)
+    : resolvePath(locale, paramsBlog);
 
 const git: GitInfoFrontmatter["git"] = remarkPluginFrontmatter.git;
 const t = useTranslations(parseLocale(locale));
@@ -52,7 +57,7 @@ const t = useTranslations(parseLocale(locale));
           <dd>
             {
               tags.map((tag) => (
-                <a href={resolvePath(paramsLocale, Astro.params.locale === C.DEFAULT_LOCALE ? undefined : paramsBlog, slug(tag))}>{tag}</a>
+                <a href={resolvePath(blogPath, slug(tag))}>{tag}</a>
               ))
             }
           </dd>
