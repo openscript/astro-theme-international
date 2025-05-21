@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.9
+
+### Patch Changes
+
+- 9c1689a: Fix tag links
+
 ## 0.2.8
 
 ### Patch Changes
