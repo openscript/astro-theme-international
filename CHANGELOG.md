@@ -1,5 +1,12 @@
 # astro-theme-international
 
+## 0.2.8
+
+### Patch Changes
+
+- 17a5a24: fix: blog tag links when default locale
+- 83da5a7: Upgrade dependencies
+
 ## 0.2.7
 
 ### Patch Changes
