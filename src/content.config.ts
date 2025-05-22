@@ -38,8 +38,8 @@ const pagesCollection = defineCollection({
   schema: extendI18nLoaderSchema(
     z.object({
       path: z.string(),
-    }
-    )),
+    })
+  ),
 });
 const projectsCollection = defineCollection({
   loader: i18nLoader({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),
