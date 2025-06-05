@@ -5,6 +5,7 @@ import PostCard from "../../components/PostCard.astro";
 import CardList from "../../components/CardList.astro";
 import { i18nPropsAndParams } from "astro-loader-i18n";
 import { defaultPropsAndParamsOptions } from "../../utils/paths";
+import slug from "limax";
 
 type Props = {
   locale: string;
@@ -16,6 +17,9 @@ const collection = await getCollection("blog");
 const posts = i18nPropsAndParams(collection, {
   ...defaultPropsAndParamsOptions,
   routePattern: `[...locale]/[blog]/[...slug]`,
+  generateSegments: (entry) => {
+    return { slug: slug(entry.data.title) };
+  }
 });
 const filteredPosts = posts.reverse().slice(0, 3);
 ---
