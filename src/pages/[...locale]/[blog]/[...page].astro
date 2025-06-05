@@ -7,7 +7,10 @@ import CardList from "../../../components/CardList.astro";
 import Pagination from "../../../components/Pagination.astro";
 import { getCollection } from "astro:content";
 import { i18nPropsAndParams } from "astro-loader-i18n";
-import { defaultPropsAndParamsOptions, resolvePath } from "../../../utils/paths";
+import {
+  defaultPropsAndParamsOptions,
+  resolvePath,
+} from "../../../utils/paths";
 import { C } from "../../../configuration";
 import PostCard from "../../../components/PostCard.astro";
 import sluggify from "limax";
@@ -30,36 +33,34 @@ export const getStaticPaths = (async ({ paginate }) => {
     {} as Record<string, string | undefined>,
   );
 
-  return Object.entries(locales).flatMap(
-    ([propsLocale, paramsLocale]) => {
-      const items = propsAndParams.filter(
-        (item) => item.props.data.locale === propsLocale,
-      );
-      const data = items.map((item) => ({
-        ...item.props.data,
-        translatedPath: item.props.translatedPath,
-      }));
-      const blog = items[0]?.params.blog;
-      const translations = Object.entries(locales).reduce(
-        (acc, [locale, slug]) => {
-          acc[locale] = resolvePath(slug, blog);
-          return acc;
-        },
-        {} as Record<string, string>,
-      );
-      return paginate(data, {
-        pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
-        props: {
-          locale: propsLocale,
-          translations,
-        },
-        params: {
-          locale: paramsLocale,
-          blog,
-        },
-      });
-    },
-  );
+  return Object.entries(locales).flatMap(([propsLocale, paramsLocale]) => {
+    const items = propsAndParams.filter(
+      (item) => item.props.data.locale === propsLocale,
+    );
+    const data = items.map((item) => ({
+      ...item.props.data,
+      translatedPath: item.props.translatedPath,
+    }));
+    const blog = items[0]?.params.blog;
+    const translations = Object.entries(locales).reduce(
+      (acc, [locale, slug]) => {
+        acc[locale] = resolvePath(slug, blog);
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+    return paginate(data, {
+      pageSize: C.SETTINGS.BLOG.PAGE_SIZE,
+      props: {
+        locale: propsLocale,
+        translations,
+      },
+      params: {
+        locale: paramsLocale,
+        blog,
+      },
+    });
+  });
 }) satisfies GetStaticPaths;
 
 const { page, locale, translations } = Astro.props;

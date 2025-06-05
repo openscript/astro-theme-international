@@ -23,12 +23,12 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.0",
-    "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.4.0",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.4.1",
     "@fontsource-variable/dosis": "^5.2.5",
     "@fontsource-variable/fira-code": "^5.2.6",
     "@fontsource-variable/playfair-display": "^5.2.5",
-    "astro": "^5.8.0",
+    "astro": "^5.8.2",
     "astro-loader-i18n": "^0.7.1",
     "fsevents": "^2.3.3",
     "limax": "^4.1.0",
@@ -41,11 +41,11 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.4",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^22.15.21",
-    "@vitest/coverage-v8": "^3.1.4",
+    "@types/node": "^22.15.29",
+    "@vitest/coverage-v8": "^3.2.1",
     "simple-git": "^3.27.0",
     "sirv": "^3.0.1",
     "vfile": "^6.0.3",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.1"
   }
 }
