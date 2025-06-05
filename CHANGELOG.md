@@ -1,5 +1,13 @@
 # astro-theme-international
 
+## 0.2.10
+
+### Patch Changes
+
+- 731903d: Upgrade to Astro 5.9.0
+- fad4e37: Fix latest blogs link
+- 9d35f4d: Update pnpm version to 10.11.1
+
 ## 0.2.9
 
 ### Patch Changes
