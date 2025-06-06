@@ -2,17 +2,19 @@
 
 An Astro theme, focused on internationalization.
 
+[👀 **DEMO**](https://openscript.github.io/astro-theme-international)
+
 ## Usage
 
 <details>
 <summary>🛠️ How to use this theme?</summary>
 
-1. Use this repository as a template.
+1. Use this repository as a template. <br> [![Use this template](./res/use-this-template.png)](https://github.com/new?template_name=astro-theme-international&template_owner=openscript)
 1. Enable Github Pages in the repository settings: <br> ![Enable Github Pages](./res/enable-github-pages.png)
 1. Open the repository with Visual Studio Code.
-1. Make sure you have Docker and the Dev Containers extension installed.
+1. Make sure you have [Docker](https://docs.docker.com/desktop/) and the [Dev Containers extension](https://code.visualstudio.com/docs/devcontainers/containers#_installation) installed.
 1. Open the repository in a Dev Container.
-1. Start making your changes.
+1. Start making changes.
 
 </details>
 
@@ -20,14 +22,14 @@ An Astro theme, focused on internationalization.
 <summary>🎁 How to contribute to this theme?</summary>
 
 1. Fork the project.
-1. Add your changes.
+1. Make your changes.
 1. Open a pull request.
 
 </details>
 
 ## Features
 
-- Internationalization
+- Internationalization and Localization by using [astro-loader-i18n](https://github.com/openscript/astro-loader-i18n)
   - UI translations
   - Content translations
   - Route translations
@@ -43,8 +45,8 @@ An Astro theme, focused on internationalization.
   - Compatible with [Github Pages](https://pages.github.com/)
   - Works on a subpath (e.g. `http://example.com/my-cool-astro-site/`)
   - MDX support [(@astrojs/mdx)](https://docs.astro.build/en/guides/mdx/)
-  - Release cycle including generating changelogs with [changesets](https://github.com/changesets/changesets)
-  - .editorconfig
+  - Release cycle including changelogs generation with [changesets](https://github.com/changesets/changesets)
+  - [.editorconfig](https://editorconfig.org/)
 - Connectivity
   - RSS Feeds with i18n support [(@astrojs/rss)](https://docs.astro.build/en/guides/rss/)
   - Sitemaps with i18n support [(@astrojs/sitemap)](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
@@ -72,7 +74,6 @@ An Astro theme, focused on internationalization.
 - DefaultLayout: Layout with a header, main and footer.
 
 ### Sections
-
 
 ## Resources
 
