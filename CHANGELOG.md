@@ -1,5 +1,11 @@
 # astro-theme-international
 
+## 0.2.11
+
+### Patch Changes
+
+- 43ab91f: Fix tags pages
+
 ## 0.2.10
 
 ### Patch Changes
