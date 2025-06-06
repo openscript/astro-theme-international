@@ -39,11 +39,12 @@ const { Content, headings, remarkPluginFrontmatter } = await render(
 );
 
 const paramsBlog = C.SEGMENT_TRANSLATIONS[parseLocale(locale)].blog;
+const paramsTag = C.SEGMENT_TRANSLATIONS[parseLocale(locale)].tag;
 
 const blogPath =
   locale === C.DEFAULT_LOCALE
-    ? originalResolvePath(paramsBlog)
-    : originalResolvePath(locale, paramsBlog);
+    ? originalResolvePath(paramsBlog, paramsTag)
+    : originalResolvePath(locale, paramsBlog, paramsTag);
 
 const git: GitInfoFrontmatter["git"] = remarkPluginFrontmatter.git;
 const t = useTranslations(parseLocale(locale));
