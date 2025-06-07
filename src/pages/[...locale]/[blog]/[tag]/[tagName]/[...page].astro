@@ -11,7 +11,6 @@ import { defaultPropsAndParamsOptions, resolvePath } from "../../../../../utils/
 import { C } from "../../../../../configuration";
 import slug from "limax";
 import Pagination from "../../../../../components/Pagination.astro";
-import sluggify from "limax";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const routePattern = "[...locale]/[blog]/[...slug]";
@@ -20,7 +19,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   const propsAndParams = i18nPropsAndParams(collection, {
     ...defaultPropsAndParamsOptions,
     routePattern,
-    generateSegments: (entry) => ({ slug: sluggify(entry.data.title) }),
+    generateSegments: (entry) => ({ slug: slug(entry.data.title) }),
   });
 
   const locales = propsAndParams.reduce(
