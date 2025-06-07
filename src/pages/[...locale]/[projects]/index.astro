@@ -18,7 +18,7 @@ const {
   translations,
   data: { locale },
 } = Astro.props;
-const collection = await getCollection("projects");
+const collection = await getCollection("projects", (project) => project.data.locale === locale);
 const projects = i18nProps(collection, {
   ...defaultPropsAndParamsOptions,
   routePattern: `${Astro.routePattern}/[project]`,
