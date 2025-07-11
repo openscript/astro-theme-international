@@ -1,6 +1,6 @@
 {
   "name": "astro-theme-international",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:2-22-bookworm",
   "customizations": {
     "vscode": {
       "extensions": [
