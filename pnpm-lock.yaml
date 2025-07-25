@@ -34,7 +34,7 @@ importers:
         version: 5.9.0(@types/node@22.15.30)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.1)
       astro-loader-i18n:
         specifier: ^0.7.2
-        version: 0.7.2(astro@5.9.0(@types/node@22.15.30)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.1))
+        version: 0.7.7(astro@5.9.0(@types/node@22.15.30)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.1))
       fsevents:
         specifier: ^2.3.3
         version: 2.3.3
@@ -1059,8 +1059,8 @@ packages:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
 
-  astro-loader-i18n@0.7.2:
-    resolution: {integrity: sha512-OuW/6U6/LDkZtgc2qsw9WE8qcl1lsDpNMnEU41bRAGpiSjzuWufki/SVV7np2f3of8NHgTH3UfDgY7VoNea19w==}
+  astro-loader-i18n@0.7.7:
+    resolution: {integrity: sha512-dhLzs9jQX05zFf9BphdeGq3ehj3jX7tHUvErnTH9mXXgUAXGd3wo+8gydRrckV/HEf4MNYMJUMFln4DyI1x7cQ==}
     peerDependencies:
       astro: ^5.5.0
 
@@ -3856,7 +3856,7 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-loader-i18n@0.7.2(astro@5.9.0(@types/node@22.15.30)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.1)):
+  astro-loader-i18n@0.7.7(astro@5.9.0(@types/node@22.15.30)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.1)):
     dependencies:
       astro: 5.9.0(@types/node@22.15.30)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.1)
 
